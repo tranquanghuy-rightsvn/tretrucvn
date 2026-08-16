@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liên hệ | Tre Việt Building</title>
+  <meta name="description" content="Liên hệ với Tre Việt Building - trụ sở chính Bến Tre và trụ sở TP Hồ Chí Minh. Gửi yêu cầu tư vấn qua form hoặc liên hệ trực tiếp qua điện thoại, email." />
+  <link rel="icon" href="../images/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/category.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrapper">
+
+      <div class="nav-col nav-col--left">
+        <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="navMenuMobile">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="nav-menu nav-menu--left" aria-label="Menu chính bên trái">
+          <a href="../index.html">Trang chủ</a>
+          <div class="nav-item has-dropdown">
+            <a href="../index.html#gioi-thieu" class="nav-dropdown-toggle">
+              Giới thiệu
+              <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+            </a>
+            <div class="nav-dropdown">
+              <a href="../chung-toi-la-ai/">Chúng tôi là ai</a>
+              <a href="../nang-luc-san-xuat/">Năng lực sản xuất</a>
+            </div>
+          </div>
+          <div class="nav-item has-dropdown">
+            <a href="../index.html#san-pham" class="nav-dropdown-toggle">
+              Sản phẩm
+              <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+            </a>
+            <div class="nav-dropdown">
+              <a href="../nguyen-lieu-tre-truc/">Nguyên liệu tre trúc</a>
+              <a href="../thi-cong-tre-truc/">Thi công tre trúc</a>
+              <a href="../tre-truc-trang-tri/">Tre trúc trang trí</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <a href="../index.html" class="brand" aria-label="Tre Việt Building - Trang chủ">
+        <img src="../images/logo.png" alt="Tre Việt Building" />
+      </a>
+
+      <div class="nav-col nav-col--right">
+        <nav class="nav-menu nav-menu--right" aria-label="Menu chính bên phải">
+          <a href="../du-an/">Dự án</a>
+          <a href="../tin-tuc/">Tin tức</a>
+          <a href="../lien-he/" class="is-active">Liên hệ</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="icon-btn" aria-label="Tìm kiếm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <button class="icon-btn" id="cartToggle" aria-label="Giỏ hàng">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-badge" id="cartBadge" hidden>0</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <nav class="nav-menu-mobile" id="navMenuMobile" aria-label="Menu mobile">
+      <a href="../index.html">Trang chủ</a>
+      <div class="mobile-item has-submenu">
+        <button class="mobile-submenu-toggle" type="button" aria-expanded="false">
+          Giới thiệu
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <div class="mobile-submenu">
+          <a href="../chung-toi-la-ai/">Chúng tôi là ai</a>
+          <a href="../nang-luc-san-xuat/">Năng lực sản xuất</a>
+        </div>
+      </div>
+      <div class="mobile-item has-submenu">
+        <button class="mobile-submenu-toggle" type="button" aria-expanded="false">
+          Sản phẩm
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <div class="mobile-submenu">
+          <a href="../nguyen-lieu-tre-truc/">Nguyên liệu tre trúc</a>
+          <a href="../thi-cong-tre-truc/">Thi công tre trúc</a>
+          <a href="../tre-truc-trang-tri/">Tre trúc trang trí</a>
+        </div>
+      </div>
+      <a href="../du-an/">Dự án</a>
+      <a href="../tin-tuc/">Tin tức</a>
+      <a href="../lien-he/" class="is-active">Liên hệ</a>
+    </nav>
+  </header>
+
+  <!-- Mini-cart drawer — hiện trên mọi trang -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer-panel">
+      <div class="cart-drawer-header">
+        <h3>Giỏ hàng của bạn</h3>
+        <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Đóng giỏ hàng">&times;</button>
+      </div>
+      <div class="cart-drawer-body" id="cartDrawerBody"></div>
+      <div class="cart-drawer-footer">
+        <div class="cart-drawer-subtotal">
+          <span>Tạm tính</span>
+          <strong id="cartDrawerSubtotal">0 ₫</strong>
+        </div>
+        <a href="../gio-hang/" class="btn btn-primary cart-drawer-btn">Xem giỏ hàng</a>
+        <a href="../thanh-toan/" class="btn cart-drawer-btn cart-drawer-btn--outline">Thanh toán ngay</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Trang chủ</a>
+          <span>/</span>
+          <span aria-current="page">Liên hệ</span>
+        </nav>
+        <span class="tag">Liên hệ</span>
+        <h1>Liên hệ với chúng tôi</h1>
+        <p class="page-lead">
+          Tre Việt Building luôn sẵn sàng lắng nghe và tư vấn giải pháp tre trúc phù hợp cho không gian của
+          bạn. Gửi yêu cầu qua form hoặc liên hệ trực tiếp theo thông tin bên dưới.
+        </p>
+      </div>
+    </section>
+
+    <section class="products-section" style="padding-top:72px;">
+      <div class="container">
+        <div class="offices-grid">
+          <article class="office-card">
+            <h3>Trụ sở chính – Bến Tre</h3>
+            <p>Số 75 Đường 30/4, Phường 3, Thành phố Bến Tre.</p>
+            <p>Email: <a href="mailto:info@betrimex.com.vn">info@betrimex.com.vn</a></p>
+            <p>
+              Điện thoại: <a href="tel:+842753822287">(+84) 275 3822 287</a><br />
+              Điện thoại: <a href="tel:+842753838867">(+84) 275 3838 867</a>
+            </p>
+          </article>
+
+          <article class="office-card">
+            <h3>Trụ sở TP Hồ Chí Minh</h3>
+            <p>Số 75 Đường 30/4, Phường 3, Thành phố Bến Tre.</p>
+            <p>Email: <a href="mailto:info@betrimex.com.vn">info@betrimex.com.vn</a></p>
+            <p>
+              Điện thoại: <a href="tel:+842753822287">(+84) 275 3822 287</a><br />
+              Điện thoại: <a href="tel:+842753838867">(+84) 275 3838 867</a>
+            </p>
+          </article>
+        </div>
+
+        <div class="contact-form-layout">
+          <div>
+            <h2 style="font-family:var(--font-heading); font-size:22px; color:var(--color-primary); margin:0 0 16px;">Gửi yêu cầu tư vấn</h2>
+            <p style="color:var(--color-text-muted); margin:0 0 24px;">Điền thông tin bên dưới, đội ngũ Tre Việt Building sẽ liên hệ lại trong thời gian sớm nhất.</p>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <input type="text" name="your-name" placeholder="Họ và tên" required />
+            <input type="email" name="your-email" placeholder="Email" required />
+            <input type="text" name="your-phone" placeholder="Điện thoại" required />
+            <textarea name="your-message" placeholder="Nội dung yêu cầu"></textarea>
+            <button type="submit" class="btn btn-primary">Gửi liên hệ</button>
+            <p class="contact-form-note" id="contactFormNote"></p>
+          </form>
+        </div>
+
+        <div class="map-embed">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.871335337289!2d109.1499113153918!3d12.25698523346984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31705d0586481019%3A0x254d1737f0287096!2zVGnhu4dtIMSQ4bq3YyBT4bqjbiBC4buTbiBC4buTbiBE4burYSBUxrDGoWk!5e0!3m2!1svi!2s!4v1531958797747"
+            loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Bản đồ Tre Việt Building"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-col--brand">
+        <img class="footer-logo" src="../images/logo.png" alt="Tre Việt Building" />
+        <h3>Công Ty Trách Nhiệm Hữu Hạn Tre Việt Building</h3>
+        <p>
+          Trụ sở chính: Số 75 Đường 30/4, Phường 3, Thành phố Bến Tre.<br />
+          Trụ sở TP Hồ Chí Minh: Số 75 Đường 30/4, Phường 3, Thành phố Bến Tre.<br />
+          Website: tretruc.com.vn — Email: info@betrimex.com.vn<br />
+          Điện thoại: (+84) 275 3822 287 / (+84) 275 3838 867
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Danh mục</h4>
+        <ul>
+          <li><a href="../index.html#top">Trang chủ</a></li>
+          <li><a href="../index.html#gioi-thieu">Giới thiệu</a></li>
+          <li><a href="../index.html#san-pham">Sản phẩm</a></li>
+          <li><a href="../du-an/">Dự án</a></li>
+          <li><a href="../tin-tuc/">Tin tức</a></li>
+          <li><a href="../lien-he/">Liên hệ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sản phẩm</h4>
+        <ul>
+          <li><a href="../nguyen-lieu-tre-truc/">Nguyên liệu tre trúc</a></li>
+          <li><a href="../thi-cong-tre-truc/">Thi công tre trúc</a></li>
+          <li><a href="../tre-truc-trang-tri/">Tre trúc trang trí</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kết nối</h4>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.5 1.6-1.5h1.6V3.7C15.9 3.6 15 3.5 13.9 3.5c-2.3 0-3.9 1.4-3.9 4v2.4H7.3V13H10v8h3.5Z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 0 1-1.9.1 4.1 4.1 0 0 0 3.8 2.9A8.2 8.2 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1Z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="M10 9.5v5l4.5-2.5Z" fill="currentColor" stroke="none"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Tre Việt Building — Mang hồn quê vào cuộc sống.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+</html>
