@@ -38,15 +38,19 @@ document.querySelectorAll(".mobile-submenu-toggle").forEach((toggle) => {
 // Trang thanh toán — chọn Tỉnh/Thành rồi tới Phường/Xã, và chọn phương thức thanh toán
 const provinceSelect = document.getElementById("provinceSelect");
 const wardSelect = document.getElementById("wardSelect");
-const wardInput = document.getElementById("wardInput");
+
+function resetWardField() {
+  if (!wardSelect) return;
+  wardSelect.innerHTML = '<option value="">Chọn Tỉnh/Thành trước</option>';
+  wardSelect.disabled = true;
+}
 
 if (provinceSelect && wardSelect && typeof populateProvinceSelect === "function") {
   populateProvinceSelect(provinceSelect);
-  wardSelect.innerHTML = '<option value="">Chọn Tỉnh/Thành trước</option>';
-  wardSelect.disabled = true;
+  resetWardField();
 
   provinceSelect.addEventListener("change", () => {
-    populateWardField(provinceSelect.value, wardSelect, wardInput);
+    populateWardField(provinceSelect.value, wardSelect);
   });
 }
 

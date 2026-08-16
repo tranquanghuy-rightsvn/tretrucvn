@@ -269,6 +269,49 @@ ul {
   color: var(--color-primary-light);
 }
 
+.page-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  max-width: min(90vw, 380px);
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: 0 14px 32px rgba(31, 42, 31, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.page-toast span {
+  flex: 1;
+}
+
+.page-toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.page-toast svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-primary-light);
+}
+
 .icon-btn {
   position: relative;
   display: inline-flex;

@@ -798,6 +798,10 @@
   text-align: left;
 }
 
+.checkout-layout[hidden] {
+  display: none;
+}
+
 .checkout-line {
   display: flex;
   align-items: center;

@@ -249,6 +249,30 @@ function showCartToast(message) {
   }, 2200);
 }
 
+// Popup alert giữa trang — dùng cho các xác nhận quan trọng (đặt hàng thành công)
+let pageToastTimer = null;
+
+function showPageToast(message) {
+  let toast = document.getElementById("pageToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "pageToast";
+    toast.className = "page-toast";
+    toast.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>' +
+      '<span id="pageToastText"></span>';
+    document.body.appendChild(toast);
+  }
+
+  document.getElementById("pageToastText").textContent = message;
+  toast.classList.add("is-visible");
+
+  clearTimeout(pageToastTimer);
+  pageToastTimer = setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 2600);
+}
+
 // ============================================================
 // Wiring sự kiện
 // ============================================================
@@ -326,6 +350,16 @@ if (checkoutForm) {
     if (errorEl) errorEl.hidden = true;
 
     clearCart();
+    showPageToast("Đặt hàng thành công! Cảm ơn bạn đã đặt hàng.");
+
+    checkoutForm.reset();
+    if (typeof resetWardField === "function") resetWardField();
+    const codRadio = document.querySelector('input[name="payment-method"][value="cod"]');
+    if (codRadio) {
+      codRadio.checked = true;
+      codRadio.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
     const successEl = document.getElementById("checkoutSuccess");
     const formWrap = document.getElementById("checkoutFormWrap");
     if (successEl) successEl.hidden = false;
