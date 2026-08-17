@@ -141,23 +141,6 @@ document.querySelectorAll(".product-detail-tab-btn").forEach((btn) => {
   });
 });
 
-// Collapse mô tả sản phẩm dài — chỉ hiện nút "Xem thêm" khi nội dung thật sự
-// vượt khung hiển thị (đo scrollHeight so với chiều cao collapse trong CSS).
-document.querySelectorAll(".product-detail-description[data-collapsible]").forEach((desc) => {
-  const toggle = desc.nextElementSibling;
-  if (!toggle || !toggle.classList.contains("product-detail-description-toggle")) return;
-
-  const collapsedHeight = desc.getBoundingClientRect().height;
-  if (desc.scrollHeight <= collapsedHeight + 32) return; // nội dung ngắn, không cần collapse
-
-  toggle.hidden = false;
-  toggle.addEventListener("click", () => {
-    const expanded = desc.classList.toggle("is-expanded");
-    toggle.classList.toggle("is-expanded", expanded);
-    toggle.textContent = expanded ? "Thu gọn" : "Xem thêm";
-  });
-});
-
 // Hero — crossfade tuần hoàn giữa nhiều clip nền (banner-hero.mp4 -> banner-hero-2.mp4 -> ...)
 // Thời điểm bắt đầu fade phải khớp với thời gian transition opacity trong CSS (.hero-video).
 const heroVideos = Array.from(document.querySelectorAll(".hero-video"));
