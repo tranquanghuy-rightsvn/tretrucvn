@@ -280,11 +280,27 @@ function showPageToast(message) {
 document.addEventListener("click", (e) => {
   const addBtn = e.target.closest(".product-cart-btn");
   if (addBtn && addBtn.dataset.id) {
-    addToCart(addBtn.dataset.id, 1);
+    const qtyInput = addBtn.closest(".product-detail-actions")?.querySelector(".product-qty-input");
+    const qty = qtyInput ? Math.max(1, parseInt(qtyInput.value, 10) || 1) : 1;
+    addToCart(addBtn.dataset.id, qty);
     const product = PRODUCT_CATALOG[addBtn.dataset.id];
     showCartToast((product ? product.name : "Sản phẩm") + " đã được thêm vào giỏ hàng");
     addBtn.classList.add("is-added");
     setTimeout(() => addBtn.classList.remove("is-added"), 700);
+    return;
+  }
+
+  const qtySelectorDecrease = e.target.closest("[data-qty-selector-decrease]");
+  if (qtySelectorDecrease) {
+    const input = qtySelectorDecrease.closest(".product-qty-selector")?.querySelector(".product-qty-input");
+    if (input) input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+    return;
+  }
+
+  const qtySelectorIncrease = e.target.closest("[data-qty-selector-increase]");
+  if (qtySelectorIncrease) {
+    const input = qtySelectorIncrease.closest(".product-qty-selector")?.querySelector(".product-qty-input");
+    if (input) input.value = (parseInt(input.value, 10) || 1) + 1;
     return;
   }
 

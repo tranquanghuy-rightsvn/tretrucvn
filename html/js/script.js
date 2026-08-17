@@ -98,6 +98,53 @@ document.querySelectorAll(".faq-question").forEach((question) => {
   });
 });
 
+// Gallery ảnh trang chi tiết sản phẩm — bấm thumbnail để đổi ảnh chính
+const productMainImage = document.getElementById("productMainImage");
+document.querySelectorAll(".product-detail-gallery-thumbs img").forEach((thumb) => {
+  thumb.addEventListener("click", () => {
+    if (!productMainImage) return;
+    productMainImage.src = thumb.dataset.full;
+    document
+      .querySelectorAll(".product-detail-gallery-thumbs img")
+      .forEach((t) => t.classList.remove("is-active"));
+    thumb.classList.add("is-active");
+  });
+});
+
+// Tabs "Mô tả sản phẩm" / "Thông số kỹ thuật" — dùng ở trang chi tiết sản phẩm
+document.querySelectorAll(".product-detail-tab-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const tabs = btn.closest(".product-detail-tabs");
+    if (!tabs) return;
+    const target = btn.dataset.tabTarget;
+    tabs.querySelectorAll(".product-detail-tab-btn").forEach((b) => {
+      const isActive = b === btn;
+      b.classList.toggle("is-active", isActive);
+      b.setAttribute("aria-selected", String(isActive));
+    });
+    tabs.querySelectorAll(".product-detail-tab-panel").forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.tab === target);
+    });
+  });
+});
+
+// Collapse mô tả sản phẩm dài — chỉ hiện nút "Xem thêm" khi nội dung thật sự
+// vượt khung hiển thị (đo scrollHeight so với chiều cao collapse trong CSS).
+document.querySelectorAll(".product-detail-description[data-collapsible]").forEach((desc) => {
+  const toggle = desc.nextElementSibling;
+  if (!toggle || !toggle.classList.contains("product-detail-description-toggle")) return;
+
+  const collapsedHeight = desc.getBoundingClientRect().height;
+  if (desc.scrollHeight <= collapsedHeight + 32) return; // nội dung ngắn, không cần collapse
+
+  toggle.hidden = false;
+  toggle.addEventListener("click", () => {
+    const expanded = desc.classList.toggle("is-expanded");
+    toggle.classList.toggle("is-expanded", expanded);
+    toggle.textContent = expanded ? "Thu gọn" : "Xem thêm";
+  });
+});
+
 // Hero — crossfade tuần hoàn giữa nhiều clip nền (banner-hero.mp4 -> banner-hero-2.mp4 -> ...)
 // Thời điểm bắt đầu fade phải khớp với thời gian transition opacity trong CSS (.hero-video).
 const heroVideos = Array.from(document.querySelectorAll(".hero-video"));
