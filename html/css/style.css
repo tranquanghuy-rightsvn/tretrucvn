@@ -3,10 +3,10 @@
    ========================================================================== */
 
 :root {
-  --color-primary: #2f6b3a;      /* thân tre - xanh lá đậm */
+  --color-primary: #2f6b3a; /* thân tre - xanh lá đậm */
   --color-primary-dark: #1f4a27; /* xanh lá đậm hơn, dùng cho hover/footer */
-  --color-primary-light: #8fc93a;/* xanh lá non - điểm nhấn */
-  --color-cream: #f7f5ee;        /* nền be nhạt như giấy/tre */
+  --color-primary-light: #8fc93a; /* xanh lá non - điểm nhấn */
+  --color-cream: #f7f5ee; /* nền be nhạt như giấy/tre */
   --color-text: #1f2a1f;
   --color-text-muted: #5b6b5b;
   --color-white: #ffffff;
@@ -172,7 +172,10 @@ ul {
   box-shadow: 0 16px 32px rgba(31, 42, 31, 0.14);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s linear 0.2s;
   z-index: 50;
 }
 
@@ -181,7 +184,9 @@ ul {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-dropdown a {
@@ -248,7 +253,10 @@ ul {
   visibility: hidden;
   transform: translateY(-6px);
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0s linear 0.25s;
 }
 
 .cart-toast span {
@@ -259,7 +267,9 @@ ul {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .cart-toast svg {
@@ -291,7 +301,10 @@ ul {
   visibility: hidden;
   transform: translate(-50%, -12px);
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0s linear 0.25s;
 }
 
 .page-toast span {
@@ -302,7 +315,9 @@ ul {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .page-toast svg {
@@ -324,7 +339,9 @@ ul {
   background: transparent;
   color: var(--color-primary);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .cart-badge {
@@ -376,7 +393,9 @@ ul {
   width: 24px;
   height: 2px;
   background: var(--color-primary);
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
 }
 
 /* Menu mobile — 1 danh sách gộp duy nhất, ẩn mặc định (chỉ hiện dưới breakpoint) */
@@ -479,7 +498,10 @@ ul {
   text-transform: uppercase;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .btn-primary {
@@ -533,11 +555,21 @@ ul {
   border-bottom: 1px dashed rgba(47, 107, 58, 0.25);
 }
 
-.intro-section { background: var(--color-cream); }
-.products-section { background: var(--color-white); }
-.posts-section { background: var(--color-cream); }
-.news-section { background: var(--color-white); }
-.contact-section { background: var(--color-white); }
+.intro-section {
+  background: var(--color-cream);
+}
+.products-section {
+  background: var(--color-white);
+}
+.posts-section {
+  background: var(--color-cream);
+}
+.news-section {
+  background: var(--color-white);
+}
+.contact-section {
+  background: var(--color-white);
+}
 
 .intro-section h2,
 .products-section h2,
@@ -623,7 +655,9 @@ ul {
   /* Trạng thái ban đầu cho hiệu ứng fade-in khi cuộn tới */
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .mosaic-item.is-visible {
@@ -651,7 +685,9 @@ ul {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
 }
 
 .mosaic-item:hover img {
@@ -662,13 +698,19 @@ ul {
   position: absolute;
   inset: auto 0 0 0;
   padding: 32px 16px 14px;
-  background: linear-gradient(180deg, rgba(15, 30, 17, 0) 0%, rgba(15, 30, 17, 0.85) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 30, 17, 0) 0%,
+    rgba(15, 30, 17, 0.85) 100%
+  );
   color: var(--color-white);
   font-size: 14px;
   font-weight: 600;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
 .mosaic-item:hover figcaption,
@@ -691,7 +733,9 @@ ul {
   background: rgba(15, 30, 17, 0.92);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+  transition:
+    opacity 0.35s ease,
+    visibility 0s linear 0.35s;
 }
 
 .lightbox.is-open {
@@ -770,7 +814,9 @@ ul {
 .intro-lead {
   color: var(--color-text-muted);
   margin: 0 0 32px;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .feature-grid {
@@ -784,7 +830,10 @@ ul {
   border: 1px solid rgba(47, 107, 58, 0.12);
   border-radius: 16px;
   padding: 28px 22px;
-  transition: opacity 0.6s ease, transform 0.35s ease, box-shadow 0.25s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.35s ease,
+    box-shadow 0.25s ease;
 }
 
 .feature-card:hover {
@@ -848,7 +897,9 @@ ul {
   text-transform: uppercase;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .tab-btn:hover {
@@ -877,10 +928,15 @@ ul {
 
 .product-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: var(--color-cream);
   border-radius: 16px;
   overflow: hidden;
-  transition: opacity 0.6s ease, transform 0.35s ease, box-shadow 0.25s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.35s ease,
+    box-shadow 0.25s ease;
 }
 
 .product-card:hover {
@@ -890,8 +946,8 @@ ul {
 
 .product-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 25px;
+  left: 25px;
   z-index: 1;
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
@@ -917,7 +973,10 @@ ul {
   color: var(--color-primary);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(31, 42, 31, 0.15);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
 .product-cart-btn:hover {
@@ -940,13 +999,16 @@ ul {
 .product-thumb {
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--color-white);
+  flex-shrink: 0;
+  padding: 16px;
 }
 
 .product-thumb a {
   display: block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .product-thumb img {
@@ -964,11 +1026,22 @@ ul {
   font-family: var(--font-heading);
   font-size: 16px;
   color: var(--color-text);
-  margin: 16px 16px 8px;
+  margin: 16px 16px 6px;
+}
+
+.product-desc {
+  margin: 0 16px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-price {
-  margin: 0 16px 20px;
+  margin: auto 16px 20px;
   font-size: 15px;
   font-weight: 700;
   color: var(--color-primary);
@@ -998,7 +1071,10 @@ ul {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(47, 107, 58, 0.12);
-  transition: opacity 0.6s ease, transform 0.35s ease, box-shadow 0.25s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.35s ease,
+    box-shadow 0.25s ease;
 }
 
 .post-card:hover {
@@ -1088,7 +1164,9 @@ ul {
   border-radius: 16px;
   overflow: hidden;
   padding-bottom: 22px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .news-slide:hover {
@@ -1157,7 +1235,9 @@ ul {
   background: var(--color-white);
   color: var(--color-primary);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .slider-arrow:hover {
@@ -1185,7 +1265,9 @@ ul {
   border-radius: 50%;
   background: rgba(47, 107, 58, 0.2);
   cursor: pointer;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
 .slider-dots button.is-active {
@@ -1194,7 +1276,8 @@ ul {
 }
 
 .news-cta,
-.posts-cta {
+.posts-cta,
+.products-cta {
   display: block;
   width: fit-content;
   margin: 32px auto 0;
