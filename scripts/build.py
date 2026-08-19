@@ -353,7 +353,12 @@ def footer_html(depth):
 
 # ---------- card renderers ----------
 
-def post_card(p, href):
+def post_card(p, href, r):
+    # p["cover"] lưu dạng "images/<section>/<slug>/file" — tương đối với SITE ROOT, không phải
+    # tương đối với trang đang render (khác "href", vốn tương đối với thư mục section). Bắt buộc
+    # phải ghép thêm "r" (tiền tố độ sâu) mới đúng — thiếu bước này là bug thật đã xảy ra: ảnh
+    # cover vỡ trên toàn bộ trang danh sách/phân trang dù ảnh vẫn tồn tại đúng chỗ trên site.
+    cover_src = (r + p["cover"]) if p.get("cover") else (r + "images/logo.png")
     return """                <article class="post-card">
                   <a class="post-thumb" href="%s"><img
                       src="%s"
@@ -368,7 +373,7 @@ def post_card(p, href):
                       %s
                     </p>
                   </div>
-                </article>""" % (href, esc(p["cover"]), esc(p["title"]), href, esc(p["title"]), esc(truncate(p.get("description", ""), 90)))
+                </article>""" % (href, esc(cover_src), esc(p["title"]), href, esc(p["title"]), esc(truncate(p.get("description", ""), 90)))
 
 
 def sidebar_post_items(posts, depth_to_section):
@@ -590,7 +595,7 @@ def build_listing_pages(section, merged, products):
         cover = page_items[0].get("cover") if page_items else ""
         cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.png"
 
-        cards = "\n\n".join(post_card(p, section_prefix + p["slug"] + "/") for p in page_items)
+        cards = "\n\n".join(post_card(p, section_prefix + p["slug"] + "/", r) for p in page_items)
         pagination = pagination_nav(section, page_num, total_pages)
         related_posts = merged[:5]
         sidebar_posts = sidebar_post_items(related_posts, section_prefix)
