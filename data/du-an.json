@@ -1,16 +1,5 @@
 [
   {
-    "id": "2430b93d-52da-4eb8-b0e1-c6a483ecaf06",
-    "slug": "test",
-    "title": "test",
-    "description": "test",
-    "author": "",
-    "cover": "images/du-an/test/cover.png",
-    "order": 1,
-    "created_at": "2026-08-19T04:40:06.517Z",
-    "updated_at": "2026-08-19T04:40:06.517Z"
-  },
-  {
     "id": "legacy-thiet-ke-thi-cong-nha-tre-uon-cong",
     "slug": "thiet-ke-thi-cong-nha-tre-uon-cong",
     "title": "THIẾT KẾ THI CÔNG NHÀ TRE UỐN CONG",
