@@ -5,3 +5,5 @@ node_modules/
 # CMS source (Google Apps Script) — deploy thủ công qua script.google.com / clasp, không push
 # qua repo này (không muốn lộ code backend ra ngoài). Xem gas/README.md để biết cách deploy.
 gas/
+__pycache__/
+*.pyc
