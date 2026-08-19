@@ -1,0 +1,11 @@
+{
+  "id": "6a841de7-e279-4e65-9a7c-5552b406c527",
+  "slug": "test",
+  "title": "test",
+  "description": "test",
+  "author": "",
+  "cover": "images/tin-tuc/test/cover.png",
+  "created_at": "2026-08-19T04:42:00.311Z",
+  "updated_at": "2026-08-19T04:42:00.311Z",
+  "content": "<p>1</p>\n<figure class=\"post-detail-figure\"><img title=\"caption nè\" src=\"../../images/tin-tuc/test/01.png\" alt=\"caption nè\" loading=\"lazy\">\n<figcaption>caption nè</figcaption>\n</figure>\n<p>alo</p>"
+}
