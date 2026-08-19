@@ -1,0 +1,55 @@
+name: Build site from CMS data
+
+on:
+  push:
+    branches: [master]
+    # Chỉ trigger ở đúng 3 file LUÔN là commit chốt của mọi thao tác Lưu/Xoá/Sắp xếp/Migrate
+    # (Contents API ghi nhiều commit liên tiếp cho 1 thao tác: ảnh -> detail.json -> index.json;
+    # nếu trigger theo cả thư mục data/**, CI sẽ chạy ngay từ commit dở dang và có thể deploy
+    # nhầm trạng thái chưa hoàn tất — xem skill free-cms-static-site-pipeline, mục gotchas).
+    paths:
+      - 'data/tin-tuc.json'
+      - 'data/du-an.json'
+      - 'data/san-pham.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build HTML from data/
+        run: python3 scripts/build.py
+
+      - name: Commit built HTML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add html/
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "CI: build html from data"
+          git push
+
+      # Push ở bước trên dùng GITHUB_TOKEN mặc định -> KHÔNG tự kích hoạt deploy.yml (GitHub
+      # chặn workflow tự trigger lẫn nhau từ push của GITHUB_TOKEN để tránh loop vô hạn).
+      # Vì vậy phải deploy trực tiếp ở đây; deploy.yml (trigger theo push html/**) chỉ lo
+      # trường hợp còn lại: ai đó sửa tay html/ rồi push thẳng, không qua build này.
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -1,0 +1,7 @@
+.wrangler/
+node_modules/
+.DS_Store
+
+# CMS source (Google Apps Script) — deploy thủ công qua script.google.com / clasp, không push
+# qua repo này (không muốn lộ code backend ra ngoài). Xem gas/README.md để biết cách deploy.
+gas/

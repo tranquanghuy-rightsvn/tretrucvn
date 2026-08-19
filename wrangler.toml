@@ -1,0 +1,14 @@
+name = "tretrucvn"
+compatibility_date = "2025-01-01"
+
+# Site tĩnh (đã build từ CMS qua scripts/build.py) — phục vụ trực tiếp bằng Workers Static
+# Assets, không cần code Worker riêng.
+[assets]
+directory = "./html"
+not_found_handling = "404-page"
+
+# Không khai báo domain ở đây (cố ý) — chưa nối domain thật, ưu tiên xong backend trước.
+# Deploy xong sẽ có URL <name>.<subdomain>.workers.dev dùng ngay được.
+# Khi nào muốn gắn domain thật: vào Dashboard -> Workers & Pages -> tretrucvn -> Settings ->
+# Domains & Routes -> Add -> chọn domain. Gắn/đổi domain theo cách này không đụng tới code hay
+# repo, và đổi domain sau này cũng chỉ sửa trong Dashboard, không cần deploy lại.

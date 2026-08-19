@@ -1,21 +1,19 @@
 // ============================================================
-// Giỏ hàng — lưu localStorage, dùng chung cho mọi trang
-// (chưa có backend thật — chỉ mô phỏng luồng thêm giỏ -> xem giỏ -> thanh toán)
+// Giỏ hàng — lưu localStorage, dùng chung cho mọi trang.
+// Đặt hàng gửi thật lên GAS backend (Orders) qua fetch — xem ORDER_ENDPOINT_URL bên dưới.
 // ============================================================
 
 const CART_STORAGE_KEY = "tvb_cart";
 
-const PRODUCT_CATALOG = {
-  "mai-la-guoc": { name: "Mái lá guộc", price: 650000, image: "images/san-pham/mai-la-guoc.jpg" },
-  "cay-tre-tam-vong": { name: "Cây tre tầm vông", price: 15000, image: "images/san-pham/cay-tre-tam-vong.jpg" },
-  "cay-tre-luong": { name: "Cây tre luồng", price: 28500, image: "images/san-pham/cay-tre-luong.jpg" },
-  "truc-da-xu-ly": { name: "Báo giá cây trúc đã xử lý", price: 8500, image: "images/san-pham/truc-da-xu-ly.png" },
-  "nha-bungalow-tre": { name: "Nhà bungalow tre", price: 0, priceLabel: "Liên hệ", image: "images/san-pham/nha-bungalow-tre.jpg" },
-  "choi-tre": { name: "Chòi tre", price: 0, priceLabel: "Liên hệ", image: "images/san-pham/choi-tre.jpg" },
-  "nha-tre": { name: "Nhà tre", price: 1710000, image: "images/san-pham/nha-tre.jpg" },
-  "op-tre-truc-trang-tri": { name: "Ốp tre trúc trang trí", price: 570000, image: "images/san-pham/op-tre-truc-trang-tri.png" },
-  "manh-tre-truc-trang-tri": { name: "Mành tre trúc trang trí", price: 170000, image: "images/san-pham/manh-tre-truc-trang-tri.jpg" },
-};
+// URL Web App GAS (Deploy > New deployment > Web app > /exec). Điền vào sau khi deploy CMS —
+// xem gas/README.md. Chưa điền thì form vẫn hoạt động (giỏ hàng, giao diện) nhưng đơn hàng sẽ
+// KHÔNG được lưu vào Orders — chỉ xoá giỏ + hiện màn thành công như demo, không có gì mất mát
+// (không throw lỗi) để không chặn việc xem/thử giao diện trước khi cấu hình xong backend.
+const ORDER_ENDPOINT_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec";
+
+// Catalog sản phẩm (giá, ảnh) nạp từ js/cart-data.js (build.py tự sinh lại theo dữ liệu CMS) —
+// phải include cart-data.js TRƯỚC cart.js trong mọi trang.
+const PRODUCT_CATALOG = window.PRODUCT_CATALOG || {};
 
 function getBasePath() {
   const logo = document.querySelector(".brand img");
@@ -344,15 +342,58 @@ document.addEventListener("change", (e) => {
   }
 });
 
-// Form thanh toán — demo, chưa có backend nên chỉ xoá giỏ + hiện màn hình thành công
+// Form thanh toán — gửi đơn hàng thật lên GAS backend (Orders), qua fetch (không phải
+// google.script.run — trang này nằm trên site tĩnh, domain khác GAS). Content-Type
+// text/plain để tránh CORS preflight (GAS không xử lý được OPTIONS).
+function buildOrderPayload() {
+  const form = document.getElementById("checkoutForm");
+  const selectedMethod = form.querySelector('input[name="payment-method"]:checked');
+  const provinceSel = document.getElementById("provinceSelect");
+  const wardSel = document.getElementById("wardSelect");
+  const cart = readCart();
+  const items = cart
+    .map((item) => {
+      const p = PRODUCT_CATALOG[item.id];
+      if (!p) return null;
+      return { id: item.id, name: p.name, qty: item.qty, price: p.price };
+    })
+    .filter(Boolean);
+
+  return {
+    name: form.querySelector('[name="customer-name"]').value.trim(),
+    phone: form.querySelector('[name="customer-phone"]').value.trim(),
+    province: provinceSel && provinceSel.selectedIndex >= 0 ? provinceSel.options[provinceSel.selectedIndex].text : "",
+    ward: wardSel && wardSel.selectedIndex >= 0 ? wardSel.options[wardSel.selectedIndex].text : "",
+    address: form.querySelector('[name="customer-address"]').value.trim(),
+    note: form.querySelector('[name="customer-note"]').value.trim(),
+    paymentMethod: selectedMethod ? selectedMethod.value : "cod",
+    items: items,
+    total: cartSubtotal(),
+    hp: form.querySelector('[name="hp"]').value, // honeypot — phải rỗng, bot form-filler sẽ điền vào
+  };
+}
+
+function submitOrderToServer(payload) {
+  if (!ORDER_ENDPOINT_URL || ORDER_ENDPOINT_URL.indexOf("REPLACE_WITH_YOUR_DEPLOYMENT_ID") !== -1) {
+    console.warn("ORDER_ENDPOINT_URL chưa được cấu hình (xem js/cart.js) — đơn hàng KHÔNG được lưu vào Orders.");
+    return Promise.resolve({ ok: true, unconfigured: true });
+  }
+  return fetch(ORDER_ENDPOINT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload),
+  })
+    .then((res) => res.json())
+    .catch(() => ({ ok: false, error: "Không kết nối được máy chủ. Vui lòng thử lại." }));
+}
+
 const checkoutForm = document.getElementById("checkoutForm");
 if (checkoutForm) {
   checkoutForm.addEventListener("submit", (e) => {
     e.preventDefault();
     if (readCart().length === 0) return;
 
-    const selectedMethod = document.querySelector('input[name="payment-method"]:checked');
-    const method = selectedMethod ? selectedMethod.value : "cod";
+    const method = (document.querySelector('input[name="payment-method"]:checked') || {}).value || "cod";
     const errorEl = document.getElementById("paymentConfirmError");
 
     if (method === "bank" || method === "momo") {
@@ -365,22 +406,36 @@ if (checkoutForm) {
     }
     if (errorEl) errorEl.hidden = true;
 
-    clearCart();
-    showPageToast("Đặt hàng thành công! Cảm ơn bạn đã đặt hàng.");
+    const submitBtn = document.getElementById("checkoutSubmitBtn");
+    if (submitBtn) submitBtn.disabled = true;
 
-    checkoutForm.reset();
-    if (typeof resetWardField === "function") resetWardField();
-    const codRadio = document.querySelector('input[name="payment-method"][value="cod"]');
-    if (codRadio) {
-      codRadio.checked = true;
-      codRadio.dispatchEvent(new Event("change", { bubbles: true }));
-    }
+    submitOrderToServer(buildOrderPayload())
+      .then((res) => {
+        if (!res || !res.ok) {
+          showPageToast((res && res.error) || "Đặt hàng thất bại, vui lòng thử lại.");
+          return;
+        }
 
-    const successEl = document.getElementById("checkoutSuccess");
-    const formWrap = document.getElementById("checkoutFormWrap");
-    if (successEl) successEl.hidden = false;
-    if (formWrap) formWrap.hidden = true;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+        clearCart();
+        showPageToast("Đặt hàng thành công! Cảm ơn bạn đã đặt hàng.");
+
+        checkoutForm.reset();
+        if (typeof resetWardField === "function") resetWardField();
+        const codRadio = document.querySelector('input[name="payment-method"][value="cod"]');
+        if (codRadio) {
+          codRadio.checked = true;
+          codRadio.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+
+        const successEl = document.getElementById("checkoutSuccess");
+        const formWrap = document.getElementById("checkoutFormWrap");
+        if (successEl) successEl.hidden = false;
+        if (formWrap) formWrap.hidden = true;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 }
 

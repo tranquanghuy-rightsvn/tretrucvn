@@ -1,0 +1,27 @@
+name: Deploy to Cloudflare Workers
+
+# Chỉ lo trường hợp html/ hoặc wrangler.toml thay đổi KHÔNG PHẢI qua build.yml (vd sửa tay rồi
+# push thẳng) — commit của build.yml dùng GITHUB_TOKEN mặc định nên không tự trigger workflow
+# này được (GitHub chặn để tránh loop vô hạn); build.yml đã tự deploy ở bước cuối của nó rồi.
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'html/**'
+      - 'wrangler.toml'
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
