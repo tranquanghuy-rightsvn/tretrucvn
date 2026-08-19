@@ -1,0 +1,110 @@
+[
+  {
+    "id": "legacy-thi-cong-op-tre-truc-trang-tri",
+    "slug": "thi-cong-op-tre-truc-trang-tri",
+    "title": "Ốp Tre Trúc Trang Trí",
+    "description": "Thi công ốp tre trúc trang trí của đơn vị Tre Việt Building đã mang đến những công trình bằng tre rất bền và đẹp tuổi thọ 10 năm cho đến 15 năm.",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 570000,
+    "cover_file": "tre1baa7n-tre-trc3bac_optimized2.png",
+    "order": 1,
+    "created_at": "2026-08-19T03:05:12.277Z",
+    "updated_at": "2026-08-19T03:05:12.277Z"
+  },
+  {
+    "id": "legacy-thi-cong-lop-mai-la-lop-guoc",
+    "slug": "thi-cong-lop-mai-la-lop-guoc",
+    "title": "mái lá guộc",
+    "description": "Tre việt Building đơn vị tiên phong đưa vật liệu chống nóng bằng sản phẩm tự nhiên vào thiết kế của mình. trong đó thi công lợp mái lá (lợp guộc) hiệu quả cao",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 650000,
+    "cover_file": "",
+    "order": 2,
+    "created_at": "2026-08-19T03:05:11.128Z",
+    "updated_at": "2026-08-19T03:05:11.128Z"
+  },
+  {
+    "id": "legacy-nha-tre",
+    "slug": "nha-tre",
+    "title": "Nhà Tre",
+    "description": "Nhà tre là một loại hình nhà được xây dựng bằng các nguyên liệu tre trúc. Nhà tre phổ biến ở các khu du lịch, hoặc tại các khu vực bản địa của người dân. Vậy",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 1710000,
+    "cover_file": "nha-tre94904.jpg",
+    "order": 3,
+    "created_at": "2026-08-19T03:05:09.781Z",
+    "updated_at": "2026-08-19T03:05:09.781Z"
+  },
+  {
+    "id": "legacy-nha-bungalow-tre",
+    "slug": "nha-bungalow-tre",
+    "title": "Nhà Bungalow Tre",
+    "description": "Nhà tre bungalow là mô hình hiện nay phổ biến nhiều ở các khu du lịch, khu nghỉ dưỡng. Nếu bạn đang tìm hiểu về giá thi công bungalow tre trúc thì đừng bỏ lỡ",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 0,
+    "cover_file": "nha-bungalow-tre73461.jpg",
+    "order": 4,
+    "created_at": "2026-08-19T03:05:08.622Z",
+    "updated_at": "2026-08-19T03:05:08.622Z"
+  },
+  {
+    "id": "legacy-manh-tre-truc-trang-tri",
+    "slug": "manh-tre-truc-trang-tri",
+    "title": "Mành Tre Trúc Trang Trí",
+    "description": "ngày nay rất phổ biến, được sử dụng rộng rãi trong việc trang trí nhà cửa bởi những ưu điểm mà mành tre trúc mang đến, chi tiết hãy cùng tìm hiểu nhé.",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 170000,
+    "cover_file": "manh-tre-truc-trang-tri05313.jpg",
+    "order": 5,
+    "created_at": "2026-08-19T03:05:07.510Z",
+    "updated_at": "2026-08-19T03:05:07.510Z"
+  },
+  {
+    "id": "legacy-choi-tre",
+    "slug": "choi-tre",
+    "title": "Chòi Tre",
+    "description": "Nhà chòi tre là một mẫu nhà được xây dựng bằng các nguyên liệu tre tự nhiên như tre trúc tre tầm vông…",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 0,
+    "cover_file": "choi-tre37299.jpg",
+    "order": 6,
+    "created_at": "2026-08-19T03:05:06.242Z",
+    "updated_at": "2026-08-19T03:05:06.242Z"
+  },
+  {
+    "id": "legacy-cay-tre-tam-vong-da-qua-xu-ly-so-1",
+    "slug": "cay-tre-tam-vong-da-qua-xu-ly-so-1",
+    "title": "Cây TreTầm Vông",
+    "description": "Nguyên liệu cây tre tầm vông ngày càng được ứng dụng nhiều trong đời sống, với nhiều năm kinh nghiệm trong lĩnh vực Tre việt Là đơn vị có nguồn cung dồi dào,…",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 15000,
+    "cover_file": "gia-cay-tam-vong-tphcm202.jpg",
+    "order": 7,
+    "created_at": "2026-08-19T03:05:05.196Z",
+    "updated_at": "2026-08-19T03:05:05.196Z"
+  },
+  {
+    "id": "legacy-cay-tre-luong-xu-ly-chat-luong-so-1",
+    "slug": "cay-tre-luong-xu-ly-chat-luong-so-1",
+    "title": "Cây Tre Luồng",
+    "description": "Cây tre luồng được xem là loại vật liệu xanh thân thiện với môi trường đang được ứng dụng phổ biến trong nhiều công trình xây dựng. Vậy cây tre luồng có giá…",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 28500,
+    "cover_file": "cay-luong77438.jpg",
+    "order": 8,
+    "created_at": "2026-08-19T03:05:02.967Z",
+    "updated_at": "2026-08-19T03:05:02.967Z"
+  },
+  {
+    "id": "legacy-bao-gia-cay-truc-da-xu-lu",
+    "slug": "bao-gia-cay-truc-da-xu-lu",
+    "title": "báo giá cây trúc đã xử lý",
+    "description": "báo giá cây trúc đã xử lý",
+    "category": "nguyen-lieu-tre-truc",
+    "price": 8500,
+    "cover_file": "",
+    "order": 9,
+    "created_at": "2026-08-19T03:05:01.736Z",
+    "updated_at": "2026-08-19T03:05:01.736Z"
+  }
+]
