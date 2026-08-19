@@ -1,0 +1,11 @@
+{
+  "id": "517795af-82c8-4a15-89d7-ab36312ee291",
+  "slug": "test-ne",
+  "title": "test nè",
+  "description": "test",
+  "author": "",
+  "cover": "images/tin-tuc/test-ne/cover.png",
+  "created_at": "2026-08-19T04:24:48.221Z",
+  "updated_at": "2026-08-19T04:24:48.221Z",
+  "content": "<figure class=\"post-detail-figure\" style=\"text-align: left;\"></figure>\n<figure class=\"post-detail-figure\" style=\"text-align: left;\"></figure>\n<figure class=\"post-detail-figure\"><img title=\"xin chào\" src=\"../../images/tin-tuc/test-ne/01.png\" alt=\"xin chào\" loading=\"lazy\">\n<figcaption>xin chào</figcaption>\n</figure>\n<p>Xin chào các bạn</p>\n<figure class=\"post-detail-figure\"><img title=\"stop\" src=\"../../images/tin-tuc/test-ne/02.png\" alt=\"stop\" loading=\"lazy\">\n<figcaption>stop</figcaption>\n</figure>\n<p>anh Huy</p>"
+}
