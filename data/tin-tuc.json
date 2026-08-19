@@ -1,12 +1,23 @@
 [
   {
+    "id": "6a841de7-e279-4e65-9a7c-5552b406c527",
+    "slug": "test",
+    "title": "test",
+    "description": "test",
+    "author": "",
+    "cover": "images/tin-tuc/test/cover.png",
+    "order": 1,
+    "created_at": "2026-08-19T04:42:00.311Z",
+    "updated_at": "2026-08-19T04:42:00.311Z"
+  },
+  {
     "id": "legacy-xuong-nguyen-lieu-tre-truc-gia-re-uy-tin",
     "slug": "xuong-nguyen-lieu-tre-truc-gia-re-uy-tin",
     "title": "XƯỞNG NGUYÊN LIỆU TRE TRÚC GIÁ RẺ, UY TÍN",
     "description": "Với sự đa dạng về kích thước và hình dạng, nguyên liệu tre trúc có thể được sử dụng trong nhiều ứng dụng khác nhau. Từ việc xây dựng các công trình kiến trúc,",
     "author": "",
     "cover": "images/tin-tuc/xuong-nguyen-lieu-tre-truc-gia-re-uy-tin/34-1.jpg",
-    "order": 2,
+    "order": 3,
     "created_at": "2025-07-31T07:55:23+00:00",
     "updated_at": "2026-03-14T02:10:25+00:00"
   },
@@ -17,7 +28,7 @@
     "description": "Xử lý tre chống mối mọt có nhiều cách. Mỗi phương pháp đều có ưu điểm và nhược điểm nhưng đều hướng đến mục đích bảo tồn và sử dụng tre, nứa một cách bền",
     "author": "",
     "cover": "images/tin-tuc/xu-ly-tre-chong-moi-mot/xu-ly-tre-chong-moi-mot201.jpg",
-    "order": 3,
+    "order": 4,
     "created_at": "2025-07-31T07:59:00+00:00",
     "updated_at": "2026-08-09T19:57:09+00:00"
   },
@@ -28,7 +39,7 @@
     "description": "cuộc sống hiện đại con ngươi ta càng muốn quay về ôm lại nhữ giá trị xưa việc thi công nhà tre mái lá ngày càng mai một. chúng tôi luôn lắng nghe.",
     "author": "",
     "cover": "images/tin-tuc/xu-huong-thi-cong-nha-tre-mai-la-hien-nay/112-2.jpg",
-    "order": 4,
+    "order": 5,
     "created_at": "2025-07-31T07:58:05+00:00",
     "updated_at": "2025-08-20T06:32:54+00:00"
   },
@@ -39,7 +50,7 @@
     "description": "Ốp tre trúc trong thiết kế nội - ngoại thất ngày càng được ưa chuộng và trở nên phổ biến trong thời buổi hiện đại. Vật liệu tự nhiên không chỉ giúp làm đẹp",
     "author": "",
     "cover": "images/tin-tuc/vi-sao-op-tre-truc-ngay-cang-duoc-ua-chuong-luu-y-khi-op-tran-tre-truc-2025/vc3ac-sao-e1bb91p-tre-trc3bac-ngc3a0y-cc3a0ng-c491c6b0e1bba3c-c6b0a-chue1bb99ng_-lc6b0u-c3bd-khi-e1bb91p-tre1baa7n-tre-trc3bac-2025_optimized.png",
-    "order": 5,
+    "order": 6,
     "created_at": "2025-07-31T07:52:44+00:00",
     "updated_at": "2026-03-14T02:24:01+00:00"
   },
@@ -50,7 +61,7 @@
     "description": "Vách ngăn tre trúc trong lĩnh vực kiến trúc và xây dựng, việc sử dụng tre trúc để làm vách ngăn đang trở thành một xu hướng mới. Sản phẩm này mang đến không",
     "author": "",
     "cover": "images/tin-tuc/vach-ngan-tre-truc/vach-ngan-tre-truc201.jpg",
-    "order": 6,
+    "order": 7,
     "created_at": "2025-07-31T07:58:17+00:00",
     "updated_at": "2026-03-14T02:01:26+00:00"
   },
@@ -61,7 +72,7 @@
     "description": "Mành tre trúc là giải pháp tuyệt vời cho những không gian sinh hoạt ngoài trời của gia đình bạn. Với tính linh hoạt và độ bền cao của tre trúc, mành tre trúc",
     "author": "",
     "cover": "images/tin-tuc/ung-dung-manh-tre-truc-trong-cuoc-song/6.jpg",
-    "order": 7,
+    "order": 8,
     "created_at": "2025-07-31T07:57:21+00:00",
     "updated_at": "2025-08-20T07:22:34+00:00"
   },
@@ -72,7 +83,7 @@
     "description": "Mành trúc có đặc tính nhẹ, linh hoạt và bền giúp nó trở thành vật liệu lý tưởng cho việc xây dựng nhà cửa và nhiều không gian khác. Ngoài ra còn có khả năng",
     "author": "",
     "cover": "images/tin-tuc/ung-dung-cua-manh-truc-trong-khu-nghi-duong/123.jpg",
-    "order": 8,
+    "order": 9,
     "created_at": "2025-07-31T07:56:21+00:00",
     "updated_at": "2026-03-14T02:08:05+00:00"
   },
@@ -83,7 +94,7 @@
     "description": "Mành tre ngoài trời cũng là một phần của trang trí ngoại thất đẹp mắt, với sự kết hợp thông minh của ánh sáng mặt trời và bóng mát. Mành tre tạo ra các mảng",
     "author": "",
     "cover": "images/tin-tuc/tua-nang-che-mua-da-co-manh-tre-ngoai-troi/bambutae28099s20maken20je20veranda20sfeervolf09f929c.jpg",
-    "order": 9,
+    "order": 10,
     "created_at": "2025-07-31T07:53:54+00:00",
     "updated_at": "2026-03-14T02:18:39+00:00"
   },
@@ -94,7 +105,7 @@
     "description": "Thi công ốp trúc đã và đang trở thành sự lựa chọn hàng đầu trong thiết kế không gian sống, làm việc nhờ vẻ đẹp tự nhiên, thân thiện với môi trường, đặc biệt",
     "author": "",
     "cover": "images/tin-tuc/tre-viet-building-don-vi-thi-cong-op-truc-uy-tin-chat-luong-tai-viet-nam/e1bb91p-tre-trc3bac_optimized6.png",
-    "order": 10,
+    "order": 11,
     "created_at": "2025-07-31T07:52:06+00:00",
     "updated_at": "2026-03-14T02:25:14+00:00"
   },
@@ -105,7 +116,7 @@
     "description": "Tre tầm vông là loại vật liệu tự nhiên, có tính ứng dụng cao trong xây dựng, thiết kế nội - ngoại thất, trang trí cảnh quan cùng nhiều lĩnh vực đa dạng khác.",
     "author": "",
     "cover": "images/tin-tuc/tre-viet-building-don-vi-cung-cap-si-le-tre-tam-vong-uy-tin-chat-luong-toan-quoc/tre-vie1bb87t-building-c490c6a1n-ve1bb8b-cung-ce1baa5p-se1bb89-le1babb-tre-te1baa7m-vc3b4ng-uy-tc3adn2c-che1baa5t-lc6b0e1bba3ng-toc3a0n-que1bb91c_optimized1.png",
-    "order": 11,
+    "order": 12,
     "created_at": "2025-07-31T07:52:19+00:00",
     "updated_at": "2026-03-14T02:24:47+00:00"
   },
@@ -116,7 +127,7 @@
     "description": "Tre mạnh tông là một trong những loại cây phát triển nhanh nhất. Măng tre mạnh tông là một loại thực phẩm có giá trị kinh tế cao. Nhưng đâu là nguồn gốc, đặc",
     "author": "",
     "cover": "images/tin-tuc/tre-manh-tong/tre-manh-tong201.jpg",
-    "order": 12,
+    "order": 13,
     "created_at": "2025-07-31T07:58:44+00:00",
     "updated_at": "2026-03-14T01:58:10+00:00"
   },
@@ -127,7 +138,7 @@
     "description": "Trang trí trần nhà bằng tre và là liên kết các thanh tre trúc lại với nhau,  để tạo nên nhiều kiểu hoa văn trang trí. Có 2 loại trần tre trúc, là ốp nguyên",
     "author": "",
     "cover": "images/tin-tuc/trang-tri-tran-nha-bang-tre/trang-tri-tran-nha-bang-tre202.jpg",
-    "order": 13,
+    "order": 14,
     "created_at": "2025-07-31T07:58:40+00:00",
     "updated_at": "2026-03-14T01:58:22+00:00"
   },
@@ -138,7 +149,7 @@
     "description": "Mành tre được làm từ cây tre - một loại cây phổ biến tại Việt Nam. Khi trang trí mành tre trong nhà, bạn có thể đổi mới cho không gian sống, làm việc, học",
     "author": "",
     "cover": "images/tin-tuc/trang-tri-manh-tre-cho-khong-gian/download201.jpg",
-    "order": 14,
+    "order": 15,
     "created_at": "2025-07-31T07:54:43+00:00",
     "updated_at": "2026-03-14T02:15:27+00:00"
   },
@@ -149,7 +160,7 @@
     "description": "Trong xu hướng nội thất hiện đại xanh và tối giản, vật liệu tre trúc đã và đang trở thành một sự lựa chọn được yêu thích nhờ vào tính thẩm mỹ cao, thân thiện",
     "author": "",
     "cover": "images/tin-tuc/tran-tre-truc-giai-phap-mat-lanh-ben-dep-cho-moi-khong-gian-song/tre1baa7n-tre-trc3bac_optimized2.png",
-    "order": 15,
+    "order": 16,
     "created_at": "2025-07-31T07:52:49+00:00",
     "updated_at": "2026-03-14T02:23:48+00:00"
   },
@@ -160,7 +171,7 @@
     "description": "Trong quá trình sản xuất, rèm trúc được làm thủ công từ các sợi trúc tự nhiên. Chúng có nhiều kiểu dáng và màu sắc khác nhau, giúp bạn tạo ra phong cách trang",
     "author": "",
     "cover": "images/tin-tuc/top-nhung-mau-rem-truc-doc-dao/191.jpg",
-    "order": 16,
+    "order": 17,
     "created_at": "2025-07-31T07:53:22+00:00",
     "updated_at": "2026-03-14T02:22:07+00:00"
   },
@@ -171,7 +182,7 @@
     "description": "Trong thời đại mà không gian sống đang ngày càng được đề cao yếu tố thiên nhiên, thân thiện với môi trường thì ốp tường tre trúc dần trở thành một sự lựa chọn",
     "author": "",
     "cover": "images/tin-tuc/top-5-xu-huong-trang-tri-op-tuong-tre-truc-dep-gia-re-2025/e1bb91p-tre-trc3bac_optimized2.png",
-    "order": 17,
+    "order": 18,
     "created_at": "2025-07-31T07:53:01+00:00",
     "updated_at": "2026-03-14T02:23:20+00:00"
   },
@@ -182,7 +193,7 @@
     "description": "Trong bối cảnh mà ốp tường tre trúc đã, đang trở thành một xu hướng trang trí được yêu thích trong thiết kế nội - ngoại thất, thì việc lựa chọn ĐÚNG đơn vị",
     "author": "",
     "cover": "images/tin-tuc/top-5-luu-y-quan-trong-khi-chon-don-vi-thi-cong-op-tuong-tre-truc/e1bb91p-tre-trc3bac_optimized3.png",
-    "order": 18,
+    "order": 19,
     "created_at": "2025-07-31T07:53:08+00:00",
     "updated_at": "2026-03-14T02:22:57+00:00"
   },
@@ -193,7 +204,7 @@
     "description": "Rèm trúc không chỉ là một phong cách trang trí đơn thuần, nó còn mang trong mình dáng hình của đất nước Việt Nam qua những năm tháng chống giặc ngoại xâm oanh",
     "author": "",
     "cover": "images/tin-tuc/ton-vinh-ve-dep-thuan-viet-voi-rem-truc-trang-tri/25-1.jpg",
-    "order": 19,
+    "order": 20,
     "created_at": "2025-07-31T07:56:36+00:00",
     "updated_at": "2026-03-14T02:07:37+00:00"
   },
@@ -204,7 +215,7 @@
     "description": "Với sự đơn giản, tự nhiên và gần gũi, mành trúc trang trí đã trở thành một xu hướng trang trí phổ biến trong nhiều ngôi nhà và không gian ngoài trời. Trong",
     "author": "",
     "cover": "images/tin-tuc/to-diem-khong-gian-cung-manh-truc-trang-tri/63.jpg",
-    "order": 20,
+    "order": 21,
     "created_at": "2025-07-31T07:53:40+00:00",
     "updated_at": "2026-03-14T02:19:11+00:00"
   },
@@ -215,7 +226,7 @@
     "description": "Tre từ lâu đã trở thành biểu tượng của đất nước Việt Nam và cho đến bây giờ, người ta vẫn sử dụng tre làm nên những vật dụng khác nhau để phục vụ cho nhiều",
     "author": "",
     "cover": "images/tin-tuc/tim-hieu-ve-manh-tre-va-cach-lua-chon-de-trang-tri-trong-nha/manh-tre-truc-trang-tri203-1.jpg",
-    "order": 21,
+    "order": 22,
     "created_at": "2025-07-31T07:55:37+00:00",
     "updated_at": "2026-03-14T02:09:51+00:00"
   },
@@ -226,7 +237,7 @@
     "description": "Khi gia công mành tre trúc các nghệ nhân sẽ dùng hai cây tre nẹp ở hai đầu của tấm mành lại, để tạo độ nặng, chắc chắn. Giữ cho mành được cố định và không bị",
     "author": "",
     "cover": "images/tin-tuc/thiet-ke-tu-nhien-dep-mat-voi-manh-tre-truc/18.jpg",
-    "order": 22,
+    "order": 23,
     "created_at": "2025-07-31T07:53:49+00:00",
     "updated_at": "2026-03-14T02:18:54+00:00"
   },
@@ -237,7 +248,7 @@
     "description": "Thi công tre trúc là một lựa chọn thú vị cho không gian xanh. Với vẻ đẹp tự nhiên, độ bền cao và tính thẩm mỹ độc đáo. Tre trúc đã thu hút được sự quan tâm",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-tre-truc-gia-re-ben-dep/thi-cc3b4ng-tre-1.jpg",
-    "order": 23,
+    "order": 24,
     "created_at": "2025-07-31T07:55:32+00:00",
     "updated_at": "2026-03-14T02:10:07+00:00"
   },
@@ -248,7 +259,7 @@
     "description": "Thi công ốp tre trúc trang trí giá rẻ hiện nay được nhiều nhà hàng, quán ăn, homestay, hotel lựa chọn bởi đây chính là phương pháp tối ưu chi phí, thời gian,",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-op-tre-truc-trang-tri/thi-cong-op-tre-truc-trang-tri201.jpg",
-    "order": 24,
+    "order": 25,
     "created_at": "2025-07-31T07:58:48+00:00",
     "updated_at": "2026-03-14T01:58:00+00:00"
   },
@@ -259,7 +270,7 @@
     "description": "Khi thế giới đang phải đối mặt với vấn đề biến đổi khí hậu, đô thị hóa tăng nhanh và các giá trị truyền thống đang dần bị mai một thì có một xu hướng kiến",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-nha-tre-mai-la-giai-phap-kien-truc-xanh-tiet-kiem-va-ben-vung/z6844637053345_1711bcddca86579384bf576a209dbb10.jpg",
-    "order": 25,
+    "order": 26,
     "created_at": "2025-07-31T07:51:28+00:00",
     "updated_at": "2026-03-14T02:26:26+00:00"
   },
@@ -270,7 +281,7 @@
     "description": "Nhà tre mái lá đã và đang trở thành xu hướng thiết kế được ưa chuộng trong các công trình homestay, quán cà phê, nhà hàng, spa, resort nhờ vẻ đẹp mộc mạc,",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-nha-tre-co-uu-diem-gi-luu-y-de-xay-dung-nha-tre-mai-la-dep-ma-ban-can-biet/z6844633356406_d809c6d164abe9e81e0f1c6d163b0e17.jpg",
-    "order": 26,
+    "order": 27,
     "created_at": "2025-07-31T07:51:21+00:00",
     "updated_at": "2026-03-14T02:28:05+00:00"
   },
@@ -281,7 +292,7 @@
     "description": "tre việt building là đơn vị cung cấp và lắp đặt thi công mành tre ngoài trời , với 15 kinh nghiệm và hàng ngàn dự án lớn nhỏ.",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-manh-tre-ngoai-troi/manh-tre-ngoai-troi.jpg",
-    "order": 27,
+    "order": 28,
     "created_at": "2025-07-31T07:55:51+00:00",
     "updated_at": "2026-03-14T02:09:24+00:00"
   },
@@ -292,7 +303,7 @@
     "description": "Nắng mùa hè thường làm cho không gian sống trở nên ẩm ướt và nóng bức, vì vậy mành trúc che nắng là loại nội thất được nhiều người lựa chọn nhằm giảm nhiệt độ",
     "author": "",
     "cover": "images/tin-tuc/thi-cong-lap-dat-manh-truc-che-nang-gia-tot/24-1.jpg",
-    "order": 28,
+    "order": 29,
     "created_at": "2025-07-31T07:57:26+00:00",
     "updated_at": "2026-03-14T02:03:24+00:00"
   },
@@ -303,7 +314,7 @@
     "description": "ốp tre trúc trang trí trong nhà mang lại không gian thư giãn. mộc mạc của thiên nhiên mang dến cho chúng ta cảm giác gần gũi thiên nhiên hơn",
     "author": "",
     "cover": "images/tin-tuc/tat-tan-tat-ve-op-tre-truc-trang-tri-trong-nha/102.jpg",
-    "order": 29,
+    "order": 30,
     "created_at": "2025-07-31T07:57:35+00:00",
     "updated_at": "2026-03-14T02:03:04+00:00"
   },
@@ -314,7 +325,7 @@
     "description": "Ốp tường tre trúc là sự kết hợp giữa vẻ đẹp tự nhiên của tre trúc và phong cách trang trí hiện đại. Mang đến cho bạn một không gian độc đáo, thân thiện và cảm",
     "author": "",
     "cover": "images/tin-tuc/tao-khong-gian-moi-la-voi-op-tuong-tre-truc/15.jpg",
-    "order": 30,
+    "order": 31,
     "created_at": "2025-07-31T07:54:39+00:00",
     "updated_at": "2026-03-14T02:15:49+00:00"
   },
@@ -325,7 +336,7 @@
     "description": "Trong xu hướng phát triển nền kiến trúc xanh hiện đại, tầm vông đã và đang được rất nhiều kiến trúc sư lẫn chủ đầu tư quan tâm, lựa chọn để thay thế cho các",
     "author": "",
     "cover": "images/tin-tuc/tam-vong-lam-nha-tre-giai-phap-kien-truc-ben-vung-tham-my-va-tiet-kiem/tam-vong-lam-nha-tre_optimized.png",
-    "order": 31,
+    "order": 32,
     "created_at": "2025-07-31T07:52:37+00:00",
     "updated_at": "2026-03-14T02:24:15+00:00"
   },
@@ -336,7 +347,7 @@
     "description": "Tầm vông là một trong những vật liệu tre truyền thống, được ưa chuộng nhờ độ bền, tính dẻo dai cùng vẻ đẹp tự nhiên. Và không chỉ phổ biến trong thi công,",
     "author": "",
     "cover": "images/tin-tuc/tac-dung-cua-cay-tam-vong-va-luu-y-ve-cach-chon-mua-vat-lieu-dung-chuan/e1bb91p-tre-trc3bac_optimized5.png",
-    "order": 32,
+    "order": 33,
     "created_at": "2025-07-31T07:52:31+00:00",
     "updated_at": "2026-03-14T02:24:36+00:00"
   },
@@ -347,7 +358,7 @@
     "description": "Tre - một biểu tượng văn hóa độc đáo của người Việt, đã trải qua hàng ngàn năm lịch sử. Và các sản phẩm được làm từ tre chính là đỉnh cao của sự kết hợp giữa",
     "author": "",
     "cover": "images/tin-tuc/su-hai-hoa-giua-manh-tre-va-khong-gian/181-1.jpg",
-    "order": 33,
+    "order": 34,
     "created_at": "2025-07-31T07:54:28+00:00",
     "updated_at": "2026-03-14T02:16:24+00:00"
   },
@@ -358,7 +369,7 @@
     "description": "Mành tre trang trí là sản phẩm được làm thủ công từ tre, có thể được làm thành các mẫu hoa văn, hình học trừu tượng hoặc những hình ảnh tự nhiên như cây cỏ,",
     "author": "",
     "cover": "images/tin-tuc/su-dung-manh-tre-trang-tri-dung-cach-hop-thoi/84.jpg",
-    "order": 34,
+    "order": 35,
     "created_at": "2025-07-31T07:56:25+00:00",
     "updated_at": "2026-03-14T02:08:05+00:00"
   },
@@ -369,7 +380,7 @@
     "description": "Mành trúc trang trí đã trở thành một sự lựa chọn phổ biến để tạo ra không gian sống và làm việc thêm phần thoáng đãng và gần gũi với thiên nhiên. Với đặc tính",
     "author": "",
     "cover": "images/tin-tuc/sang-tao-khong-gian-voi-manh-truc-trang-tri/25.jpg",
-    "order": 35,
+    "order": 36,
     "created_at": "2025-07-31T07:54:48+00:00",
     "updated_at": "2026-03-14T02:15:04+00:00"
   },
@@ -380,7 +391,7 @@
     "description": "Cái nắng gay gắt của ngày hè không chỉ khiến ta khó chịu mà còn tác động tiêu cực đến không gian sống của chúng ta. Để tận hưởng một không gian trong lành và",
     "author": "",
     "cover": "images/tin-tuc/rem-truc-che-nang/19.jpg",
-    "order": 36,
+    "order": 37,
     "created_at": "2025-07-31T07:53:31+00:00",
     "updated_at": "2025-08-26T06:47:12+00:00"
   },
@@ -391,7 +402,7 @@
     "description": "Nếu hỏi rằng, ở thời điểm hiện tại, điều gì thất thường nhất, thì câu trả lời đó chính là: thời tiết. Để khắc phục bất lợi ấy, công ty TNHH Tre Việt Building",
     "author": "",
     "cover": "images/tin-tuc/rem-truc-che-nang-chong-choi-thoi-tiet-hieu-qua/55.jpg",
-    "order": 37,
+    "order": 38,
     "created_at": "2025-07-31T07:56:31+00:00",
     "updated_at": "2026-03-14T02:07:48+00:00"
   },
@@ -402,7 +413,7 @@
     "description": "Trong những ngày hè nắng nóng, nếu bạn muốn xua đi cái oi bức của thời tiết thì một tấm rèm trúc chính là lựa chọn hoàn hảo với không gian sống của bạn đấy.",
     "author": "",
     "cover": "images/tin-tuc/rem-truc-che-nang-ban-cong-gia-re-chat-luong/13-1.jpg",
-    "order": 38,
+    "order": 39,
     "created_at": "2025-07-31T07:57:53+00:00",
     "updated_at": "2026-03-14T02:02:17+00:00"
   },
@@ -413,7 +424,7 @@
     "description": "Việc trang trí các không gian trong nhà hàng là một điều quan trọng trong việc thu hút và tạo ấn tượng với khách hàng. Do đó, bạn nên lựa chọn những vật dụng",
     "author": "",
     "cover": "images/tin-tuc/rem-tre-truc-trang-tri-trong-nha-hang-can-chu-y-dieu-gi/91.jpg",
-    "order": 39,
+    "order": 40,
     "created_at": "2025-07-31T07:57:44+00:00",
     "updated_at": "2026-03-14T02:02:41+00:00"
   },
@@ -424,7 +435,7 @@
     "description": "Rèm tre trúc có nhiều ưu điểm về cả mặt thẩm mỹ lẫn tính năng sử dụng. Và trở thành một sự lựa chọn phổ biến trong trang trí nội thất hiện đại, mang đến vẻ",
     "author": "",
     "cover": "images/tin-tuc/rem-tre-truc-thiet-ke-tu-nhien-doc-dao/33.jpg",
-    "order": 40,
+    "order": 41,
     "created_at": "2025-07-31T07:56:42+00:00",
     "updated_at": "2026-03-14T02:07:19+00:00"
   },
@@ -435,7 +446,7 @@
     "description": "Rèm tre có những đặc điểm riêng biệt mà không thể tìm thấy ở các loại rèm khác. Đầu tiên phải kể đến là độ bền cao, vượt trội với khả năng chịu được nắng mưa",
     "author": "",
     "cover": "images/tin-tuc/rem-tre-trang-tri-nha-cua-ben-dep/18-1.jpg",
-    "order": 41,
+    "order": 42,
     "created_at": "2025-07-31T07:57:39+00:00",
     "updated_at": "2026-03-14T02:02:58+00:00"
   },
@@ -446,7 +457,7 @@
     "description": "Rèm tre trở thành một lựa chọn phổ biến cho việc trang trí nội thất. Đây cũng là một giải pháp hoàn hảo cho những người yêu thích phong cách trang trí độc",
     "author": "",
     "cover": "images/tin-tuc/rem-tre-thu-cong-khong-lo-hu-hong/29.jpg",
-    "order": 42,
+    "order": 43,
     "created_at": "2025-07-31T07:56:52+00:00",
     "updated_at": "2026-03-14T02:04:47+00:00"
   },
@@ -457,7 +468,7 @@
     "description": "Tre Việt Building tự hào mang đến cho quý khách hàng quy trình thi công mái lá guột bài bản, chuyên nghiệp, giàu giá trị thẩm mỹ",
     "author": "",
     "cover": "images/tin-tuc/quy-trinh-thi-cong-mai-la-guot/quy-trinh-thi-cong-mai-la-guot-3.png",
-    "order": 43,
+    "order": 44,
     "created_at": "2025-08-06T14:17:03+00:00",
     "updated_at": "2026-03-14T01:56:50+00:00"
   },
@@ -468,7 +479,7 @@
     "description": "Giữa nhịp sống đô thị hiện đại, mái lá guột như một nét chấm phá độc đáo, đưa con người ta trở về với cảm giác mộc mạc, yên bình của làng quê xưa. Không chỉ",
     "author": "",
     "cover": "images/tin-tuc/quy-trinh-thi-cong-mai-la-guot-dung-ky-thuat-chuan-tung-chi-tiet-tai-tre-viet-building/thi-cc3b4ng-mc3a1i-lc3a1-gue1bb99t-6_optimized.png",
-    "order": 44,
+    "order": 45,
     "created_at": "2025-07-31T07:51:34+00:00",
     "updated_at": "2026-03-14T02:26:13+00:00"
   },
@@ -479,7 +490,7 @@
     "description": "Trong bối cảnh kiến trúc hiện đại đang ngày càng hướng đến sự bền vững, cá nhân hóa và gần gũi với thiên nhiên thì vật liệu tre trúc đã, đang trở thành sự lựa",
     "author": "",
     "cover": "images/tin-tuc/op-tuong-tre-truc-xu-huong-trang-tri-noi-that-hien-dai-va-ben-vung/e1bb90p-tc6b0e1bb9dng-tre-trc3bac-xu-hc6b0e1bb9bng-trang-trc3ad-ne1bb99i-the1baa5t-hie1bb87n-c491e1baa1i-vc3a0-be1bb81n-ve1bbafng_optimized.png",
-    "order": 45,
+    "order": 46,
     "created_at": "2025-07-31T07:53:13+00:00",
     "updated_at": "2026-03-14T02:22:41+00:00"
   },
@@ -490,7 +501,7 @@
     "description": "Giữa lòng thành phố hiện đại, con người ta đôi khi muốn tìm về lại xúc cảm hoài niệm, xưa cổ pha chút yên bình. Và không gian với lối thi công ốp tre trúc",
     "author": "",
     "cover": "images/tin-tuc/op-tre-truc-va-ung-dung-tuyet-voi-trong-cuoc-song/94-1.jpg",
-    "order": 46,
+    "order": 47,
     "created_at": "2025-07-31T07:55:18+00:00",
     "updated_at": "2026-03-14T02:10:33+00:00"
   },
@@ -501,7 +512,7 @@
     "description": "Ốp tre trúc trang trí có sự kết hợp hoàn hảo giữa vẻ đẹp tự nhiên của tre trúc và nghệ thuật trong quy trình sản xuất. Sản phẩm này không chỉ mang lại vẻ đẹp",
     "author": "",
     "cover": "images/tin-tuc/op-tre-truc-trang-tri-trong-nha-hang/thiet-ke-quan-cafe-bang-tre-4.jpg",
-    "order": 47,
+    "order": 48,
     "created_at": "2025-07-31T07:53:36+00:00",
     "updated_at": "2026-03-14T02:19:22+00:00"
   },
@@ -512,7 +523,7 @@
     "description": "Tre trúc không chỉ gắn liền với đời sống và văn hóa người Việt mà nay còn được ứng dụng rộng rãi trong thiết kế, thi công, trang trí nội ngoại thất, đặc biệt",
     "author": "",
     "cover": "images/tin-tuc/nguyen-lieu-tre-truc-su-lua-chon-ly-tuong-cho-khong-gian-song-xanh-va-hien-dai/nguyc3aan-lie1bb87u-tre-trc3bac_optimized.png",
-    "order": 48,
+    "order": 49,
     "created_at": "2025-07-31T07:51:51+00:00",
     "updated_at": "2026-03-14T02:25:39+00:00"
   },
@@ -523,7 +534,7 @@
     "description": "Nguyên liệu tre trúc đang ngày càng trở nên phổ biến và được ưa chuộng trong nhiều lĩnh vực, từ thiết kế, thi công, trang trí nội - ngoại thất cho đến sản",
     "author": "",
     "cover": "images/tin-tuc/mua-nguyen-lieu-tre-truc-chat-luong-gia-tot-tai-tre-viet-building/mua-nguyc3aan-lie1bb87u-tre-trc3bac_optimized.png",
-    "order": 49,
+    "order": 50,
     "created_at": "2025-07-31T07:51:46+00:00",
     "updated_at": "2026-03-14T02:25:46+00:00"
   },
@@ -534,7 +545,7 @@
     "description": "Cửa sổ là nơi đón ánh sáng và gió vào trong phòng, tuy nhiên khi tiết trời vào mùa hè sẽ dễ khiến cho chủ nhân căn phòng cảm thấy khó chịu bởi nhiệt độ nóng",
     "author": "",
     "cover": "images/tin-tuc/manh-truc-treo-cua-so-can-thiet-hay-khong/download205.jpg",
-    "order": 50,
+    "order": 51,
     "created_at": "2025-07-31T07:54:18+00:00",
     "updated_at": "2026-03-14T02:17:51+00:00"
   },
@@ -545,7 +556,7 @@
     "description": "Mành trúc trang trí là sản phẩm được làm từ cây trúc - một loại cây được trồng phổ biến tại Việt Nam. Và không chỉ có chức năng che mưa che nắng, mành trúc",
     "author": "",
     "cover": "images/tin-tuc/manh-truc-trang-tri-nghe-thuat-mua-o-dau/63-1.jpg",
-    "order": 51,
+    "order": 52,
     "created_at": "2025-07-31T07:57:30+00:00",
     "updated_at": "2026-03-14T02:03:15+00:00"
   },
@@ -556,7 +567,7 @@
     "description": "Mành trúc che nắng là một loại mành được làm từ sợi trúc hoặc tre. Thường được sử dụng để tạo ra bóng mát và giảm nhiệt độ trong không gian mở.",
     "author": "",
     "cover": "images/tin-tuc/manh-truc-che-nang-tk-toi-gian-hien-dai/21-1.jpg",
-    "order": 52,
+    "order": 53,
     "created_at": "2025-07-31T07:54:53+00:00",
     "updated_at": "2026-03-14T02:15:06+00:00"
   },
@@ -567,7 +578,7 @@
     "description": "Mành tre trúc là vật liệu tự nhiên không chỉ giúp che mưa, chắn nắng mà còn có tính thẩm mỹ cao trong không gian sống hiện đại. Vật liệu vừa đáp ứng nhu cầu",
     "author": "",
     "cover": "images/tin-tuc/manh-tre-truc-ve-dep-truyen-thong-trong-khong-gian-hien-dai/mc3a0nh-tre-trc3bac-3_optimized.png",
-    "order": 53,
+    "order": 54,
     "created_at": "2025-07-31T07:52:55+00:00",
     "updated_at": "2026-03-14T02:23:34+00:00"
   },
@@ -578,7 +589,7 @@
     "description": "Mành tre che nắng là một sản phẩm thủ công được làm từ cây tre - người bạn thân của nông dân Việt Nam, bạn thân của nhân dân Việt Nam. Vào đâu tre cũng sống,",
     "author": "",
     "cover": "images/tin-tuc/manh-tre-che-nang-va-nhung-dieu-can-biet/161.jpg",
-    "order": 54,
+    "order": 55,
     "created_at": "2025-07-31T07:54:23+00:00",
     "updated_at": "2026-03-14T02:16:54+00:00"
   },
@@ -589,7 +600,7 @@
     "description": "Mành sáo trúc thường được tạo ra bằng cách tẩm sợi tre vào nước để làm mềm. Sau đó, dùng để tạo thành các sợi mành. Các sợi tre sau đó được dệt hoặc dệt tay",
     "author": "",
     "cover": "images/tin-tuc/manh-sao-truc-tinh-hoa-truyen-thong-viet/12-1.jpg",
-    "order": 55,
+    "order": 56,
     "created_at": "2025-07-31T07:55:08+00:00",
     "updated_at": "2026-03-14T02:10:59+00:00"
   },
@@ -600,7 +611,7 @@
     "description": "Mành sáo trúc là một loại vật liệu trang trí tự nhiên được sử dụng phổ biến trong hoạt động trang trí nhà cửa. Nó mang đến cho không gian sống của bạn một cảm",
     "author": "",
     "cover": "images/tin-tuc/manh-sao-truc-nghe-thuat-trang-tri-cho-nha-cua-sang-trong/11-2.jpg",
-    "order": 56,
+    "order": 57,
     "created_at": "2025-07-31T07:57:16+00:00",
     "updated_at": "2026-03-14T02:03:49+00:00"
   },
@@ -611,7 +622,7 @@
     "description": "Màn sáo trúc là một trong những sản phẩm nổi bật được rất nhiều người ưa chuộng và sử dụng. Cùng Tre Việt Building tìm hiểu về màn sáo trúc và xu hướng dùng",
     "author": "",
     "cover": "images/tin-tuc/man-sao-truc-trang-tri-sang-trong-trong-nha/z.jpg",
-    "order": 57,
+    "order": 58,
     "created_at": "2025-07-31T07:57:11+00:00",
     "updated_at": "2026-03-14T02:04:00+00:00"
   },
@@ -622,7 +633,7 @@
     "description": "Màn sáo trúc là sản phẩm trang trí nội thất đậm nét văn hóa và thiên nhiên, mang lại sự thoáng mát và tạo điểm nhấn cho không gian. Mỗi sản phẩm đều có sự tự",
     "author": "",
     "cover": "images/tin-tuc/man-sao-truc-nang-tam-khong-gian-song-cho-gia-dinh/261.jpg",
-    "order": 58,
+    "order": 59,
     "created_at": "2025-07-31T07:56:05+00:00",
     "updated_at": "2026-03-14T02:08:46+00:00"
   },
@@ -633,7 +644,7 @@
     "description": "Vậy, ưu điểm của vật liệu tự nhiên trong các công trình kiến trúc sinh thái, từ nhà ở dân dụng cho đến các resort cao cấp là gì? Đâu là đơn vị thiết kế, thi",
     "author": "",
     "cover": "images/tin-tuc/mai-la-guot-giai-phap-cho-khong-gian-song-xanh-va-hien-dai/mc3a1i-lc3a1-gue1bb99t-gie1baa3i-phc3a1p-cho-khc3b4ng-gian-se1bb91ng-xanh-vc3a0-hie1bb87n-c491e1baa1i-5_optimized.png",
-    "order": 59,
+    "order": 60,
     "created_at": "2025-07-31T07:51:40+00:00",
     "updated_at": "2026-03-14T02:25:55+00:00"
   },
@@ -644,7 +655,7 @@
     "description": "Màn sáo tre trúc - sản phẩm không quá xa lạ với người dân Việt Nam. Bạn có thể bắt gặp chúng ở bất cứ nơi đâu, có thể là quán bar, nhà hàng hay trong chính",
     "author": "",
     "cover": "images/tin-tuc/loi-ich-khi-su-dung-man-sao-tre-trong-nha/a.jpg",
-    "order": 60,
+    "order": 61,
     "created_at": "2025-07-31T07:57:06+00:00",
     "updated_at": "2026-04-18T12:03:33+00:00"
   },
@@ -655,7 +666,7 @@
     "description": "Rèm trúc là một sản phẩm có nguyên liệu từ thiên nhiên, ngoài việc tăng tính thẩm mỹ trong không gian sống còn mang lại nhiều lợi ích khác nhau. Để được hiểu",
     "author": "",
     "cover": "images/tin-tuc/loi-ich-khi-lua-chon-rem-truc-ngoai-troi-cho-khong-gian-song/141-1.jpg",
-    "order": 61,
+    "order": 62,
     "created_at": "2025-07-31T07:57:49+00:00",
     "updated_at": "2026-03-14T02:02:30+00:00"
   },
@@ -666,7 +677,7 @@
     "description": "Mành tre được xem là một vật dụng gắn bó lâu đời với rất nhiều người dân Việt Nam và được xem là lưu giữ văn hóa truyền thống. Đến ngày nay, mành tre được ưa",
     "author": "",
     "cover": "images/tin-tuc/lap-dat-manh-tre-che-nang-ban-cong-the-nao-cho-dung/manh-tre-truc-trang-tri206-1.jpg",
-    "order": 62,
+    "order": 63,
     "created_at": "2025-07-31T07:55:42+00:00",
     "updated_at": "2026-03-14T02:09:42+00:00"
   },
@@ -677,7 +688,7 @@
     "description": "Rèm tre trúc có thiết kế đơn giản và tinh tế, thường được cắt và làm thành các sợi tre mảnh. Sau đó được dệt lại để tạo thành một mảng rèm. Sợi tre trúc có",
     "author": "",
     "cover": "images/tin-tuc/lam-moi-khong-gian-voi-rem-tre-truc/ad9ab08d-9982-4f71-a7c0-d2c1f3d12470.jpg",
-    "order": 63,
+    "order": 64,
     "created_at": "2025-07-31T07:53:18+00:00",
     "updated_at": "2026-03-14T02:22:11+00:00"
   },
@@ -688,7 +699,7 @@
     "description": "Ốp tường tre trúc là cách gọi cho việc nẹp các thanh tre trúc cố định lên bề mặt tường. Công dụng chính của loại hình thi công ốp tre trúc này chính là trang",
     "author": "",
     "cover": "images/tin-tuc/la-mat-voi-op-tuong-tre-truc-doc-dao/114.jpg",
-    "order": 64,
+    "order": 65,
     "created_at": "2025-07-31T07:55:13+00:00",
     "updated_at": "2026-03-14T02:10:46+00:00"
   },
@@ -699,7 +710,7 @@
     "description": "Tầm vông là một trong những loài tre quý, được ưa chuộng nhờ sự bền bỉ, tính dẻo dai cùng khả năng chống chịu tốt trước thời tiết khắc nghiệt. Vì thế mà hiện",
     "author": "",
     "cover": "images/tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong-tot-nhat/ke1bbb9-thue1baadt-tre1bb93ng-vc3a0-chc483m-sc3b3c-cc3a2y-te1baa7m-vc3b4ng-te1bb91t-nhe1baa5t_optimized1.png",
-    "order": 65,
+    "order": 66,
     "created_at": "2025-07-31T07:52:24+00:00",
     "updated_at": "2026-03-14T02:24:39+00:00"
   },
@@ -710,7 +721,7 @@
     "description": "Kỹ thuật trồng cây tầm vông đúng cách không phải ai cũng biết. Nếu đây là thông tin quý khách đang tìm kiếm thì đừng bỏ qua bài viết này nhé.",
     "author": "",
     "cover": "images/tin-tuc/ky-thuat-trong-cay-tam-vong/ky-thuat-trong-cay-tam-vong202.jpg",
-    "order": 66,
+    "order": 67,
     "created_at": "2025-07-31T07:58:28+00:00",
     "updated_at": "2026-03-14T02:00:45+00:00"
   },
@@ -721,7 +732,7 @@
     "description": "Màn sáo tre được tạo ra bằng cách tương đối đơn giản. Các cành tre được tán thành các sợi nhỏ và kết thành tấm lưới. Sau đó được gắn vào một khung gỗ hoặc kim",
     "author": "",
     "cover": "images/tin-tuc/kinh-nghiem-chon-man-sao-tre-cuc-chuan/241.jpg",
-    "order": 67,
+    "order": 68,
     "created_at": "2025-07-31T07:56:10+00:00",
     "updated_at": "2026-03-14T02:08:40+00:00"
   },
@@ -732,7 +743,7 @@
     "description": "Mành tre trúc có nguồn gốc từ các vùng nhiệt đới và cận nhiệt đới, nơi tre trúc mọc mạnh mẽ. Quá trình sản xuất mành yêu cầu kỹ thuật cao và sự khéo léo của",
     "author": "",
     "cover": "images/tin-tuc/khong-gian-dep-mat-tinh-te-voi-manh-tre-truc/20.jpg",
-    "order": 68,
+    "order": 69,
     "created_at": "2025-07-31T07:54:59+00:00",
     "updated_at": "2026-03-14T02:14:35+00:00"
   },
@@ -743,7 +754,7 @@
     "description": "Với vẻ đẹp tự nhiên và sự tinh tế trong thiết kế, màn sáo trúc không chỉ là một vật trang trí cho không gian sống mà còn mang lại nhiều lợi ích cho người sử",
     "author": "",
     "cover": "images/tin-tuc/kham-pha-ve-dep-tu-nhien-cua-man-sao-truc/14.jpg",
-    "order": 69,
+    "order": 70,
     "created_at": "2025-07-31T07:54:04+00:00",
     "updated_at": "2026-03-14T02:18:19+00:00"
   },
@@ -754,7 +765,7 @@
     "description": "Mành trúc được ưa chuộng trong đời sống hằng ngày của người Việt Nam qua suốt chiều dài thế kỷ với đa ứng dụng khi có thể che nắng, mưa và dùng để trang trí",
     "author": "",
     "cover": "images/tin-tuc/huong-dan-cach-chon-lua-manh-truc-chat-luong/1.jpg",
-    "order": 70,
+    "order": 71,
     "created_at": "2025-07-31T07:56:00+00:00",
     "updated_at": "2026-03-14T02:09:00+00:00"
   },
@@ -765,7 +776,7 @@
     "description": "Mành sáo trúc thường được làm từ những cây sáo trúc tươi mới, chất liệu tự nhiên và dễ dàng chế tác. Các nghệ nhân sẽ chọn cây sáo trúc có đường kính và chiều",
     "author": "",
     "cover": "images/tin-tuc/hoa-minh-vao-thien-nhien-voi-manh-sao-truc/download206.jpg",
-    "order": 71,
+    "order": 72,
     "created_at": "2025-07-31T07:54:00+00:00",
     "updated_at": "2026-03-14T02:18:35+00:00"
   },
@@ -776,7 +787,7 @@
     "description": "Do chịu ảnh hưởng bởi một số yếu tố, giá mành tre có thể dao động và rơi vào nhiều mức giá khác nhau. Từ vài trăm nghìn đồng đến hàng triệu đồng cho một chiếc",
     "author": "",
     "cover": "images/tin-tuc/gia-manh-tre-hien-nay-co-dat-khong/11-1.jpg",
-    "order": 72,
+    "order": 73,
     "created_at": "2025-07-31T07:54:13+00:00",
     "updated_at": "2026-03-14T02:17:53+00:00"
   },
@@ -787,7 +798,7 @@
     "description": "Giữa lòng nhịp sống hiện đại, muốn tìm về một cảm giác hoài niệm, cổ xưa thì những kiến trúc thi công bằng phương pháp ốp tường tre trúc sẽ là một không gian",
     "author": "",
     "cover": "images/tin-tuc/don-vi-thi-cong-op-tuong-tre-truc/72.jpg",
-    "order": 73,
+    "order": 74,
     "created_at": "2025-07-31T07:57:59+00:00",
     "updated_at": "2026-03-14T02:01:58+00:00"
   },
@@ -798,7 +809,7 @@
     "description": "Trong xu hướng thiết kế hiện đại, hướng về thiên nhiên, rất nhiều spa đã lựa chọn phong cách ốp trúc để tạo nên một không gian nghỉ ngơi, thư giãn mộc mạc và",
     "author": "",
     "cover": "images/tin-tuc/dich-vu-thi-cong-op-truc-spa-uy-tin-chat-luong-va-chuyen-nghiep-tai-tre-viet-building/de1bb8bch-ve1bba5-thi-cc3b4ng-e1bb91p-trc3bac-spa-uy-tc3adn_optimized.png",
-    "order": 74,
+    "order": 75,
     "created_at": "2025-07-31T07:51:59+00:00",
     "updated_at": "2026-03-14T02:25:23+00:00"
   },
@@ -809,7 +820,7 @@
     "description": "Màn sáo tre là một sản phẩm nội thất độc đáo và đẹp mắt, kết hợp giữa vẻ tự nhiên của tre và sự tinh tế về mặt thẩm mỹ. Với sự phát triển của xu hướng bền",
     "author": "",
     "cover": "images/tin-tuc/dia-chi-cung-cap-man-sao-tre-gia-re/11.jpg",
-    "order": 75,
+    "order": 76,
     "created_at": "2025-07-31T07:54:09+00:00",
     "updated_at": "2026-03-14T02:18:08+00:00"
   },
@@ -820,7 +831,7 @@
     "description": "Thi công nhà tre trúc là một quá trình đòi hỏi kỹ năng và sự am hiểu về các quy tắc xây dựng truyền thống. Những công trình này được xây dựng từ tre trúc -",
     "author": "",
     "cover": "images/tin-tuc/cong-trinh-thi-cong-nha-tre-truc-noi-tieng/nha-la-dep3.jpg",
-    "order": 76,
+    "order": 77,
     "created_at": "2025-07-31T07:54:32+00:00",
     "updated_at": "2026-03-14T02:16:06+00:00"
   },
@@ -831,7 +842,7 @@
     "description": "Việc trang hoàng nhà cửa hay hàng quán của các chủ cơ sở kinh doanh, luôn là nhu cầu thiết yếu trong quá trình hoàn thiện kiến trúc. Và trang trí mành tre là",
     "author": "",
     "cover": "images/tin-tuc/co-so-thi-cong-trang-tri-manh-tre-uy-tin-tai-tp-ho-chi-minh/manh20tre202.jpg",
-    "order": 77,
+    "order": 78,
     "created_at": "2025-07-31T07:55:56+00:00",
     "updated_at": "2026-03-14T02:09:09+00:00"
   },
@@ -842,7 +853,7 @@
     "description": "Mành tre ngoài trời là xu hướng thiết kế đem lại nhiều công năng bên cạnh việc tạo nét đẹp cho nội thất. Đặc biệt, đối với các hộ gia đình muốn theo phong",
     "author": "",
     "cover": "images/tin-tuc/co-nen-su-dung-manh-tre-ngoai-troi-cho-ho-gia-dinh/151.jpg",
-    "order": 78,
+    "order": 79,
     "created_at": "2025-07-31T07:55:04+00:00",
     "updated_at": "2026-03-14T02:14:19+00:00"
   },
@@ -853,7 +864,7 @@
     "description": "Mành trúc che nắng được làm từ các sợi trúc mềm và linh hoạt. Khi được treo lên và sắp xếp thành các lớp hoặc vòm, chúng tạo ra một bề mặt che chắn, giúp hạn",
     "author": "",
     "cover": "images/tin-tuc/co-manh-truc-che-nang-khong-gian-them-mat-me/141.jpg",
-    "order": 79,
+    "order": 80,
     "created_at": "2025-07-31T07:53:45+00:00",
     "updated_at": "2026-03-14T02:19:02+00:00"
   },
@@ -864,7 +875,7 @@
     "description": "Cây tre lồ ô là loại cây tre rất quen thuộc với người dân Việt Nam. Bởi đây là loại nguyên liệu thân thiện với môi trường, mang lại nhiều công dụng ưu việt và",
     "author": "",
     "cover": "images/tin-tuc/cay-tre-lo-o/cay-tre-lo-o201.jpg",
-    "order": 80,
+    "order": 81,
     "created_at": "2025-07-31T07:58:24+00:00",
     "updated_at": "2026-03-14T02:00:46+00:00"
   },
@@ -875,7 +886,7 @@
     "description": "Cây nứa ngày nay không chỉ được biết đến như một loại tre trúc phổ biến trong tự nhiên, mà còn là nguồn nguyên liệu mang lại nhiều lợi ích thiết thực cho con",
     "author": "",
     "cover": "images/tin-tuc/cay-nua/cay-nua201.jpg",
-    "order": 81,
+    "order": 82,
     "created_at": "2025-07-31T07:58:52+00:00",
     "updated_at": "2026-03-14T01:57:46+00:00"
   },
@@ -886,7 +897,7 @@
     "description": "Cây le rừng hiện này là nguyên liệu nhiều khách hàng quan tâm bởi những ưu điểm của chúng. Nếu bạn đang quan tâm về giá bán cây le rừng đừng bỏ qua bài viết",
     "author": "",
     "cover": "images/tin-tuc/cay-le-rung/cay-le-rung202.jpg",
-    "order": 82,
+    "order": 83,
     "created_at": "2025-07-31T07:59:06+00:00",
     "updated_at": "2025-08-20T04:59:48+00:00"
   },
@@ -897,7 +908,7 @@
     "description": "Được sản xuất từ tre với đa dạng mẫu mã và kiểu dáng, mành tre trang trí được sử dụng để che nắng, che mưa và là một vật dụng trang trí dung dị phù hợp với",
     "author": "",
     "cover": "images/tin-tuc/bao-quan-manh-tre-trang-tri-sao-cho-dung/manh-tre-truc-trang-tri206-2.jpg",
-    "order": 83,
+    "order": 84,
     "created_at": "2025-07-31T07:55:47+00:00",
     "updated_at": "2026-03-14T02:09:32+00:00"
   },
@@ -908,7 +919,7 @@
     "description": "tre việt building chuyên thi công công trình nhà tre mái lá. cung cấp nguyên liệu tre trúc. cung cấp báo giá thi công nhà tre trúc và nguyên liệu tre rõ ràng",
     "author": "",
     "cover": "images/tin-tuc/bao-gia-thi-cong-nha-tre-truc/z3826599797383_0a57bad6409972af077436e80f410de0.jpg",
-    "order": 84,
+    "order": 85,
     "created_at": "2025-07-31T07:58:34+00:00",
     "updated_at": "2026-03-14T01:58:35+00:00"
   },
@@ -919,7 +930,7 @@
     "description": "Tre trúc là cây trồng đặc trưng tại Việt Nam, biểu tượng cho sự kiên cường bất khuất. Tiếp nối gìn giữ những giá trị truyền thống ấy, ngày nay tre trúc vẫn",
     "author": "",
     "cover": "images/tin-tuc/bao-gia-thi-cong-nha-tre-truc-chuyen-nghiep/nhc3a0-tre-trc3bac-1.jpg",
-    "order": 85,
+    "order": 86,
     "created_at": "2025-07-31T07:55:28+00:00",
     "updated_at": "2026-03-14T02:10:13+00:00"
   },
@@ -930,7 +941,7 @@
     "description": "Giá mành tre là yếu tố ảnh hưởng trực tiếp đến quyết định mua sắm của khách hàng. Do đó, bạn nên lựa chọn địa điểm cung cấp chất lượng, giá cả phải chăng. Bài",
     "author": "",
     "cover": "images/tin-tuc/bao-gia-manh-tre-thi-truong-hien-nay/221.jpg",
-    "order": 86,
+    "order": 87,
     "created_at": "2025-07-31T07:56:16+00:00",
     "updated_at": "2026-03-14T02:08:20+00:00"
   },
@@ -941,7 +952,7 @@
     "description": "Ngày nay, càng nhiều những hộ kinh doanh và các gia đình Việt Nam lựa chọn mành tre là nguyên liệu trang trí độc đáo, tạo nên phong cách cổ điển, ấm cúng và",
     "author": "",
     "cover": "images/tin-tuc/bao-gia-manh-tre-tai-khu-vuc-tp-hcm/1_2.jpg",
-    "order": 87,
+    "order": 88,
     "created_at": "2025-07-31T07:57:01+00:00",
     "updated_at": "2026-03-14T02:04:21+00:00"
   }
