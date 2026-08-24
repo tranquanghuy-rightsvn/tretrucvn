@@ -583,6 +583,11 @@
   font-weight: 600;
 }
 
+.contact-form-note.is-error {
+  color: #c83c3c;
+  font-weight: 600;
+}
+
 .map-embed {
   border-radius: 20px;
   overflow: hidden;

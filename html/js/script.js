@@ -89,18 +89,6 @@ if (paymentRadios.length) {
   });
 }
 
-// Form liên hệ — demo, chưa có backend nên chỉ hiện thông báo, không gửi đi đâu
-const contactForm = document.getElementById("contactForm");
-const contactFormNote = document.getElementById("contactFormNote");
-
-if (contactForm && contactFormNote) {
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    contactFormNote.textContent = "Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.";
-    contactFormNote.classList.add("is-success");
-  });
-}
-
 // FAQ accordion — dùng ở các trang danh mục sản phẩm
 document.querySelectorAll(".faq-question").forEach((question) => {
   question.addEventListener("click", () => {

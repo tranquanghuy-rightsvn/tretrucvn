@@ -9,7 +9,7 @@ const CART_STORAGE_KEY = "tvb_cart";
 // xem gas/README.md. Chưa điền thì form vẫn hoạt động (giỏ hàng, giao diện) nhưng đơn hàng sẽ
 // KHÔNG được lưu vào Orders — chỉ xoá giỏ + hiện màn thành công như demo, không có gì mất mát
 // (không throw lỗi) để không chặn việc xem/thử giao diện trước khi cấu hình xong backend.
-const ORDER_ENDPOINT_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec";
+const ORDER_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzhZkx5lKE0l0jknzs38RwP1NWnEBofUyNRb4xKAmV1AB0S5mWQGjWWQyXQg2-LWYSZ/exec";
 
 // Catalog sản phẩm (giá, ảnh) nạp từ js/cart-data.js (build.py tự sinh lại theo dữ liệu CMS) —
 // phải include cart-data.js TRƯỚC cart.js trong mọi trang.
@@ -432,6 +432,65 @@ if (checkoutForm) {
         if (successEl) successEl.hidden = false;
         if (formWrap) formWrap.hidden = true;
         window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
+      });
+  });
+}
+
+// Form liên hệ /lien-he/ — gửi thật lên GAS backend (Contacts), dùng chung
+// ORDER_ENDPOINT_URL ở trên (cùng 1 deployment GAS, phân biệt qua field "form" trong payload —
+// xem doPost/submitContact_ trong gas/Code.js).
+function submitContactToServer(payload) {
+  if (!ORDER_ENDPOINT_URL || ORDER_ENDPOINT_URL.indexOf("REPLACE_WITH_YOUR_DEPLOYMENT_ID") !== -1) {
+    console.warn("ORDER_ENDPOINT_URL chưa được cấu hình (xem js/cart.js) — liên hệ KHÔNG được lưu vào Contacts.");
+    return Promise.resolve({ ok: true, unconfigured: true });
+  }
+  return fetch(ORDER_ENDPOINT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(Object.assign({ form: "contact" }, payload)),
+  })
+    .then((res) => res.json())
+    .catch(() => ({ ok: false, error: "Không kết nối được máy chủ. Vui lòng thử lại." }));
+}
+
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const noteEl = document.getElementById("contactFormNote");
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const payload = {
+      name: contactForm.querySelector('[name="your-name"]').value.trim(),
+      email: contactForm.querySelector('[name="your-email"]').value.trim(),
+      phone: contactForm.querySelector('[name="your-phone"]').value.trim(),
+      message: contactForm.querySelector('[name="your-message"]').value.trim(),
+      hp: contactForm.querySelector('[name="hp"]').value,
+    };
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (noteEl) {
+      noteEl.textContent = "Đang gửi...";
+      noteEl.className = "contact-form-note";
+    }
+
+    submitContactToServer(payload)
+      .then((res) => {
+        if (!res || !res.ok) {
+          if (noteEl) {
+            noteEl.textContent = (res && res.error) || "Gửi liên hệ thất bại, vui lòng thử lại.";
+            noteEl.className = "contact-form-note is-error";
+          }
+          return;
+        }
+        contactForm.reset();
+        if (noteEl) {
+          noteEl.textContent = "Cảm ơn bạn! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.";
+          noteEl.className = "contact-form-note is-success";
+        }
       })
       .finally(() => {
         if (submitBtn) submitBtn.disabled = false;
