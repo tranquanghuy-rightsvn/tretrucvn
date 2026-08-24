@@ -9,6 +9,7 @@ on:
     paths:
       - 'html/**'
       - 'wrangler.toml'
+  workflow_dispatch:
 
 concurrency:
   group: deploy-site
