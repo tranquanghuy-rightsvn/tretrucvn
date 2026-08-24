@@ -520,6 +520,149 @@ ul {
   transform: none;
 }
 
+.btn-cta-phone-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Hero CTA — ánh sáng lướt qua khi hover */
+.btn-cta-phone {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta-phone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-cta-phone:hover::after {
+  animation: btn-cta-shine 0.9s ease;
+}
+
+@keyframes btn-cta-shine {
+  from {
+    left: -60%;
+  }
+  to {
+    left: 130%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta-phone:hover::after {
+    animation: none;
+  }
+}
+
+/* Liên hệ nhanh — Zalo + điện thoại nổi góc phải, luôn hiển thị */
+.quick-contact {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.quick-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(31, 42, 31, 0.28);
+  transition: transform 0.2s ease;
+}
+
+.quick-contact-btn:hover {
+  transform: scale(1.08);
+}
+
+.quick-contact-btn--zalo {
+  background: #0068ff;
+}
+
+.quick-contact-btn--zalo svg {
+  width: 46px;
+  height: 46px;
+}
+
+.quick-contact-btn--phone {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.quick-contact-btn--phone svg {
+  width: 26px;
+  height: 26px;
+}
+
+.quick-contact-btn--shake {
+  animation: quick-contact-shake 2.4s ease-in-out infinite;
+}
+
+@keyframes quick-contact-shake {
+  0%,
+  8%,
+  100% {
+    transform: rotate(0);
+  }
+  1%,
+  5% {
+    transform: rotate(-16deg);
+  }
+  3%,
+  7% {
+    transform: rotate(16deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-contact-btn--shake {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .quick-contact {
+    right: 14px;
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .quick-contact-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .quick-contact-btn--zalo svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .quick-contact-btn--phone svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 /* Wave divider đáy hero — 2 lớp sóng không đều, cao dần về phía phải */
 .hero-waves {
   position: absolute;
@@ -809,6 +952,9 @@ ul {
   height: 100%;
   object-fit: cover;
   display: block;
+  /* phóng to nhẹ, neo mép trên — đẩy watermark AI ở đuôi video ra ngoài vùng overflow:hidden */
+  transform: scale(1.16);
+  transform-origin: center top;
 }
 
 .intro-lead {
@@ -1650,7 +1796,6 @@ ul {
   }
 
   .intro-video {
-    position: static;
     aspect-ratio: 16 / 9;
     max-width: 480px;
     margin: 0 auto;
@@ -1693,14 +1838,15 @@ ul {
   }
 
   .tabs {
+    flex-direction: column;
+    align-items: stretch;
     width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
   }
 
   .tab-btn {
-    white-space: nowrap;
+    width: 100%;
+    border-radius: 10px;
   }
 
   .contact-grid {
