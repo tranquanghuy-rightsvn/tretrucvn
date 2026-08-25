@@ -1,2 +1,18 @@
 /admin/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# Mặc định Workers Static Assets trả Cache-Control: max-age=0, must-revalidate cho MỌI
+# file (kể cả video/ảnh/css/js) — nghĩa là trình duyệt phải hỏi lại server mỗi lần tải,
+# dù ETag khớp thì server chỉ trả 304 chứ không tránh được round-trip. Khai báo riêng
+# max-age dài cho các asset ít đổi để trình duyệt dùng thẳng bản cache, không cần hỏi lại.
+/video/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/css/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+
+/js/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
