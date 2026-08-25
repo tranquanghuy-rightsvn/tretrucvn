@@ -2,7 +2,8 @@ name = "tretrucvn"
 compatibility_date = "2025-01-01"
 
 # Site tĩnh (đã build từ CMS qua scripts/build.py) — phục vụ trực tiếp bằng Workers Static
-# Assets, không cần code Worker riêng.
+# Assets, không cần code Worker riêng. CI deploy bằng wrangler v4 (ghim trong workflow) —
+# bản cũ hơn (3.x) không xử lý (parse) file html/_headers nên mọi rule header bị bỏ qua.
 [assets]
 directory = "./html"
 not_found_handling = "404-page"
