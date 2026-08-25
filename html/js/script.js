@@ -133,11 +133,23 @@ document.querySelectorAll(".product-detail-tab-btn").forEach((btn) => {
 // Thời điểm bắt đầu fade phải khớp với thời gian transition opacity trong CSS (.hero-video).
 const heroVideos = Array.from(document.querySelectorAll(".hero-video"));
 
+// Các clip chưa active dùng preload="none" + data-src (xem index.html) để không tải
+// cùng lúc với clip đang chạy — chỉ nạp source thật khi sắp cần đến, đỡ tốn băng thông tải trang.
+const loadVideoSource = (video) => {
+  const source = video.querySelector("source[data-src]");
+  if (!source) return;
+  source.src = source.dataset.src;
+  delete source.dataset.src;
+  video.load();
+};
+
 if (heroVideos.length > 1) {
   const FADE_BEFORE_END = 1.2; // giây
+  const PRELOAD_BEFORE_END = 5; // giây — đủ thời gian tải clip kế tiếp trước khi cần
   let activeIndex = heroVideos.findIndex((v) => v.classList.contains("is-active"));
   if (activeIndex === -1) activeIndex = 0;
   let isSwitching = false;
+  let hasPreloadedNext = false;
 
   const playVideo = (video) => {
     video.currentTime = 0;
@@ -151,19 +163,72 @@ if (heroVideos.length > 1) {
     playVideo(heroVideos[nextIndex]);
     activeIndex = nextIndex;
     isSwitching = false;
+    hasPreloadedNext = false;
   };
 
   heroVideos.forEach((video, index) => {
     video.addEventListener("timeupdate", () => {
       if (index !== activeIndex || isSwitching || !video.duration) return;
-      if (video.duration - video.currentTime <= FADE_BEFORE_END) {
+
+      const timeLeft = video.duration - video.currentTime;
+      const nextIndex = (index + 1) % heroVideos.length;
+
+      if (!hasPreloadedNext && timeLeft <= PRELOAD_BEFORE_END) {
+        hasPreloadedNext = true;
+        loadVideoSource(heroVideos[nextIndex]);
+      }
+
+      if (timeLeft <= FADE_BEFORE_END) {
         isSwitching = true;
-        crossfadeTo((index + 1) % heroVideos.length);
+        crossfadeTo(nextIndex);
       }
     });
   });
 
-  playVideo(heroVideos[activeIndex]);
+  // Chỉ bắt đầu tải + phát video nền SAU KHI trang đã load xong hoàn toàn (ảnh, CSS, JS),
+  // để poster (ảnh tĩnh) hiện ra ngay lập tức và video không cạnh tranh băng thông với
+  // nội dung quan trọng của lần tải trang đầu tiên.
+  const startHeroPlayback = () => {
+    loadVideoSource(heroVideos[activeIndex]);
+    playVideo(heroVideos[activeIndex]);
+  };
+
+  if (document.readyState === "complete") {
+    startHeroPlayback();
+  } else {
+    window.addEventListener("load", startHeroPlayback, { once: true });
+  }
+}
+
+// Video dưới fold (vd. clip giới thiệu) — chỉ tải + phát khi cuộn gần tới, tránh
+// tải hàng chục MB video ngay từ đầu cho nội dung người dùng chưa chắc đã xem tới.
+const lazyVideos = document.querySelectorAll(".lazy-video");
+
+if (lazyVideos.length) {
+  if ("IntersectionObserver" in window) {
+    const lazyVideoObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const video = entry.target;
+          loadVideoSource(video);
+          const playPromise = video.play();
+          if (playPromise) playPromise.catch(() => {});
+          observer.unobserve(video);
+        });
+      },
+      { rootMargin: "200px 0px" }
+    );
+
+    lazyVideos.forEach((video) => lazyVideoObserver.observe(video));
+  } else {
+    // Fallback cho trình duyệt không hỗ trợ IntersectionObserver
+    lazyVideos.forEach((video) => {
+      loadVideoSource(video);
+      const playPromise = video.play();
+      if (playPromise) playPromise.catch(() => {});
+    });
+  }
 }
 
 // Sản phẩm — chuyển tab danh mục (Nguyên liệu / Thi công / Trang trí)

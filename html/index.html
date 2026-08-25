@@ -292,15 +292,21 @@
       <div class="hero-video-stack">
         <video
           class="hero-video is-active"
-          autoplay
           muted
           playsinline
-          poster="images/logo.png"
+          preload="none"
+          poster="images/video-posters/banner-hero.jpg"
         >
-          <source src="video/banner-hero.mp4" type="video/mp4" />
+          <source data-src="video/banner-hero.mp4" type="video/mp4" />
         </video>
-        <video class="hero-video" muted playsinline>
-          <source src="video/banner-hero-2.mp4" type="video/mp4" />
+        <video
+          class="hero-video"
+          muted
+          playsinline
+          preload="none"
+          poster="images/video-posters/banner-hero-2.jpg"
+        >
+          <source data-src="video/banner-hero-2.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="hero-overlay"></div>
@@ -362,8 +368,15 @@
 
           <div class="intro-columns">
             <div class="intro-video">
-              <video autoplay muted loop playsinline poster="images/logo.png">
-                <source src="video/sub-info.mp4" type="video/mp4" />
+              <video
+                class="lazy-video"
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="images/video-posters/sub-info.jpg"
+              >
+                <source data-src="video/sub-info.mp4" type="video/mp4" />
               </video>
             </div>
 
