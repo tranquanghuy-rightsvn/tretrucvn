@@ -54,3 +54,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Ghim bản 4 — auto-detect từng bị lỗi mạng khi fetch 4.x và fallback về 3.90.0,
+          # bản đó không xử lý (parse) file _headers cho Workers Static Assets, nên mọi rule
+          # cache/security header trong _headers bị bỏ qua âm thầm (file chỉ được serve như
+          # asset thường, không áp dụng).
+          wranglerVersion: "4"
