@@ -158,7 +158,7 @@ HEADER_TPL = """    <header class="site-header">
         </div>
 
         <a href="{r}index.html" class="brand" aria-label="Tre Việt Building - Trang chủ">
-          <img src="{r}images/logo.png" alt="Tre Việt Building">
+          <img src="{r}images/logo.webp" alt="Tre Việt Building">
         </a>
 
         <div class="nav-col nav-col--right">
@@ -246,7 +246,7 @@ HEADER_TPL = """    <header class="site-header">
 FOOTER_TPL = """    <footer class="site-footer">
       <div class="container footer-grid">
         <div class="footer-col footer-col--brand">
-          <img class="footer-logo" src="{r}images/logo.png" alt="Tre Việt Building">
+          <img class="footer-logo" src="{r}images/logo.webp" alt="Tre Việt Building">
           <h3>Công Ty Trách Nhiệm Hữu Hạn Tre Việt Building</h3>
           <p>
             Địa chỉ: 917 Phạm Văn Đồng, Phường Linh Xuân, TP. Hồ Chí Minh.<br />
@@ -373,7 +373,7 @@ def post_card(p, href, r):
     # tương đối với trang đang render (khác "href", vốn tương đối với thư mục section). Bắt buộc
     # phải ghép thêm "r" (tiền tố độ sâu) mới đúng — thiếu bước này là bug thật đã xảy ra: ảnh
     # cover vỡ trên toàn bộ trang danh sách/phân trang dù ảnh vẫn tồn tại đúng chỗ trên site.
-    cover_src = (r + p["cover"]) if p.get("cover") else (r + "images/logo.png")
+    cover_src = (r + p["cover"]) if p.get("cover") else (r + "images/logo.webp")
     return """                <article class="post-card">
                   <a class="post-thumb" href="%s"><img
                       src="%s"
@@ -493,8 +493,8 @@ def build_detail_page(item, section, tpl, all_items, products):
     depth = 2
     r = rel(depth)
     cover = item.get("cover") or ""
-    cover_src = r + cover if cover else r + "images/logo.png"
-    cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.png"
+    cover_src = r + cover if cover else r + "images/logo.webp"
+    cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.webp"
     url = "%s/%s/%s/" % (SITE, section, slug)
 
     related = [p for p in all_items if p["slug"] != slug][:5]
@@ -608,7 +608,7 @@ def build_listing_pages(section, merged, products):
         page_title = "%s%s" % (label, title_suffix)
         url = "%s/%s/" % (SITE, section) if is_page1 else "%s/%s/page/%d/" % (SITE, section, page_num)
         cover = page_items[0].get("cover") if page_items else ""
-        cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.png"
+        cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.webp"
 
         cards = "\n\n".join(post_card(p, section_prefix + p["slug"] + "/", r) for p in page_items)
         pagination = pagination_nav(section, page_num, total_pages)
@@ -667,7 +667,7 @@ LISTING_PAGE_TPL = """<!doctype html>
     <meta name="description" content="{description}" />
     <link rel="canonical" href="{url}" />
 
-    <meta property="og:title" content="{title}" />
+    <meta property="og:title" content="{title} | Tre Việt Building" />
     <meta property="og:description" content="{description}" />
     <meta property="og:image" content="{cover_url}" />
     <meta property="og:url" content="{url}" />
@@ -676,10 +676,10 @@ LISTING_PAGE_TPL = """<!doctype html>
     <meta property="og:locale" content="vi_VN" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{title}" />
+    <meta name="twitter:title" content="{title} | Tre Việt Building" />
     <meta name="twitter:description" content="{description}" />
     <meta name="twitter:image" content="{cover_url}" />
-    <link rel="icon" href="{r}images/logo.png" type="image/png" />
+    <link rel="icon" href="{r}images/logo.webp" type="image/webp" />
     <link rel="stylesheet" href="{r}css/style.css" />
     <link rel="stylesheet" href="{r}css/category.css" />
     <script type="application/ld+json">
@@ -803,8 +803,8 @@ def build_product_detail(prod, all_products):
     r = rel(depth)
     images = prod.get("images") or ([prod["cover_file"]] if prod.get("cover_file") else [])
     cover_file = images[0] if images else ""
-    cover_src = "%simages/san-pham/%s/%s" % (r, slug, cover_file) if cover_file else r + "images/logo.png"
-    cover_url = "%s/images/san-pham/%s/%s" % (SITE, slug, cover_file) if cover_file else SITE + "/images/logo.png"
+    cover_src = "%simages/san-pham/%s/%s" % (r, slug, cover_file) if cover_file else r + "images/logo.webp"
+    cover_url = "%s/images/san-pham/%s/%s" % (SITE, slug, cover_file) if cover_file else SITE + "/images/logo.webp"
     url = "%s/san-pham/%s/" % (SITE, slug)
 
     thumbs = "\n".join(

@@ -20,12 +20,12 @@ if (header) {
 // Nút kính lúp trên header — điều hướng tới /tim-kiem/, tự tính đúng path
 // tương đối theo độ sâu trang hiện tại. Dùng src của logo (không phải href
 // của .brand, vì trên trang chủ .brand cố tình trỏ href="#") — src logo luôn
-// đúng dạng "images/logo.png", "../images/logo.png" hoặc "../../images/logo.png".
+// đúng dạng "images/logo.webp", "../images/logo.webp" hoặc "../../images/logo.webp".
 const searchToggle = document.querySelector('.icon-btn[aria-label="Tìm kiếm"]');
 if (searchToggle) {
   searchToggle.addEventListener("click", () => {
     const logo = document.querySelector(".brand img");
-    const basePath = logo ? logo.getAttribute("src").replace(/images\/logo\.png$/, "") : "";
+    const basePath = logo ? logo.getAttribute("src").replace(/images\/logo\.webp$/, "") : "";
     window.location.href = `${basePath}tim-kiem/`;
   });
 }
