@@ -1018,6 +1018,10 @@ a.sidebar-product:hover .sidebar-product-info h4 {
   font-size: 16px;
   line-height: 1.85;
   color: var(--color-text);
+  /* Nội dung đến từ CMS nên có thể lẫn chuỗi dài không có chỗ ngắt dòng (URL,
+     dãy dấu "…", tên file). Không có dòng này, một chuỗi như vậy sẽ đẩy rộng
+     cả trang và gây tràn viền trên mobile. */
+  overflow-wrap: break-word;
 }
 
 .post-detail-body p {
