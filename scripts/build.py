@@ -401,7 +401,8 @@ def sidebar_post_items(posts, depth_to_section):
 def sidebar_product_items(products, r):
     blocks = []
     for prod in products[:9]:
-        blocks.append("""                <div class="sidebar-product">
+        href = "%ssan-pham/%s/" % (r, prod["slug"])
+        blocks.append("""                <a class="sidebar-product" href="%s">
                   <img
                     src="%simages/san-pham/%s/%s"
                     alt="%s"
@@ -411,7 +412,7 @@ def sidebar_product_items(products, r):
                     <h4>%s</h4>
                     <span class="price">%s</span>
                   </div>
-                </div>""" % (r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]), esc(prod["title"]), fmt_price(prod.get("price"))))
+                </a>""" % (href, r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]), esc(prod["title"]), fmt_price(prod.get("price"))))
     return "\n".join(blocks)
 
 

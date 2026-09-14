@@ -180,6 +180,13 @@
   text-align: left;
 }
 
+.listing-layout > * {
+  /* Grid item mặc định min-width:auto = min-content; nếu 1 chữ/ảnh trong bài
+     hoặc sidebar rộng hơn màn hình mobile, cả cột (và cả trang) sẽ bị đẩy
+     tràn ra ngoài viền. Ép min-width:0 để cột luôn co vừa khung grid. */
+  min-width: 0;
+}
+
 .listing-posts {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -252,6 +259,16 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.sidebar-product .sidebar-product-info h4 {
+  transition: color 0.25s ease;
+}
+
+a.sidebar-product:hover .sidebar-product-info h4 {
+  color: var(--color-primary);
 }
 
 .sidebar-product img {
