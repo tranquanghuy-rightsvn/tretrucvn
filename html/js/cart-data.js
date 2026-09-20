@@ -1,8 +1,8 @@
 // Catalog sản phẩm dùng cho giỏ hàng — TỰ SINH bởi scripts/build.py từ dữ liệu CMS,
 // không sửa tay (sẽ mất khi build lại).
 window.PRODUCT_CATALOG = {
-  "cay-tre-luong": { "name": "Cây tre luồng", "price": 0, "priceLabel": "Liên hệ", "image": "images/san-pham/cay-tre-luong/01.png" },
   "mai-la-guoc": { "name": "mái lá guộc", "price": 0, "priceLabel": "Liên hệ", "image": "images/san-pham/mai-la-guoc/01.png" },
+  "cay-tre-luong": { "name": "Cây tre luồng", "price": 0, "priceLabel": "Liên hệ", "image": "images/san-pham/cay-tre-luong/01.png" },
   "thi-cong-op-tre-truc-trang-tri": { "name": "Ốp Tre Trúc Trang Trí", "price": 570000, "image": "images/san-pham/thi-cong-op-tre-truc-trang-tri/tre1baa7n-tre-trc3bac_optimized2.png" },
   "thi-cong-lop-mai-la-lop-guoc": { "name": "mái lá guộc", "price": 650000, "image": "images/san-pham/thi-cong-lop-mai-la-lop-guoc/" },
   "nha-tre": { "name": "Nhà Tre", "price": 1710000, "image": "images/san-pham/nha-tre/nha-tre94904.jpg" },
