@@ -1,0 +1,13 @@
+# Redirect 301 URL cũ (Google còn index, đang trả 404) -> trang thay thế tương đương.
+# Chỉ gồm các dòng "mức tin cậy cao" trong bao-cao-seo.md mục 1.2. URL cũ không có trang
+# tương đương thì để 404, không redirect bừa. Mỗi dòng: <nguồn> <đích> <mã>.
+/san-pham /cua-hang/ 301
+/san-pham/ /cua-hang/ 301
+/tin-tuc/bao-gia-thi-cong-thiet-ke-nha-tre-truc /tin-tuc/bao-gia-thi-cong-nha-tre-truc/ 301
+/tin-tuc/bao-gia-thi-cong-thiet-ke-nha-tre-truc/ /tin-tuc/bao-gia-thi-cong-nha-tre-truc/ 301
+/tin-tuc/tam-vong-lam-nha-tre /tin-tuc/tam-vong-lam-nha-tre-giai-phap-kien-truc-ben-vung-tham-my-va-tiet-kiem/ 301
+/tin-tuc/tam-vong-lam-nha-tre/ /tin-tuc/tam-vong-lam-nha-tre-giai-phap-kien-truc-ben-vung-tham-my-va-tiet-kiem/ 301
+/tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong /tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong-tot-nhat/ 301
+/tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong/ /tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong-tot-nhat/ 301
+/tin-tuc/1-cay-tre-gia-bao-nhieu /du-an/1-cay-tre-gia-bao-nhieu-mua-tre-o-dau/ 301
+/tin-tuc/1-cay-tre-gia-bao-nhieu/ /du-an/1-cay-tre-gia-bao-nhieu-mua-tre-o-dau/ 301

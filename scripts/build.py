@@ -19,6 +19,7 @@ Output:
   html/nguyen-lieu-tre-truc/index.html           (vá product-grid theo category)
   html/thi-cong-tre-truc/index.html
   html/tre-truc-trang-tri/index.html
+  html/index.html                               (vá slider "Tin tức" = bài mới nhất)
   html/sitemap.xml (nếu tồn tại)
 
 Chạy local để thử: python3 scripts/build.py
@@ -85,6 +86,40 @@ def truncate(s, n=160):
     return s if len(s) <= n else s[: n].rsplit(" ", 1)[0] + "…"
 
 
+BRAND = "Tre Việt Building"
+META_DESC_MAX = 160
+
+
+def cap_first(s):
+    s = (s or "").strip()
+    return s[:1].upper() + s[1:]
+
+
+def page_title(title):
+    # Chỉ nối "- Tre Việt Building" khi tiêu đề chưa chứa tên thương hiệu (tránh title lặp
+    # thương hiệu 2 lần như "Tre Việt Building - Đơn vị ... - Tre Việt Building").
+    title = cap_first(title)
+    return title if BRAND.lower() in title.lower() else "%s - %s" % (title, BRAND)
+
+
+def meta_description(desc, content=""):
+    """Meta description từ field description của CMS (hoặc đoạn đầu content nếu trống):
+    viết hoa chữ đầu, và nếu dài quá META_DESC_MAX thì cắt ở cuối câu gần nhất, không
+    được thì cắt ở ranh giới từ + "…" — tránh description cụt giữa chữ / dài 300–500 ký tự."""
+    s = re.sub(r"<[^>]+>", " ", desc or "")
+    s = re.sub(r"\s+", " ", htmllib.unescape(s)).strip()
+    if not s:
+        s = re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", content or ""))).strip()
+    s = cap_first(s)
+    if len(s) <= META_DESC_MAX:
+        return s
+    head = s[:META_DESC_MAX]
+    end = max(head.rfind(". "), head.rfind("! "), head.rfind("? "))
+    if end >= 80:
+        return head[: end + 1]
+    return head.rsplit(" ", 1)[0].rstrip(",;:–-") + "…"
+
+
 def fmt_price(n):
     try:
         n = int(n)
@@ -101,6 +136,60 @@ LEGACY_ORDER_FALLBACK = 10 ** 9
 def order_sort_key(p):
     order = p.get("order")
     return order if isinstance(order, (int, float)) else LEGACY_ORDER_FALLBACK
+
+
+IMG_EXTS = (".webp", ".jpg", ".jpeg", ".png")
+# Ảnh chính trên trang chi tiết đã build: sản phẩm (#productMainImage) và bài viết/dự án
+# (ảnh đầu tiên trong .post-detail-featured).
+MAIN_IMG_RE = {
+    "san-pham": re.compile(r'<img src="[^"]*/images/san-pham/[^/"]+/([^"/]+)"[^>]*id="productMainImage"'),
+    "tin-tuc": re.compile(r'class="post-detail-featured">\s*<img\s+src="[^"]*/images/tin-tuc/[^/"]+/([^"/]+)"'),
+    "du-an": re.compile(r'class="post-detail-featured">\s*<img\s+src="[^"]*/images/du-an/[^/"]+/([^"/]+)"'),
+}
+
+
+def find_image(section, slug, name, page_first=False):
+    """Tên file ảnh (trong html/images/<section>/<slug>/) thực sự tồn tại cho 1 bài/sản phẩm.
+    Index JSON có thể lệch với file thật (ảnh đã đổi sang .webp nhưng index vẫn ghi .jpg/.png,
+    hoặc để trống) -> ảnh card/sidebar/slider/giỏ hàng bị vỡ. Thử lần lượt: đúng tên -> cùng
+    tên đuôi .webp -> ảnh chính trên trang chi tiết đã build -> ảnh đầu tiên trong thư mục
+    (page_first=True: ưu tiên ảnh trên trang chi tiết trước). Không có thì trả ""."""
+    d = HTML / "images" / section / slug
+    name = Path(name or "").name
+
+    def from_page():
+        page = HTML / section / slug / "index.html"
+        if page.exists():
+            m = MAIN_IMG_RE[section].search(page.read_text(encoding="utf-8"))
+            if m and (d / m.group(1)).is_file():
+                return m.group(1)
+        return ""
+
+    if page_first and from_page():
+        return from_page()
+    if name and (d / name).is_file():
+        return name
+    if name and (d / (Path(name).stem + ".webp")).is_file():
+        return Path(name).stem + ".webp"
+    found = from_page()
+    if found:
+        return found
+    if d.is_dir():
+        files = sorted(f.name for f in d.iterdir() if f.suffix.lower() in IMG_EXTS)
+        if files:
+            return files[0]
+    return ""
+
+
+def resolve_cover_file(prod):
+    # sản phẩm: ưu tiên đúng ảnh cover đang hiển thị trên trang chi tiết sản phẩm
+    return find_image("san-pham", prod["slug"], prod.get("cover_file"), page_first=True)
+
+
+def resolve_cover(item, section):
+    # bài viết/dự án: "cover" dạng "images/<section>/<slug>/<file>" (tương đối với site root)
+    f = find_image(section, item["slug"], item.get("cover"))
+    return "images/%s/%s/%s" % (section, item["slug"], f) if f else ""
 
 
 def merge_by_slug(legacy, cms):
@@ -131,7 +220,7 @@ NAV_LEFT_TPL = """          <nav class="nav-menu nav-menu--left" aria-label="Men
               </div>
             </div>
             <div class="nav-item has-dropdown">
-              <a href="{r}cua-hang"{san_pham_active}>
+              <a href="{r}cua-hang/"{san_pham_active}>
                 Sản phẩm
                 <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="m6 9 6 6 6-6"></path>
@@ -261,7 +350,7 @@ FOOTER_TPL = """    <footer class="site-footer">
           <ul>
             <li><a href="{r}index.html#top">Trang chủ</a></li>
             <li><a href="{r}index.html#gioi-thieu">Giới thiệu</a></li>
-            <li><a href="{r}cua-hang">Sản phẩm</a></li>
+            <li><a href="{r}cua-hang/">Sản phẩm</a></li>
             <li><a href="{r}du-an/">Dự án</a></li>
             <li><a href="{r}tin-tuc/">Tin tức</a></li>
             <li><a href="{r}lien-he/">Liên hệ</a></li>
@@ -493,7 +582,7 @@ def build_detail_page(item, section, tpl, all_items, products):
     slug = item["slug"]
     depth = 2
     r = rel(depth)
-    cover = item.get("cover") or ""
+    cover = resolve_cover(item, section)
     cover_src = r + cover if cover else r + "images/logo.webp"
     cover_url = SITE + "/" + cover if cover else SITE + "/images/logo.webp"
     url = "%s/%s/%s/" % (SITE, section, slug)
@@ -501,11 +590,13 @@ def build_detail_page(item, section, tpl, all_items, products):
     related = [p for p in all_items if p["slug"] != slug][:5]
     featured_products = sorted(products, key=order_sort_key)[:9]
 
+    desc = meta_description(item.get("description", ""), item.get("content", ""))
     page = (
-        tpl.replace("{{TITLE}}", esc(item["title"]))
+        tpl.replace("{{PAGE_TITLE}}", esc(page_title(item["title"])))
+        .replace("{{TITLE}}", esc(item["title"]))
         .replace("{{TITLE_JSON}}", esc_json(item["title"]))
-        .replace("{{DESCRIPTION}}", esc(item.get("description", "")))
-        .replace("{{DESCRIPTION_JSON}}", esc_json(item.get("description", "")))
+        .replace("{{DESCRIPTION}}", esc(desc))
+        .replace("{{DESCRIPTION_JSON}}", esc_json(desc))
         .replace("{{URL}}", url)
         .replace("{{COVER_URL}}", cover_url)
         .replace("{{COVER_SRC}}", cover_src)
@@ -828,11 +919,13 @@ def build_product_detail(prod, all_products):
 
     price = prod.get("price") or 0
     tpl = (TEMPLATES / "product.html").read_text(encoding="utf-8")
+    desc = meta_description(prod.get("description", ""), prod.get("content", ""))
     page = (
-        tpl.replace("{{TITLE}}", esc(prod["title"]))
+        tpl.replace("{{PAGE_TITLE}}", esc(page_title(prod["title"])))
+        .replace("{{TITLE}}", esc(prod["title"]))
         .replace("{{TITLE_JSON}}", esc_json(prod["title"]))
-        .replace("{{DESCRIPTION}}", esc(prod.get("description", "")))
-        .replace("{{DESCRIPTION_JSON}}", esc_json(prod.get("description", "")))
+        .replace("{{DESCRIPTION}}", esc(desc))
+        .replace("{{DESCRIPTION_JSON}}", esc_json(desc))
         .replace("{{URL}}", url)
         .replace("{{COVER_URL}}", cover_url)
         .replace("{{SKU}}", esc(slug))
@@ -884,6 +977,56 @@ def patch_product_grid(path, products, with_categories=False):
         return
     path.write_text(new_s, encoding="utf-8")
     print("vá product-grid:", path.relative_to(ROOT), "(%d sản phẩm)" % len(products))
+
+
+HOME_NEWS_COUNT = 12
+NEWS_TRACK_RE = re.compile(
+    r'^(?P<indent>[ \t]*)(?P<open><div class="news-track" id="newsTrack">)\n.*?\n(?P=indent)</div>\n',
+    re.S | re.M,
+)
+
+
+def home_news_slide(p):
+    href = "tin-tuc/%s/" % p["slug"]
+    cover_src = p["cover"] if p.get("cover") else "images/logo.webp"
+    return """              <article class="news-slide">
+                <a class="news-thumb" href="%s"
+                  ><img
+                    src="%s"
+                    alt="%s"
+                    loading="lazy"
+                /></a>
+                <h3><a href="%s">%s</a></h3>
+                <p class="news-excerpt">
+                  %s
+                </p>
+                <a href="%s" class="news-link">Đọc tiếp →</a>
+              </article>""" % (
+        href, esc(cover_src), esc(p["title"]), href, esc(p["title"]),
+        esc(cap_first(truncate(p.get("description", ""), 90))), href,
+    )
+
+
+def patch_home_news(posts_latest):
+    """Vá slider "Tin tức" trên trang chủ bằng HOME_NEWS_COUNT bài mới nhất — trước đây
+    danh sách này viết tay cố định nên bài mới đăng qua CMS không hiện ở trang chủ. Dot của
+    slider do js/script.js tự sinh theo số slide, không cần sửa gì thêm."""
+    path = HTML / "index.html"
+    if not path.exists():
+        print("WARN: không tìm thấy", path, "- bỏ qua vá tin tức trang chủ")
+        return
+    s = path.read_text(encoding="utf-8")
+    slides = "\n".join(home_news_slide(p) for p in posts_latest[:HOME_NEWS_COUNT])
+
+    def repl(m):
+        return "%s%s\n%s\n%s</div>\n" % (m.group("indent"), m.group("open"), slides, m.group("indent"))
+
+    new_s, n = NEWS_TRACK_RE.subn(repl, s, count=1)
+    if not n:
+        print("WARN: không tìm thấy newsTrack trong html/index.html - bỏ qua")
+        return
+    path.write_text(new_s, encoding="utf-8")
+    print("vá tin tức trang chủ: html/index.html (%d bài)" % min(len(posts_latest), HOME_NEWS_COUNT))
 
 
 # ---------- sitemap ----------
@@ -954,6 +1097,15 @@ def main():
     cms_products = load_json(DATA / "san-pham.json", [])
     legacy_products = load_json(DATA / "legacy-san-pham.json", [])
     products = merge_by_slug(legacy_products, cms_products)
+    for p in products:
+        p["cover_file"] = resolve_cover_file(p)
+    for section, items in (("tin-tuc", posts), ("du-an", projects)):
+        for p in items:
+            p["cover"] = resolve_cover(p, section)
+            # description trống -> card/slider không có mô tả; lấy tạm đoạn đầu nội dung bài
+            if not (p.get("description") or "").strip():
+                detail = load_json(DATA / section / p["slug"] / "detail.json", {})
+                p["description"] = meta_description("", detail.get("content", ""))
 
     # sắp mới nhất trước cho card/sidebar (order chỉ dùng để CMS admin sắp thủ công nếu cần)
     posts_latest = sorted(posts, key=lambda p: p.get("updated_at", ""), reverse=True)
@@ -999,6 +1151,7 @@ def main():
         in_cat = [p for p in products_latest if p.get("category") == slug]
         patch_product_grid(HTML / slug / "index.html", in_cat)
 
+    patch_home_news(posts_latest)
     build_sitemap(posts, projects, products)
     build_cart_data_js(products_latest)
 
