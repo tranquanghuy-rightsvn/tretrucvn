@@ -15,11 +15,11 @@ const ORDER_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzhZkx5lKE0l
 // phải include cart-data.js TRƯỚC cart.js trong mọi trang.
 const PRODUCT_CATALOG = window.PRODUCT_CATALOG || {};
 
+// Site luôn được phục vụ ở gốc domain (tretruc.com.vn/, *.workers.dev/, localhost/) nên dùng
+// đường dẫn tuyệt đối từ gốc — đúng ở mọi độ sâu trang, không phải đoán số "../" (từng gây vỡ
+// ảnh giỏ hàng ở trang sản phẩm/bài viết). search.js và vn-address.js dùng chung hàm này.
 function getBasePath() {
-  const logo = document.querySelector(".brand img");
-  if (!logo) return "";
-  const src = logo.getAttribute("src") || "";
-  return src.indexOf("../") === 0 ? "../" : "";
+  return "/";
 }
 
 function formatPrice(n) {

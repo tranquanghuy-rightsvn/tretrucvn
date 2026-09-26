@@ -93,7 +93,8 @@ searchFilters.addEventListener("click", (e) => {
 async function init() {
   try {
     const basePath = typeof getBasePath === "function" ? getBasePath() : "../";
-    const res = await fetch(basePath + "js/json/search-index.json");
+    // no-cache: luôn hỏi lại server (ETag) — index do build.py sinh lại mỗi lần CMS lưu bài
+    const res = await fetch(basePath + "js/json/search-index.json", { cache: "no-cache" });
 
     searchIndex = await res.json();
   } catch (err) {

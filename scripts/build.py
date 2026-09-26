@@ -21,6 +21,7 @@ Output:
   html/tre-truc-trang-tri/index.html
   html/index.html                               (vá slider "Tin tức" = bài mới nhất)
   html/sitemap.xml (nếu tồn tại)
+  html/js/json/search-index.json                (dữ liệu trang tìm kiếm)
 
 Chạy local để thử: python3 scripts/build.py
 """
@@ -418,8 +419,8 @@ FOOTER_TPL = """    <footer class="site-footer">
       </a>
     </div>
 
-    <script src="{r}js/cart-data.js"></script>
-    <script src="{r}js/cart.js"></script>
+    <script src="{r}js/cart-data.js?v=20260926"></script>
+    <script src="{r}js/cart.js?v=20260926"></script>
     <script src="{r}js/script.js"></script>
 """
 
@@ -1060,6 +1061,34 @@ def build_sitemap(posts, projects, products):
     print("built html/sitemap.xml (%d bài, %d dự án, %d sản phẩm)" % (len(posts), len(projects), len(products)))
 
 
+def build_search_index(posts_latest, projects_latest, products):
+    """Sinh lại js/json/search-index.json (dữ liệu cho /tim-kiem/) từ toàn bộ bài/dự án/sản
+    phẩm — trước đây file này viết tay nên thiếu bài mới đăng qua CMS và giữ tên ảnh cũ
+    (.jpg/.png đã đổi sang .webp) -> ảnh kết quả tìm kiếm bị vỡ. Đường dẫn tuyệt đối "/"."""
+    def entry(title, desc, url, image, category, price=None):
+        return {
+            "title": title,
+            "excerpt": cap_first(truncate(desc, 160)),
+            "url": url,
+            "image": "/" + image if image else "/images/logo.webp",
+            "category": category,
+            "price": price,
+        }
+
+    items = [entry(p["title"], p.get("description", ""), "/tin-tuc/%s/" % p["slug"], p.get("cover"), "Tin tức")
+             for p in posts_latest]
+    items += [entry(p["title"], p.get("description", ""), "/du-an/%s/" % p["slug"], p.get("cover"), "Dự án")
+              for p in projects_latest]
+    for p in products:
+        cover = "images/san-pham/%s/%s" % (p["slug"], p["cover_file"]) if p.get("cover_file") else ""
+        price = fmt_price(p.get("price")) if (p.get("price") or 0) > 0 else None
+        items.append(entry(p["title"], p.get("description", ""), "/san-pham/%s/" % p["slug"], cover, "Sản phẩm", price))
+    path = HTML / "js" / "json" / "search-index.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("built html/js/json/search-index.json (%d mục)" % len(items))
+
+
 def build_cart_data_js(products):
     """Sinh lại js/cart-data.js (catalog cho giỏ hàng) từ toàn bộ sản phẩm (CMS + legacy).
     cart.js đọc window.PRODUCT_CATALOG từ file này — không sửa tay, mất khi build lại."""
@@ -1154,6 +1183,7 @@ def main():
     patch_home_news(posts_latest)
     build_sitemap(posts, projects, products)
     build_cart_data_js(products_latest)
+    build_search_index(posts_latest, projects_latest, products)
 
     print(
         "Done: %d bai (%d trang) + %d du an (%d trang) + %d san pham | tong %d bai, %d du an, %d san pham"
