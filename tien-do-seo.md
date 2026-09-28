@@ -23,4 +23,9 @@
      - `tre-truc-trang-tri` (1): mành tre trúc trang trí
      - `nguyen-lieu-tre-truc` (5, giữ nguyên): tre tầm vông, tre luồng, tre luồng xử lý, mái lá guộc, cây trúc đã xử lý
    - Build lại: 2 trang danh mục đã có sản phẩm; bộ lọc danh mục ở `/cua-hang/` cũng đúng theo
-   - Lưu ý: phải sửa category của 6 sản phẩm trên trong Google Sheet của CMS, nếu không lần lưu sản phẩm tiếp theo trên CMS sẽ ghi đè về category cũ
+   - Lưu ý: phải đổi category của 6 sản phẩm trên cả trong CMS, nếu không lần lưu sản phẩm tiếp theo trên CMS sẽ ghi đè về category cũ
+   - Sửa CMS (`gas/Code.js`) để mở/lưu bài, dự án, sản phẩm cũ (nhập ngày 19/08) không làm hỏng dữ liệu:
+     - Sheet còn ghi tên ảnh `.jpg/.png` trong khi file thật đã đổi sang `.webp` → CMS tự đổi sang tên đúng khi mở và khi lưu (hết ảnh vỡ trong editor)
+     - Lưu sản phẩm trước đây xoá mọi ảnh trên GitHub không có trong Sheet (mô phỏng: 9 sản phẩm cũ mất 121 ảnh) → nay chỉ xoá ảnh vừa gỡ trên CMS và không đang dùng trong nội dung
+     - Bài/sản phẩm cũ chưa từng lưu qua CMS: editor lấy nội dung từ trang thật, không dùng bản chụp ngày 19/08 (trước đây lưu sẽ mất các sửa chữa sau đó ở 119 trang)
+     - Migrate sản phẩm đọc category từ breadcrumb với mọi domain (lỗi gốc khiến cả 11 sản phẩm bị gán `nguyen-lieu-tre-truc`)
