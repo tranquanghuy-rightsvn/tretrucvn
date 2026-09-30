@@ -184,7 +184,7 @@
 
             <div class="product-detail-info">
               <p class="product-detail-price">{{PRICE_DISPLAY}}</p>
-
+{{STOCK}}
 
               <div class="product-detail-actions">
                 <div class="product-qty-selector">
@@ -196,7 +196,7 @@
                     +
                   </button>
                 </div>
-                <button type="button" class="btn btn-primary product-cart-btn" data-id="{{SKU}}" aria-label="Thêm {{TITLE}} vào giỏ hàng">
+                <button type="button" class="btn btn-primary product-cart-btn" data-id="{{SLUG}}" aria-label="Thêm {{TITLE}} vào giỏ hàng">
                   Thêm vào giỏ hàng
                 </button>
               </div>
@@ -204,7 +204,7 @@
               <div class="product-detail-meta"><p><strong>SKU:</strong> {{SKU}}</p>
               <p><strong>Danh mục:</strong> <a href="../../{{CATEGORY_SLUG}}/">{{CATEGORY_LABEL}}</a></p></div>
             </div>
-          </div><div class="product-detail-tabs">
+          </div>{{TABS_START}}<div class="product-detail-tabs">
             <div class="product-detail-tabs-nav" role="tablist">
               <button type="button" class="product-detail-tab-btn is-active" data-tab-target="mo-ta" role="tab" aria-selected="true">Mô tả sản phẩm</button>
 
@@ -215,7 +215,7 @@
             </div>
 
             </div>
-          </div>
+          </div>{{TABS_END}}
           <div class="product-detail-related">
             <h2 class="product-detail-section-title">Bài viết tương tự</h2>
             <div class="product-grid">

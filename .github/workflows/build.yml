@@ -11,6 +11,11 @@ on:
       - 'data/tin-tuc.json'
       - 'data/du-an.json'
       - 'data/san-pham.json'
+      # Bài Smart content (viết tay ở local; CMS chỉ sửa khối thông tin đầu file) — content/README.md
+      - 'content/**'
+      # Toàn bộ trang chi tiết sinh từ template -> đổi template / build script cũng phải build lại
+      - 'templates/**'
+      - 'scripts/build.py'
   workflow_dispatch:
 
 permissions:
@@ -40,7 +45,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add html/
+          # -A: kèm cả việc XOÁ trang mồ côi (bài đã xoá qua CMS)
+          git add -A html/
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "CI: build html from data"
           git push

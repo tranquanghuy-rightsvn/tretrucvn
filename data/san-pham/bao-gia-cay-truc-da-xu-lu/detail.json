@@ -1,0 +1,20 @@
+{
+  "id": "legacy-bao-gia-cay-truc-da-xu-lu",
+  "slug": "bao-gia-cay-truc-da-xu-lu",
+  "title": "báo giá cây trúc đã xử lý",
+  "description": "báo giá cây trúc đã xử lý",
+  "category": "nguyen-lieu-tre-truc",
+  "price": 8500,
+  "cover_file": "vi-sao-nen-chon-op-tre-tam-vong-cho-khong-gian-song-hien-dai.webp",
+  "order": 11,
+  "created_at": "2026-08-19T03:05:01.736Z",
+  "updated_at": "2026-08-19T03:05:01.736Z",
+  "content": "",
+  "images": [
+    "vi-sao-nen-chon-op-tre-tam-vong-cho-khong-gian-song-hien-dai.webp"
+  ],
+  "sku": "10000",
+  "stock_text": "Còn 10000 trong kho (có thể đặt hàng trước)",
+  "legacy_related_html": "              <article class=\"product-card\"><span class=\"product-badge\">-5%</span>\n                <div class=\"product-thumb\"><a href=\"../cay-tre-luong-xu-ly-chat-luong-so-1/\"><img src=\"../../images/san-pham/cay-tre-luong-xu-ly-chat-luong-so-1/cay-luong77438.webp\" alt=\"Cây Tre Luồng\" loading=\"lazy\"></a></div>\n                <h3><a href=\"../cay-tre-luong-xu-ly-chat-luong-so-1/\">Cây Tre Luồng</a></h3><p class=\"product-desc\">Cây tre luồng được xem là loại vật liệu xanh thân thiện với môi trường, đang được ứng dụng phổ biến trong nhiều công trình xây dựng hiện nay.</p>\n                <p class=\"product-price\"><span class=\"price-old\">30.000 ₫</span><span class=\"price-new\">28.500 ₫</span></p>\n              </article>\n              <article class=\"product-card\"><span class=\"product-badge\">-12%</span>\n                <div class=\"product-thumb\"><a href=\"../cay-tre-tam-vong-da-qua-xu-ly-so-1/\"><img src=\"../../images/san-pham/cay-tre-tam-vong-da-qua-xu-ly-so-1/gia-cay-tam-vong-tphcm202.webp\" alt=\"Cây TreTầm Vông\" loading=\"lazy\"></a></div>\n                <h3><a href=\"../cay-tre-tam-vong-da-qua-xu-ly-so-1/\">Cây TreTầm Vông</a></h3><p class=\"product-desc\">Nguyên liệu cây tre tầm vông ngày càng được ứng dụng nhiều trong đời sống, với nhiều năm kinh nghiệm Tre Việt là đơn vị có nguồn cung dồi dào, chất lượng.</p>\n                <p class=\"product-price\"><span class=\"price-old\">17.000 ₫</span><span class=\"price-new\">15.000 ₫</span></p>\n              </article>\n              <article class=\"product-card\"><span class=\"product-badge\">-19%</span>\n                <div class=\"product-thumb\"><a href=\"../thi-cong-lop-mai-la-lop-guoc/\"><img src=\"../../images/san-pham/thi-cong-lop-mai-la-lop-guoc/z6844633284354_3b0af2c976f61bd0daf6ca2bfaa7f3f0.webp\" alt=\"mái lá guộc\" loading=\"lazy\"></a></div>\n                <h3><a href=\"../thi-cong-lop-mai-la-lop-guoc/\">mái lá guộc</a></h3><p class=\"product-desc\">Tre Việt Building đơn vị tiên phong đưa vật liệu chống nóng bằng sản phẩm tự nhiên vào thiết kế của mình, trong đó thi công lợp mái lá (lợp guộc) hiệu quả cao.</p>\n                <p class=\"product-price\"><span class=\"price-old\">800.000 ₫</span><span class=\"price-new\">650.000 ₫</span></p>\n              </article>",
+  "schema_description": "báo giá cây trúc đã xử lý"
+}

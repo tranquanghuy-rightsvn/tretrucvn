@@ -10,6 +10,9 @@ Input:
   data/san-pham.json, data/san-pham/<slug>/detail.json, data/legacy-san-pham.json
   templates/post.html, templates/project.html, templates/product.html
   html/images/tin-tuc|du-an|san-pham/<slug>/*   # ảnh đã được CMS đẩy thẳng vào đây
+  content/tin-tuc/<slug>.html, content/du-an/<slug>.html
+                                     # bài "Smart content": viết tay ở local (HTML thiết kế riêng),
+                                     # KHÔNG sửa trong CMS — xem content/README.md
 
 Output:
   html/tin-tuc/<slug>/index.html, html/tin-tuc/index.html, html/tin-tuc/page/N/index.html
@@ -28,12 +31,14 @@ Chạy local để thử: python3 scripts/build.py
 import html as htmllib
 import json
 import re
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 HTML = ROOT / "html"
 DATA = ROOT / "data"
+CONTENT = ROOT / "content"
 TEMPLATES = ROOT / "templates"
 SITE = "https://tretruc.com.vn"
 
@@ -87,6 +92,41 @@ def truncate(s, n=160):
     return s if len(s) <= n else s[: n].rsplit(" ", 1)[0] + "…"
 
 
+# Dấu trang do build.py sinh ra (trang chi tiết tin tức / dự án / sản phẩm). Chỉ trang MANG DẤU
+# mới bị dọn khi bản ghi không còn trong data/ (đã xoá qua CMS) — trang viết tay không bao giờ bị
+# đụng. Chèn SAU <head> (đứng trước <!doctype> sẽ đẩy trình duyệt về quirks mode).
+GENERATED_MARKER = "<!-- build.py:generated -->"
+
+
+def mark_generated(page):
+    if GENERATED_MARKER in page:
+        return page
+    return page.replace("<head>", "<head>\n    " + GENERATED_MARKER, 1)
+
+
+def clean_orphans(section, keep_slugs, index_path):
+    """Xoá html/<section>/<slug>/ mang dấu build.py mà slug không còn trong data/. Không có
+    index (file thiếu/rỗng) thì KHÔNG dọn gì: thà sót trang cũ còn hơn xoá nhầm cả mục."""
+    if not index_path.exists() or not keep_slugs:
+        print("WARN: bỏ qua dọn trang mồ côi %s (không có dữ liệu index)" % section)
+        return []
+    removed = []
+    for d in sorted((HTML / section).iterdir()):
+        if not d.is_dir() or d.name == "page" or d.name in keep_slugs:
+            continue
+        page = d / "index.html"
+        try:
+            generated = GENERATED_MARKER in page.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            generated = False
+        if generated:
+            shutil.rmtree(d)
+            removed.append(d.name)
+    for slug in removed:
+        print("dọn trang mồ côi: html/%s/%s/" % (section, slug))
+    return removed
+
+
 BRAND = "Tre Việt Building"
 META_DESC_MAX = 160
 
@@ -101,6 +141,16 @@ def page_title(title):
     # thương hiệu 2 lần như "Tre Việt Building - Đơn vị ... - Tre Việt Building").
     title = cap_first(title)
     return title if BRAND.lower() in title.lower() else "%s - %s" % (title, BRAND)
+
+
+def seo_title_of(item):
+    # seo_title (tuỳ chọn): <title> nguyên văn — bài chuyển từ trang cũ giữ đúng title đang có
+    return (item.get("seo_title") or "").strip() or page_title(item["title"])
+
+
+def seo_description_of(item):
+    # seo_description (tuỳ chọn): meta description nguyên văn, không cắt/viết hoa lại
+    return (item.get("seo_description") or "").strip() or meta_description(item.get("description", ""), item.get("content", ""))
 
 
 def meta_description(desc, content=""):
@@ -129,6 +179,40 @@ def fmt_price(n):
     if n <= 0:
         return "Giá bán: Liên hệ"
     return "{:,}".format(n).replace(",", ".") + " ₫"
+
+
+def _int(n):
+    try:
+        return int(n)
+    except (TypeError, ValueError):
+        return 0
+
+
+def has_sale(prod):
+    # price_old (tuỳ chọn): giá gốc, chỉ hiện khi lớn hơn giá bán
+    return _int(prod.get("price_old")) > _int(prod.get("price")) > 0
+
+
+def price_spans(prod):
+    new = '<span class="price-new">%s</span>' % fmt_price(prod.get("price"))
+    return ('<span class="price-old">%s</span>' % fmt_price(prod.get("price_old")) + new) if has_sale(prod) else new
+
+
+def price_detail_html(prod):
+    return price_spans(prod) if has_sale(prod) else fmt_price(prod.get("price"))
+
+
+def sale_badge(prod):
+    if not has_sale(prod):
+        return ""
+    old, new = _int(prod.get("price_old")), _int(prod.get("price"))
+    return '<span class="product-badge">-%d%%</span>' % int(round((old - new) * 100.0 / old))
+
+
+def schema_description(item, desc):
+    # schema_description (không có ô nhập): JSON-LD description nguyên văn của trang cũ — chỉ bài
+    # chuyển từ trang HTML tĩnh mới có; CMS tự bỏ field này khi người dùng sửa mô tả
+    return (item.get("schema_description") or "").strip() or desc
 
 
 LEGACY_ORDER_FALLBACK = 10 ** 9
@@ -191,6 +275,88 @@ def resolve_cover(item, section):
     # bài viết/dự án: "cover" dạng "images/<section>/<slug>/<file>" (tương đối với site root)
     f = find_image(section, item["slug"], item.get("cover"))
     return "images/%s/%s/%s" % (section, item["slug"], f) if f else ""
+
+
+# ---------- Smart content ----------
+# content/<section>/<slug>.html = 1 bài viết/dự án viết tay ở local, toàn bộ (tiêu đề, mô tả,
+# ảnh cover, nội dung) nằm trong file, CMS chỉ hiển thị và khoá không cho sửa. Đầu file là
+# khối thông tin:
+#   <!-- smart-content
+#   title: Tiêu đề bài
+#   description: Mô tả ngắn (meta description)
+#   cover: cover.webp            (file trong html/images/<section>/<slug>/)
+#   author: (không bắt buộc)
+#   date: 2026-09-28             (ngày đăng)
+#   updated: 2026-09-30          (không bắt buộc, mặc định = date)
+#   -->
+# Phần sau khối này là thân bài. Trùng slug với bài CMS/legacy thì Smart content thắng.
+
+SMART_HEAD_RE = re.compile(r"^\s*<!--\s*smart-content\b(.*?)-->\s*", re.S)
+SLUG_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+
+
+def smart_date(s):
+    s = (s or "").strip()
+    return s + "T00:00:00.000Z" if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s) else s
+
+
+def load_smart(section):
+    items = {}
+    d = CONTENT / section
+    if not d.is_dir():
+        return items
+    for f in sorted(d.glob("*.html")):
+        slug = f.stem
+        where = f.relative_to(ROOT)
+        if not SLUG_RE.match(slug):
+            print("WARN: Smart content", where, "- tên file không phải slug hợp lệ, bỏ qua")
+            continue
+        text = f.read_text(encoding="utf-8")
+        m = SMART_HEAD_RE.match(text)
+        if not m:
+            print("WARN: Smart content", where, "- thiếu khối <!-- smart-content ... --> đầu file, bỏ qua")
+            continue
+        meta = {}
+        for line in m.group(1).splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                meta[k.strip().lower()] = v.strip()
+        if not meta.get("title") or not meta.get("date"):
+            print("WARN: Smart content", where, "- thiếu title hoặc date, bỏ qua")
+            continue
+        created = smart_date(meta["date"])
+        cover = Path(meta.get("cover", "")).name
+        items[slug] = {
+            "id": "smart-" + slug, "slug": slug, "title": meta["title"],
+            "description": meta.get("description", ""), "author": meta.get("author", ""),
+            "cover": "images/%s/%s/%s" % (section, slug, cover) if cover else "",
+            "created_at": created, "updated_at": smart_date(meta.get("updated")) or created,
+            "content": text[m.end():].strip(), "smart": True,
+        }
+    return items
+
+
+# CSS/JS của các khối thiết kế (tiền tố tv-) — chỉ nạp cho trang có dùng khối đó
+BLOCK_ASSETS = [
+    ("tv-slider", ["css/slider.css"], ["js/slider.js"]),
+    ("tv-process", ["css/process.css"], ["js/blocks.js"]),
+    ("tv-models|tv-faq|tv-contact|tv-h2-ico", ["css/blocks.css"], []),
+]
+
+
+def inject_block_assets(page, content, r):
+    css, js = [], []
+    for pattern, c, j in BLOCK_ASSETS:
+        if re.search(r'class="(?:[^"]*\s)?(?:%s)[\s"]' % pattern, content or ""):
+            css += [x for x in c if x not in css]
+            js += [x for x in j if x not in js]
+    if css:
+        links = "".join('    <link rel="stylesheet" href="%s%s" />\n' % (r, x) for x in css)
+        page = page.replace("  </head>", links + "  </head>", 1)
+    if js:
+        scripts = "".join('    <script src="%s%s"></script>\n' % (r, x) for x in js)
+        page = page.replace("  </body>", scripts + "  </body>", 1)
+    return page
 
 
 def merge_by_slug(legacy, cms):
@@ -508,20 +674,21 @@ def sidebar_product_items(products, r):
 
 def product_card(prod, r):
     href = "%ssan-pham/%s/" % (r, prod["slug"])
-    return """            <article class="product-card">
+    return """            <article class="product-card">%s
               <div class="product-thumb"><a href="%s"><img src="%simages/san-pham/%s/%s" alt="%s" loading="lazy"></a></div>
                 <h3><a href="%s">%s</a></h3><p class="product-desc">%s</p>
-                <p class="product-price"><span class="price-new">%s</span></p>
+                <p class="product-price">%s</p>
             </article>""" % (
+        sale_badge(prod),
         href, r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]),
-        href, esc(prod["title"]), esc(truncate(prod.get("description", ""), 160)), fmt_price(prod.get("price")),
+        href, esc(prod["title"]), esc(truncate(prod.get("description", ""), 160)), price_spans(prod),
     )
 
 
 def product_grid_card(prod, r, with_categories=False):
     href = "%ssan-pham/%s/" % (r, prod["slug"])
     data_categories = ' data-categories="%s"' % esc(prod.get("category", "")) if with_categories else ""
-    return """            <article class="product-card"%s>
+    return """            <article class="product-card"%s>%s
               <button
                 class="product-cart-btn"
                 type="button"
@@ -557,15 +724,15 @@ def product_grid_card(prod, r, with_categories=False):
                 %s
               </p>
               <p class="product-price">
-                <span class="price-new">%s</span>
+                %s
               </p>
             </article>""" % (
-        data_categories,
+        data_categories, sale_badge(prod),
         prod["slug"], esc(prod["title"]),
         href, r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]),
         href, esc(prod["title"]),
         esc(truncate(prod.get("description", ""), 160)),
-        fmt_price(prod.get("price")),
+        price_spans(prod),
     )
 
 
@@ -579,6 +746,40 @@ def transform_content(content, section, slug):
 
 # ---------- builders: bài viết (tin-tuc) & dự án (du-an), dùng chung logic ----------
 
+ASIDE_RE = re.compile(r"(<aside>)[\s\S]*?(</aside>)")
+
+
+def keep_legacy_sidebar(page, item):
+    """legacy_sidebar_html (không có ô nhập): cột phải NGUYÊN VĂN của trang cũ. Bài chuyển từ
+    trang HTML tĩnh giữ đúng link nội bộ đang có (vd 20 trang dự án đang trỏ về trang báo giá
+    ốp trần) — build không tự thay bằng "bài mới nhất" cho tới khi chủ động đổi."""
+    legacy = item.get("legacy_sidebar_html")
+    if not legacy:
+        return page
+    return ASIDE_RE.sub(lambda m: m.group(1) + legacy + m.group(2), page, count=1)
+
+
+def project_info_html(rows):
+    """Khối "Thông tin dự án" (tuỳ chọn): project_info = [[nhãn, giá trị], ...]."""
+    rows = [(str(r[0]).strip(), str(r[1]).strip()) for r in (rows or []) if len(r) >= 2 and (str(r[0]).strip() or str(r[1]).strip())]
+    if not rows:
+        return ""
+    items = "\n".join(
+        """                  <div class="post-detail-info-row">
+                    <dt>%s</dt>
+                    <dd>%s</dd>
+                  </div>""" % (esc(k), esc(v))
+        for k, v in rows
+    )
+    return """              <div class="post-detail-info">
+                <h3>Thông tin dự án</h3>
+                <dl>
+%s
+                </dl>
+              </div>
+""" % items
+
+
 def build_detail_page(item, section, tpl, all_items, products):
     slug = item["slug"]
     depth = 2
@@ -591,25 +792,28 @@ def build_detail_page(item, section, tpl, all_items, products):
     related = [p for p in all_items if p["slug"] != slug][:5]
     featured_products = sorted(products, key=order_sort_key)[:9]
 
-    desc = meta_description(item.get("description", ""), item.get("content", ""))
+    desc = seo_description_of(item)
     page = (
-        tpl.replace("{{PAGE_TITLE}}", esc(page_title(item["title"])))
+        tpl.replace("{{PAGE_TITLE}}", esc(seo_title_of(item)))
         .replace("{{TITLE}}", esc(item["title"]))
         .replace("{{TITLE_JSON}}", esc_json(item["title"]))
         .replace("{{DESCRIPTION}}", esc(desc))
-        .replace("{{DESCRIPTION_JSON}}", esc_json(desc))
+        .replace("{{DESCRIPTION_JSON}}", esc_json(schema_description(item, desc)))
         .replace("{{URL}}", url)
         .replace("{{COVER_URL}}", cover_url)
         .replace("{{COVER_SRC}}", cover_src)
+        .replace("{{PROJECT_INFO}}", project_info_html(item.get("project_info")))
         .replace("{{DATE_PUBLISHED}}", item.get("created_at", ""))
         .replace("{{DATE_MODIFIED}}", item.get("updated_at", item.get("created_at", "")))
         .replace("{{CONTENT}}", transform_content(item.get("content", ""), section, slug))
         .replace("{{SIDEBAR_POSTS}}", sidebar_post_items(related, "../"))
         .replace("{{SIDEBAR_PRODUCTS}}", sidebar_product_items(featured_products, r))
     )
+    page = keep_legacy_sidebar(page, item)
+    page = inject_block_assets(page, item.get("content", ""), r)
     out = HTML / section / slug / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(page, encoding="utf-8")
+    out.write_text(mark_generated(page), encoding="utf-8")
     return out
 
 
@@ -920,17 +1124,29 @@ def build_product_detail(prod, all_products):
 
     price = prod.get("price") or 0
     tpl = (TEMPLATES / "product.html").read_text(encoding="utf-8")
-    desc = meta_description(prod.get("description", ""), prod.get("content", ""))
+    content = (prod.get("content", "") or "").strip()
+    if not content:
+        # không có mô tả: bỏ cả khối tab "Mô tả sản phẩm" (giống trang sản phẩm cũ)
+        tpl = re.sub(r"\{\{TABS_START\}\}[\s\S]*?\{\{TABS_END\}\}", "", tpl)
+    tpl = tpl.replace("{{TABS_START}}", "").replace("{{TABS_END}}", "")
+    stock = (prod.get("stock_text") or "").strip()
+    stock_html = '              <p class="product-detail-stock in-stock">%s</p>\n' % esc(stock) if stock else ""
+    if len(images) <= 1:
+        # 1 ảnh: không có dải thumbnail (giống trang sản phẩm cũ)
+        tpl = tpl.replace('\n          <div class="product-detail-gallery-thumbs">\n{{GALLERY_THUMBS}}\n          </div>', "")
+    desc = seo_description_of(prod)
     page = (
-        tpl.replace("{{PAGE_TITLE}}", esc(page_title(prod["title"])))
+        tpl.replace("{{PAGE_TITLE}}", esc(seo_title_of(prod)))
         .replace("{{TITLE}}", esc(prod["title"]))
         .replace("{{TITLE_JSON}}", esc_json(prod["title"]))
         .replace("{{DESCRIPTION}}", esc(desc))
-        .replace("{{DESCRIPTION_JSON}}", esc_json(desc))
+        .replace("{{DESCRIPTION_JSON}}", esc_json(schema_description(prod, desc)))
         .replace("{{URL}}", url)
         .replace("{{COVER_URL}}", cover_url)
-        .replace("{{SKU}}", esc(slug))
-        .replace("{{CATEGORY_LABEL}}", esc(CATEGORY_LABEL.get(category, "")))
+        .replace("{{SKU}}", esc(str(prod.get("sku") or slug)))
+        .replace("{{SLUG}}", slug)
+        .replace("{{STOCK}}", stock_html)
+        .replace("{{CATEGORY_LABEL}}", esc(CATEGORY_LABEL_TITLE.get(category, "")))
         .replace("{{CATEGORY_LABEL_JSON}}", esc_json(CATEGORY_LABEL_TITLE.get(category, "")))
         .replace("{{CATEGORY_SLUG}}", category)
         .replace("{{CATEGORY_URL}}", "%s/%s/" % (SITE, category))
@@ -939,14 +1155,14 @@ def build_product_detail(prod, all_products):
         .replace("{{NAV_ACTIVE_TRANG_TRI}}", ' class="is-active"' if category == "tre-truc-trang-tri" else "")
         .replace("{{GALLERY_MAIN_SRC}}", cover_src)
         .replace("{{GALLERY_THUMBS}}", thumbs)
-        .replace("{{PRICE_DISPLAY}}", fmt_price(price))
+        .replace("{{PRICE_DISPLAY}}", price_detail_html(prod))
         .replace("{{PRICE_JSONLD}}", str(int(price) if price else 0))
-        .replace("{{CONTENT}}", (prod.get("content", "") or "").strip())
-        .replace("{{RELATED_PRODUCTS}}", related_html)
+        .replace("{{CONTENT}}", content)
+        .replace("{{RELATED_PRODUCTS}}", prod.get("legacy_related_html") or related_html)
     )
     out = HTML / "san-pham" / slug / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(page, encoding="utf-8")
+    out.write_text(mark_generated(page), encoding="utf-8")
     return out
 
 
@@ -1117,11 +1333,13 @@ def build_cart_data_js(products):
 def main():
     cms_posts = load_json(DATA / "tin-tuc.json", [])
     legacy_posts = load_json(DATA / "legacy-tin-tuc.json", [])
-    posts = merge_by_slug(legacy_posts, cms_posts)
+    smart_posts = load_smart("tin-tuc")
+    posts = merge_by_slug(legacy_posts, cms_posts + list(smart_posts.values()))
 
     cms_projects = load_json(DATA / "du-an.json", [])
     legacy_projects = load_json(DATA / "legacy-du-an.json", [])
-    projects = merge_by_slug(legacy_projects, cms_projects)
+    smart_projects = load_smart("du-an")
+    projects = merge_by_slug(legacy_projects, cms_projects + list(smart_projects.values()))
 
     cms_products = load_json(DATA / "san-pham.json", [])
     legacy_products = load_json(DATA / "legacy-san-pham.json", [])
@@ -1133,7 +1351,7 @@ def main():
             p["cover"] = resolve_cover(p, section)
             # description trống -> card/slider không có mô tả; lấy tạm đoạn đầu nội dung bài
             if not (p.get("description") or "").strip():
-                detail = load_json(DATA / section / p["slug"] / "detail.json", {})
+                detail = p if p.get("smart") else load_json(DATA / section / p["slug"] / "detail.json", {})
                 p["description"] = meta_description("", detail.get("content", ""))
 
     # sắp mới nhất trước cho card/sidebar (order chỉ dùng để CMS admin sắp thủ công nếu cần)
@@ -1144,7 +1362,12 @@ def main():
     project_tpl = (TEMPLATES / "project.html").read_text(encoding="utf-8")
 
     built_posts = 0
+    for p in smart_posts.values():
+        build_detail_page(p, "tin-tuc", post_tpl, posts_latest, products)
+        built_posts += 1
     for p in cms_posts:
+        if p["slug"] in smart_posts:
+            continue  # Smart content cùng slug đã build ở trên
         dj = DATA / "tin-tuc" / p["slug"] / "detail.json"
         if not dj.exists():
             print("WARN: thiếu", dj.relative_to(ROOT), "- bỏ qua")
@@ -1153,7 +1376,12 @@ def main():
         built_posts += 1
 
     built_projects = 0
+    for p in smart_projects.values():
+        build_detail_page(p, "du-an", project_tpl, projects_latest, products)
+        built_projects += 1
     for p in cms_projects:
+        if p["slug"] in smart_projects:
+            continue
         dj = DATA / "du-an" / p["slug"] / "detail.json"
         if not dj.exists():
             print("WARN: thiếu", dj.relative_to(ROOT), "- bỏ qua")
@@ -1169,6 +1397,11 @@ def main():
             continue
         build_product_detail(load_json(dj, {}), products)
         built_products += 1
+
+    # dọn trang chi tiết của bản ghi đã xoá qua CMS (chỉ trang mang dấu build.py)
+    clean_orphans("tin-tuc", {p["slug"] for p in posts}, DATA / "tin-tuc.json")
+    clean_orphans("du-an", {p["slug"] for p in projects}, DATA / "du-an.json")
+    clean_orphans("san-pham", {p["slug"] for p in products}, DATA / "san-pham.json")
 
     tin_tuc_pages = build_listing_pages("tin-tuc", posts_latest, products)
     du_an_pages = build_listing_pages("du-an", projects_latest, products)
@@ -1186,8 +1419,9 @@ def main():
     build_search_index(posts_latest, projects_latest, products)
 
     print(
-        "Done: %d bai (%d trang) + %d du an (%d trang) + %d san pham | tong %d bai, %d du an, %d san pham"
-        % (built_posts, tin_tuc_pages, built_projects, du_an_pages, built_products, len(posts), len(projects), len(products))
+        "Done: %d bai (%d trang) + %d du an (%d trang) + %d san pham | tong %d bai, %d du an, %d san pham | smart content: %d bai, %d du an"
+        % (built_posts, tin_tuc_pages, built_projects, du_an_pages, built_products, len(posts), len(projects), len(products),
+           len(smart_posts), len(smart_projects))
     )
 
 

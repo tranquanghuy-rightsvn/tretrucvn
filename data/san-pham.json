@@ -45,7 +45,8 @@
     "cover_file": "z6844633284354_3b0af2c976f61bd0daf6ca2bfaa7f3f0.webp",
     "order": 4,
     "created_at": "2026-08-19T03:05:11.128Z",
-    "updated_at": "2026-08-19T03:05:11.128Z"
+    "updated_at": "2026-08-19T03:05:11.128Z",
+    "price_old": 800000
   },
   {
     "id": "legacy-nha-tre",
@@ -99,25 +100,27 @@
     "id": "legacy-cay-tre-tam-vong-da-qua-xu-ly-so-1",
     "slug": "cay-tre-tam-vong-da-qua-xu-ly-so-1",
     "title": "Cây TreTầm Vông",
-    "description": "Nguyên liệu cây tre tầm vông ngày càng được ứng dụng nhiều trong đời sống, với nhiều năm kinh nghiệm trong lĩnh vực Tre việt Là đơn vị có nguồn cung dồi dào,…",
+    "description": "Nguyên liệu cây tre tầm vông ngày càng được ứng dụng nhiều trong đời sống, với nhiều năm kinh nghiệm trong lĩnh vực Tre việt Là đơn vị có nguồn cung dồi dào, đáp ứng được số lượng lớn.",
     "category": "nguyen-lieu-tre-truc",
     "price": 15000,
     "cover_file": "gia-cay-tam-vong-tphcm202.webp",
     "order": 9,
     "created_at": "2026-08-19T03:05:05.196Z",
-    "updated_at": "2026-08-19T03:05:05.196Z"
+    "updated_at": "2026-08-19T03:05:05.196Z",
+    "price_old": 17000
   },
   {
     "id": "legacy-cay-tre-luong-xu-ly-chat-luong-so-1",
     "slug": "cay-tre-luong-xu-ly-chat-luong-so-1",
     "title": "Cây Tre Luồng",
-    "description": "Cây tre luồng được xem là loại vật liệu xanh thân thiện với môi trường đang được ứng dụng phổ biến trong nhiều công trình xây dựng. Vậy cây tre luồng có giá…",
+    "description": "Cây tre luồng được xem là loại vật liệu xanh thân thiện với môi trường đang được ứng dụng phổ biến trong nhiều công trình xây dựng. Vậy cây tre luồng có giá bao nhiêu? Địa chỉ mua bán tre luồng giá rẻ và đảm bảo chất lượng? Tham khảo bài viết dưới đây để biết rõ hơn về giá bán cũng như tìm hiểu về địa chỉ cung cấp tre luồng uy tín hiện nay nhé!",
     "category": "nguyen-lieu-tre-truc",
     "price": 28500,
     "cover_file": "cay-luong77438.webp",
     "order": 10,
     "created_at": "2026-08-19T03:05:02.967Z",
-    "updated_at": "2026-08-19T03:05:02.967Z"
+    "updated_at": "2026-08-19T03:05:02.967Z",
+    "price_old": 30000
   },
   {
     "id": "legacy-bao-gia-cay-truc-da-xu-lu",
