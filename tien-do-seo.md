@@ -35,6 +35,7 @@
    - Đối chiếu sau khi build: 111/111 tin tức + dự án giống hệt trang đang chạy; 9 sản phẩm chỉ khác do sửa danh mục ngày 4
    - Trang danh sách (/tin-tuc/, /du-an/, phân trang) + tìm kiếm: giữ NGUYÊN tiêu đề/mô tả thẻ bài như đang chạy (Đại ca chốt: không đổi gì có thể ảnh hưởng bài top)
    - 2 sản phẩm CMS (mái lá guộc, cây tre luồng): viết hoa nhãn danh mục, bỏ dải ảnh nhỏ khi chỉ có 1 ảnh (Đại ca đồng ý)
-   - Chờ Đại ca duyệt: /cua-hang/ + 2 trang danh mục hiện lại giá gốc gạch ngang + nhãn giảm giá của 3 sản phẩm (mất từ 19/08)
+   - /cua-hang/ + 2 trang danh mục: thẻ sản phẩm GIỮ NGUYÊN như đang chạy (chưa hiện giá gốc / nhãn giảm giá — bật bằng `SHOW_SALE_ON_CARDS = True` trong build.py khi Đại ca duyệt)
+   - Đối chiếu trước khi push: trong 129 trang HTML có thay đổi, chỉ 8 trang sản phẩm khác nội dung (6 do sửa danh mục ngày 4, 2 do mục Đại ca đồng ý)
    - CMS: thêm ô Tiêu đề SEO / Mô tả SEO (tuỳ chọn); Smart content sửa được tiêu đề, mô tả, ảnh cover (không sửa nội dung); không còn tab Đơn hàng (đơn vẫn nhận, lưu Sheet, báo Telegram/email)
    - Build tự dọn trang của bài đã xoá qua CMS; CI build lại khi đổi template

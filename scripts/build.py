@@ -209,6 +209,19 @@ def sale_badge(prod):
     return '<span class="product-badge">-%d%%</span>' % int(round((old - new) * 100.0 / old))
 
 
+# Thẻ sản phẩm ở /cua-hang/, 3 trang danh mục, khối liên quan: CHƯA hiện giá gốc + nhãn giảm giá
+# (giữ đúng như site đang chạy — chờ Đại ca duyệt, 30/09/2026). Muốn hiện: đổi thành True.
+SHOW_SALE_ON_CARDS = False
+
+
+def card_price(prod):
+    return price_spans(prod) if SHOW_SALE_ON_CARDS else '<span class="price-new">%s</span>' % fmt_price(prod.get("price"))
+
+
+def card_badge(prod):
+    return sale_badge(prod) if SHOW_SALE_ON_CARDS else ""
+
+
 def schema_description(item, desc):
     # schema_description (không có ô nhập): JSON-LD description nguyên văn của trang cũ — chỉ bài
     # chuyển từ trang HTML tĩnh mới có; CMS tự bỏ field này khi người dùng sửa mô tả
@@ -674,14 +687,13 @@ def sidebar_product_items(products, r):
 
 def product_card(prod, r):
     href = "%ssan-pham/%s/" % (r, prod["slug"])
-    return """            <article class="product-card">%s
+    return """            <article class="product-card">
               <div class="product-thumb"><a href="%s"><img src="%simages/san-pham/%s/%s" alt="%s" loading="lazy"></a></div>
                 <h3><a href="%s">%s</a></h3><p class="product-desc">%s</p>
                 <p class="product-price">%s</p>
             </article>""" % (
-        sale_badge(prod),
         href, r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]),
-        href, esc(prod["title"]), esc(truncate(prod.get("description", ""), 160)), price_spans(prod),
+        href, esc(prod["title"]), esc(truncate(prod.get("description", ""), 160)), card_price(prod),
     )
 
 
@@ -727,12 +739,12 @@ def product_grid_card(prod, r, with_categories=False):
                 %s
               </p>
             </article>""" % (
-        data_categories, sale_badge(prod),
+        data_categories, card_badge(prod),
         prod["slug"], esc(prod["title"]),
         href, r, prod["slug"], prod.get("cover_file", ""), esc(prod["title"]),
         href, esc(prod["title"]),
         esc(truncate(prod.get("description", ""), 160)),
-        price_spans(prod),
+        card_price(prod),
     )
 
 
