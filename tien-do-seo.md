@@ -33,6 +33,8 @@
    - Bài viết, dự án, sản phẩm và ảnh lưu + quản lý trong git (`data/`, `html/images/`), không còn qua Google Sheet/Drive. Chi tiết: `GAS.md`
    - Chuyển 1 lần 120 trang cũ (86 tin tức, 25 dự án, 9 sản phẩm, trước đó là HTML tĩnh) vào `data/` bằng `scripts/migrate_legacy.py`, lấy NGUYÊN VĂN từ trang đang chạy: `<title>`, meta description, H1, JSON-LD, ngày đăng/sửa, sidebar (giữ đúng link nội bộ, vd 20 trang dự án đang trỏ về trang báo giá ốp trần), khối "Thông tin dự án", giá gốc, SKU, tồn kho
    - Đối chiếu sau khi build: 111/111 tin tức + dự án giống hệt trang đang chạy; 9 sản phẩm chỉ khác do sửa danh mục ngày 4
-   - Thay đổi nhỏ ngoài 120 trang (chờ Đại ca duyệt trước khi push): thẻ bài ở trang danh sách bỏ đuôi "- Tre Việt Building" bị dính; /cua-hang/ + trang danh mục hiện lại giá gốc gạch ngang và nhãn giảm giá (mất từ 19/08); 2 sản phẩm CMS viết hoa nhãn danh mục, bỏ dải ảnh nhỏ khi chỉ có 1 ảnh
+   - Trang danh sách (/tin-tuc/, /du-an/, phân trang) + tìm kiếm: giữ NGUYÊN tiêu đề/mô tả thẻ bài như đang chạy (Đại ca chốt: không đổi gì có thể ảnh hưởng bài top)
+   - 2 sản phẩm CMS (mái lá guộc, cây tre luồng): viết hoa nhãn danh mục, bỏ dải ảnh nhỏ khi chỉ có 1 ảnh (Đại ca đồng ý)
+   - Chờ Đại ca duyệt: /cua-hang/ + 2 trang danh mục hiện lại giá gốc gạch ngang + nhãn giảm giá của 3 sản phẩm (mất từ 19/08)
    - CMS: thêm ô Tiêu đề SEO / Mô tả SEO (tuỳ chọn); Smart content sửa được tiêu đề, mô tả, ảnh cover (không sửa nội dung); không còn tab Đơn hàng (đơn vẫn nhận, lưu Sheet, báo Telegram/email)
    - Build tự dọn trang của bài đã xoá qua CMS; CI build lại khi đổi template

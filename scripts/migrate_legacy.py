@@ -173,6 +173,11 @@ def main():
                 detail.write_text(json.dumps(rec, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             meta_rec = index_meta(section, rec)
             row = {k: meta_rec.get(k, item.get(k)) for k in item}
+            # Trang danh sách (thẻ bài, tìm kiếm) giữ NGUYÊN tiêu đề + mô tả đang hiện trên site —
+            # Đại ca chốt 30/09/2026: không đổi gì có thể ảnh hưởng bài đang top. Trang chi tiết dùng
+            # H1 thật (detail.json). Lần Lưu đầu tiên qua CMS mới đồng bộ index theo tiêu đề đã sửa.
+            row["title"] = item.get("title")
+            row["description"] = item.get("description")
             if "price_old" in meta_rec:
                 row["price_old"] = meta_rec["price_old"]
             new_index.append(row)
