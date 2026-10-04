@@ -44,6 +44,8 @@ Thân bài chỉ gồm phần nội dung (không header/menu/footer — `build.p
 | `tv-slider` | `html/css/slider.css` + `html/js/slider.js` |
 | `tv-process` | `html/css/process.css` + `html/js/blocks.js` (hiện dần thanh tóm tắt) |
 | `tv-models`, `tv-faq`, `tv-contact`, `tv-h2-ico` | `html/css/blocks.css` |
+| `tv-gallery`, `tv-video`, `tv-proof` | `html/css/blocks.css` + `html/js/media.js` (phóng to ảnh, video bấm mới tải) |
+| `tv-harms` | `html/css/blocks.css` |
 
 Mẫu HTML từng khối: xem `content/tin-tuc/thi-cong-nha-tre-choi-tre-tron-goi.html`.
 

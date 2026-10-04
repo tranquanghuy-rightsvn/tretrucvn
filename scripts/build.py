@@ -354,6 +354,8 @@ BLOCK_ASSETS = [
     ("tv-slider", ["css/slider.css"], ["js/slider.js"]),
     ("tv-process", ["css/process.css"], ["js/blocks.js"]),
     ("tv-models|tv-faq|tv-contact|tv-h2-ico", ["css/blocks.css"], []),
+    ("tv-gallery|tv-video|tv-proof", ["css/blocks.css"], ["js/media.js"]),
+    ("tv-harms|tv-callout", ["css/blocks.css"], []),
 ]
 
 
@@ -1009,9 +1011,9 @@ LISTING_PAGE_TPL = """<!doctype html>
         "url": "{url}",
         "isPartOf": {{
           "@type": "WebSite",
+          "creator": {{"@type": "Organization", "@id": "https://web100.vn/#organization", "name": "Web100", "url": "https://web100.vn/"}},
           "name": "Tre Việt Building",
           "url": "https://tretruc.com.vn/"
-          "creator": {"@type": "Organization", "@id": "https://web100.vn/#organization", "name": "Web100", "url": "https://web100.vn/"},
         }}
       }}
     </script>
