@@ -1011,6 +1011,7 @@ LISTING_PAGE_TPL = """<!doctype html>
           "@type": "WebSite",
           "name": "Tre Việt Building",
           "url": "https://tretruc.com.vn/"
+          "creator": {"@type": "Organization", "@id": "https://web100.vn/#organization", "name": "Web100", "url": "https://web100.vn/"},
         }}
       }}
     </script>
