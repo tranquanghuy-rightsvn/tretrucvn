@@ -1056,12 +1056,110 @@ ul {
   transform-origin: center top;
 }
 
+/* Ảnh nhà tre vẽ mực (section "Về Tre Việt Building" trang chủ, lấy từ Blooming Passage):
+   ảnh chỉ hiện trong nét cọ (images/gioi-thieu/ink-mask.svg), mảng màu nước phía sau,
+   cành tre SVG mọc lên ở góc trái + nét cọ gạch chân + chấm mực phía trước. */
+.intro-section:has(.ink-art) {
+  overflow-x: clip;
+}
+.intro-video.ink-art {
+  position: relative;
+  isolation: isolate;
+  align-self: start;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+.ink-art > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ink-frame {
+  -webkit-mask: url(../images/gioi-thieu/ink-mask.svg) center / 100% 100% no-repeat;
+  mask: url(../images/gioi-thieu/ink-mask.svg) center / 100% 100% no-repeat;
+}
+.ink-art::before,
+.ink-art::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-mask: url(../images/gioi-thieu/ink-wash.svg) center / 100% 100% no-repeat;
+  mask: url(../images/gioi-thieu/ink-wash.svg) center / 100% 100% no-repeat;
+}
+.ink-art::before { inset: 14% 22% -9% -7%; background: #c9a96e; opacity: 0.42; }
+.ink-art::after { inset: -8% -6% 40% 46%; background: var(--color-primary-light); opacity: 0.22; transform: scaleX(-1) rotate(4deg); }
+.ink-art__deco { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.ink-art__swoosh { fill: #9a7440; opacity: 0.85; }
+.ink-art__bamboo .bb-stem, .ink-art__bamboo .bb-leaves path, .ink-art__bamboo .bb-stalk { fill: var(--color-primary); }
+.ink-art__bamboo .bb-joints { fill: none; stroke: #fff; stroke-linecap: round; }
+.ink-art__bamboo .bb-grow, .ink-art__bamboo .bb-rise, .ink-art__bamboo .bb-branch, .ink-art__bamboo .bb-leaves path { transform-box: fill-box; }
+.ink-art__bamboo .bb-grow { transform-origin: center; }
+.ink-art__bamboo .bb-rise { transform-origin: 50% 100%; }
+.ink-art__splat { fill: #9a7440; opacity: 0.7; }
+.ink-art__deco path, .ink-art__deco circle { transform-box: fill-box; transform-origin: center; }
+
+/* Hiện lần lượt khi cuộn tới (script.js thêm .is-pending rồi .is-in):
+   màu nước -> ảnh -> thân tre mọc lên, cành vươn ra, lá nhú dần -> nét cọ gạch chân -> chấm mực */
+.ink-art.is-pending:not(.is-in)::before { opacity: 0; transform: scale(0.88); }
+.ink-art.is-pending:not(.is-in)::after { opacity: 0; transform: scaleX(-1) rotate(4deg) scale(0.88); }
+.ink-art.is-pending:not(.is-in) > img { opacity: 0; transform: scale(1.04); }
+.ink-art.is-pending:not(.is-in) .bb-rise { transform: scaleY(0); }
+.ink-art.is-pending:not(.is-in) .bb-grow { transform: scale(0); }
+.ink-art.is-pending:not(.is-in) .bb-leaves path { opacity: 0; transform: scale(0.2) rotate(-20deg); }
+.ink-art.is-pending:not(.is-in) .ink-art__line { clip-path: inset(-30% -30% -30% 100%); }
+.ink-art.is-pending:not(.is-in) .ink-art__splat circle { opacity: 0; transform: scale(0); }
+.ink-art__line { clip-path: inset(-30% -30% -30% 0%); }
+.ink-art.is-in::before { transition: opacity 1s ease, transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1); }
+.ink-art.is-in::after { transition: opacity 1s ease 0.25s, transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s; }
+.ink-art.is-in > img { transition: opacity 1s ease 0.6s, transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s; }
+.ink-art.is-in .bb-rise { transition: transform 0.8s ease-out 1.3s; }
+.ink-art.is-in .bb-grow { transition: transform 1s ease-out 1.6s; }
+/* mỗi lá có độ trễ riêng (--d, ghi inline: lá gần gốc nhú trước) */
+.ink-art.is-in .bb-leaves path { transition: opacity 0.5s ease var(--d), transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) var(--d); }
+.ink-art.is-in .ink-art__line { transition: clip-path 1.1s cubic-bezier(0.45, 0.05, 0.25, 1) 2.4s; }
+.ink-art.is-in .ink-art__splat circle { transition: opacity 0.3s ease 3.4s, transform 0.4s cubic-bezier(0.34, 1.6, 0.64, 1) 3.4s; }
+.ink-art.is-in .ink-art__splat circle:nth-child(even) { transition-delay: 3.52s; }
+/* lá rung quanh cuống, cả cành đung đưa chậm từ gốc như có gió; thân tre đứng yên */
+.ink-art__bamboo .bb-leaves path { animation: leaf-sway 3.2s ease-in-out infinite alternate; }
+.ink-art__bamboo .bb-leaves path:nth-child(2n) { animation-duration: 2.6s; animation-delay: -1.1s; }
+.ink-art__bamboo .bb-leaves path:nth-child(3n) { animation-duration: 3.8s; animation-delay: -2.3s; }
+.ink-art__bamboo .bb-leaves path:nth-child(5n) { animation-duration: 2.9s; animation-delay: -0.6s; }
+.ink-art__bamboo .bb-branch { animation: branch-sway 7s ease-in-out infinite; }
+@keyframes leaf-sway { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes branch-sway {
+  0%, 100% { rotate: -1.5deg; }
+  30% { rotate: 2.6deg; }
+  45% { rotate: 1.4deg; }
+  70% { rotate: 3.2deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-art__bamboo .bb-branch, .ink-art__bamboo .bb-leaves path { animation: none; }
+}
+@media (max-width: 1024px) {
+  .intro-video.ink-art {
+    width: 88%;
+    max-width: 560px;
+    margin: 0 auto 0 9%;
+  }
+}
+
 .intro-lead {
   color: var(--color-text-muted);
   margin: 0 0 32px;
   transition:
     opacity 0.6s ease,
     transform 0.6s ease;
+}
+
+/* đoạn giới thiệu nằm trên, dưới tiêu đề section; ảnh + 4 thẻ ở hàng dưới */
+.intro-lead--top {
+  max-width: 880px;
+  margin: 16px auto 0;
+  text-align: center;
 }
 
 .feature-grid {

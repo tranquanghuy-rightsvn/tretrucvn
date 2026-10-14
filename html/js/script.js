@@ -424,3 +424,31 @@ if (lightbox && lightboxImg && lightboxCaption && lightboxClose) {
     }
   });
 }
+
+// Ảnh nhà tre vẽ mực (section "Về Tre Việt Building" trang chủ): các lớp hiện lần lượt khi cuộn tới (xem style.css).
+// Ẩn trước bằng .is-pending chỉ khi có JS và không bật giảm chuyển động.
+document.querySelectorAll(".ink-art").forEach((art) => {
+  if (
+    !("IntersectionObserver" in window) ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) return;
+
+  art.classList.add("is-pending");
+  const show = () => {
+    art.classList.add("is-in");
+    io.disconnect();
+    window.removeEventListener("scroll", passed);
+  };
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) show();
+    },
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.3 }
+  );
+  // Nhảy trang (neo, khôi phục vị trí cuộn) có thể bỏ qua giao cắt: đã qua nửa màn hình thì hiện luôn.
+  const passed = () => {
+    if (art.getBoundingClientRect().top < window.innerHeight * 0.5) show();
+  };
+  io.observe(art);
+  window.addEventListener("scroll", passed, { passive: true });
+});
