@@ -426,29 +426,31 @@ if (lightbox && lightboxImg && lightboxCaption && lightboxClose) {
 }
 
 // Ảnh nhà tre vẽ mực (section "Về Tre Việt Building" trang chủ): các lớp hiện lần lượt khi cuộn tới (xem style.css).
+// Chỉ bắt đầu khi đã cuộn tới giữa ảnh (nửa trên ảnh đã vào màn hình), không phải khi vừa thấy mép trên.
 // Ẩn trước bằng .is-pending chỉ khi có JS và không bật giảm chuyển động.
 document.querySelectorAll(".ink-art").forEach((art) => {
-  if (
-    !("IntersectionObserver" in window) ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   art.classList.add("is-pending");
-  const show = () => {
-    art.classList.add("is-in");
-    io.disconnect();
-    window.removeEventListener("scroll", passed);
+  let ticking = false;
+  const check = () => {
+    ticking = false;
+    // cũng đúng khi nhảy trang (neo, khôi phục vị trí cuộn) đã cuộn qua ảnh
+    const rect = art.getBoundingClientRect();
+    if (rect.top + rect.height / 2 <= window.innerHeight) {
+      art.classList.add("is-in");
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    }
   };
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) show();
-    },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.3 }
-  );
-  // Nhảy trang (neo, khôi phục vị trí cuộn) có thể bỏ qua giao cắt: đã qua nửa màn hình thì hiện luôn.
-  const passed = () => {
-    if (art.getBoundingClientRect().top < window.innerHeight * 0.5) show();
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(check);
+    }
   };
-  io.observe(art);
-  window.addEventListener("scroll", passed, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  window.addEventListener("load", check);
+  check();
 });
