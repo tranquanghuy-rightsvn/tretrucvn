@@ -454,3 +454,12 @@ document.querySelectorAll(".ink-art").forEach((art) => {
   window.addEventListener("load", check);
   check();
 });
+
+// Tạm dừng các chuyển động lặp (tre đung đưa, hoa lắc / "thở") khi ảnh nằm ngoài màn hình — đỡ tốn CPU/pin trên điện thoại (xem "Performance" trong style.css).
+if ("IntersectionObserver" in window) {
+  document.querySelectorAll(".ink-art").forEach((art) => {
+    new IntersectionObserver((entries) => {
+      art.classList.toggle("is-offscreen", !entries[0].isIntersecting);
+    }, { rootMargin: "80px 0px" }).observe(art);
+  });
+}

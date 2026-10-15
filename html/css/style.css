@@ -1174,6 +1174,29 @@ ul {
 @media (prefers-reduced-motion: reduce) {
   .ink-art__flower .fl-head, .ink-art__flower .fl-petal { animation: none; }
 }
+/* Performance (phones especially): the idle sway / breathe loops only run while the painting is on screen
+   (JS toggles .is-offscreen), phones keep just the bamboo and the large flower moving, and the two decorative
+   SVGs get their own layer so each frame repaints only them, not the photo underneath. */
+.ink-art__bamboo, .ink-art__flower { will-change: transform; }
+.ink-art.is-offscreen .bb-branch, .ink-art.is-offscreen .bb-leaves path, .ink-art.is-offscreen .fl-head, .ink-art.is-offscreen .fl-petal { animation-play-state: paused; }
+@media (max-width: 767px) {
+  .ink-art__flower .fl-petal, .ink-art__flower .fl-head--small, .ink-art__flower .fl-head--bg.fl-head--sway { animation: none; }
+}
+/* GPU sway: the branch and the two original flowers each sit in their own <svg> layer and sway by rotating the whole
+   layer (compositor only, no repaint), pivoting where the branch meets the stalk / at each flower's centre.
+   The old in-SVG sways of these three are switched off. */
+.ink-art__bamboo .bb-branch, .ink-art__flower--main .fl-head, .ink-art__flower--small .fl-head { animation: none; }
+.ink-art__branch { transform-origin: -1.41% 44.15%; animation: branch-sway 7s ease-in-out infinite; }
+.ink-art__flower--main { transform-origin: 94.69% 88.75%; animation: flower-sway 6s ease-in-out infinite; }
+.ink-art__flower--small { transform-origin: 100.31% 77.08%; animation: flower-sway 5s ease-in-out -2s infinite; }
+.ink-art.is-offscreen .ink-art__branch, .ink-art.is-offscreen .ink-art__flower--main, .ink-art.is-offscreen .ink-art__flower--small { animation-play-state: paused; }
+@media (max-width: 767px) {
+  /* phones: only the GPU layer sways keep moving; the in-SVG loops (leaf flutter, petal breathe, background sways) stop */
+  .ink-art__bamboo .bb-leaves path { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ink-art__branch, .ink-art__flower--main, .ink-art__flower--small { animation: none; }
+}
 @media (max-width: 1024px) {
   .intro-video.ink-art {
     width: 88%;
