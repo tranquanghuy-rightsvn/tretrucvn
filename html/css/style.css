@@ -1197,6 +1197,21 @@ ul {
 @media (prefers-reduced-motion: reduce) {
   .ink-art__branch, .ink-art__flower--main, .ink-art__flower--small { animation: none; }
 }
+@media (max-width: 767px) {
+  /* Phones: the bloom cluster opens as GPU waves — each <svg> layer scales up and fades in from the corner (leaves,
+     then the corner, the middle, the tips; the two big flowers from their own centres) — instead of ~300 petal / heart /
+     leaf / bud transitions inside the SVG, which repaint the whole cluster every frame. Every other leaf is dropped. */
+  .ink-art__flower .fl-petal, .ink-art__flower .fl-heart, .ink-art__flower .fl-leaf, .ink-art__flower .fl-bud { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .ink-art__flower .fl-leaf--extra { display: none; }
+  .fl-layer { transform-origin: 98.44% 95.42%; }
+  .ink-art__flower { transition: opacity .7s ease var(--wd), scale 1s cubic-bezier(.34, 1.25, .64, 1) var(--wd); }
+  .ink-art.is-pending:not(.is-in) .ink-art__flower { opacity: 0; scale: .5; }
+  .fl-layer--leaves { --wd: 2.85s; }
+  .fl-layer--w1 { --wd: 3.05s; }
+  .ink-art__flower--main { --wd: 3.2s; }
+  .fl-layer--w2, .ink-art__flower--small { --wd: 3.35s; }
+  .fl-layer--w3 { --wd: 3.65s; }
+}
 @media (max-width: 1024px) {
   .intro-video.ink-art {
     width: 88%;
