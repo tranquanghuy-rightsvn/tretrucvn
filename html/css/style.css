@@ -1139,6 +1139,41 @@ ul {
 @media (prefers-reduced-motion: reduce) {
   .ink-art__bamboo .bb-branch, .ink-art__bamboo .bb-leaves path { animation: none; }
 }
+/* Cụm hoa chữ L ở góc dưới bên phải ảnh — đồng bộ từ Blooming Passage, chỉ khác màu tre */
+/* Flowers (bottom right) open straight after the bamboo leaves finish (~3s), so the sequence flows without a pause: petals open one by one from their base (--d set inline),
+   then the orange heart and stamens pop; afterwards the head sways gently and the petals breathe */
+.intro-video .ink-art__line { display: none; } /* vạch mực nâu dưới ảnh đã bỏ: cụm hoa thay thế (đồng bộ Blooming Passage, 15/10/2026) */
+.ink-art__flower { transform: translateY(10px); } /* the whole bloom cluster sits 10px lower */
+.ink-art__flower .fl-petal path { fill: #fff; stroke: #d8c3a5; stroke-width: 1.1; stroke-linejoin: round; }
+.ink-art__flower .fl-petal .fl-vein { fill: none; stroke: #eadbc6; stroke-width: 1; stroke-linecap: round; }
+.ink-art__flower .fl-core { fill: #e8892b; }
+.ink-art__flower .fl-stamens path { fill: none; stroke: #e07b22; stroke-width: 1.1; stroke-linecap: round; }
+.ink-art__flower .fl-stamens circle { fill: #f2a23a; }
+.ink-art__flower .fl-head, .ink-art__flower .fl-petal, .ink-art__flower .fl-heart { transform-box: fill-box; }
+.ink-art__flower .fl-head, .ink-art__flower .fl-heart { transform-origin: center; }
+.ink-art__flower .fl-petal { transform-origin: 50% 100%; }
+.ink-art.is-pending:not(.is-in) .fl-petal { opacity: 0; transform: scale(.15) rotate(-30deg); }
+.ink-art.is-pending:not(.is-in) .fl-heart { opacity: 0; transform: scale(0); }
+.ink-art.is-in .fl-petal { transition: opacity .5s ease var(--d), transform .9s cubic-bezier(.34, 1.45, .64, 1) var(--d); }
+.ink-art.is-in .fl-heart { transition: opacity .3s ease var(--d), transform .6s cubic-bezier(.34, 1.8, .64, 1) var(--d); }
+.ink-art__flower .fl-head { animation: flower-sway 6s ease-in-out infinite; }
+.ink-art__flower .fl-head--small { animation-duration: 5s; animation-delay: -2s; }
+.ink-art__flower .fl-petal { animation: petal-breathe 4s ease-in-out infinite alternate; }
+@keyframes flower-sway { 0%, 100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+/* The bloom cluster (a mirrored L in the corner, 1/3 as tall as it is long): leaves unfurl first, then the flowers
+   open in a wave from the corner outwards (--d inline), buds swell last. Only a few background flowers sway. */
+.ink-art__flower .fl-leaf { fill: #5f7d34; }
+.ink-art__flower .fl-leaf--light { fill: #87a250; }
+.ink-art__flower .fl-leaf, .ink-art__flower .fl-bud { transform-box: fill-box; transform-origin: 50% 100%; }
+.ink-art.is-pending:not(.is-in) .fl-leaf, .ink-art.is-pending:not(.is-in) .fl-bud { opacity: 0; transform: scale(0); }
+.ink-art.is-in .fl-leaf { transition: opacity .4s ease var(--d), transform .8s cubic-bezier(.34, 1.3, .64, 1) var(--d); }
+.ink-art.is-in .fl-bud { transition: opacity .4s ease var(--d), transform .7s cubic-bezier(.34, 1.6, .64, 1) var(--d); }
+.ink-art__flower .fl-head--bg, .ink-art__flower .fl-head--bg .fl-petal { animation: none; }
+.ink-art__flower .fl-head--bg.fl-head--sway { animation: flower-sway 7s ease-in-out infinite; }
+@keyframes petal-breathe { from { scale: 1; } to { scale: 1.05; } }
+@media (prefers-reduced-motion: reduce) {
+  .ink-art__flower .fl-head, .ink-art__flower .fl-petal { animation: none; }
+}
 @media (max-width: 1024px) {
   .intro-video.ink-art {
     width: 88%;
