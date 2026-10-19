@@ -58,3 +58,11 @@
      - Trang tĩnh: `/chung-toi-la-ai/`, `/nang-luc-san-xuat/` (dòng "liên hệ trực tiếp qua hotline"), `/thanh-toan/` (thông tin chuyển khoản)
    - Build lại: 117 file HTML khác bản trước, khác biệt duy nhất là số điện thoại (kể cả `search-index.json`)
    - Toàn site giờ chỉ còn 1 số điện thoại: 0876 915 999 (khớp header, footer, schema, nút gọi nhanh)
+8. **Ngày 8 (19/10/2026)**: Đổi năm 2025 → 2026 (Đại ca chốt đổi toàn bộ một lượt, không làm từng URL)
+   - Đổi 20 chỗ trong 7 bài + 2 file danh sách (`data/tin-tuc.json`, `data/du-an.json`): title, H1, tiêu đề SEO, tiêu đề mục, alt ảnh, chữ trong bài
+     - `/du-an/bao-gia-dich-vu-thi-cong-nha-tre/` (trang top): title/H1 "Báo giá dịch vụ thi công nhà tre tại Tre Việt Building 2026" + 6 alt ảnh
+     - `/tin-tuc/top-5-xu-huong-trang-tri-op-tuong-tre-truc-dep-gia-re-2025/`: title/H1 + H2 "5 xu hướng … hot 2026"
+     - `/tin-tuc/vi-sao-op-tre-truc-…-2025/`: title/H1 + H2 "Lưu ý quan trọng khi thi công ốp trần tre trúc 2026"
+     - Chữ trong bài: `/du-an/bao-gia-thi-cong-op-tran-tre-truc-tron-goi-tai-tphcm/` ("(2026)"), `/du-an/op-truc/` (H2 + chú thích ảnh), `/du-an/thi-cong-tre-truc/` (chữ link), `/tin-tuc/bao-gia-thi-cong-nha-tre-truc/`
+   - KHÔNG đổi: slug/URL (2 bài vẫn có `-2025` trong URL), tên file ảnh, ngày đăng/sửa (để không đảo thứ tự bài ở trang chủ/danh sách), mốc lịch sử "01/07/2025", và "Thi công năm 2025" trong bài smart content nhà tre chòi tre (năm công trình Amiana Cam Ranh thật)
+   - Build lại: 11 file khác bản trước (7 trang bài, trang danh sách tin-tuc 3–4, du-an 2, search-index), khác biệt duy nhất là năm

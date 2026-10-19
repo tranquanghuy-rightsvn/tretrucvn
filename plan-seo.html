@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Kế hoạch SEO tretruc.com.vn</title>
+<style>
+:root{--bg:#faf8f3;--fg:#23261f;--mut:#667060;--card:#fff;--line:#e3dfd3;--acc:#3d6b35;--code:#f1eee5;
+  --done:#2f7d32;--done-bg:#e6f2e3;--todo:#8a5a00;--todo-bg:#fbefd9;--owner:#1f5f99;--owner-bg:#e2eef8;--wait:#6b5b8a;--wait-bg:#ece7f4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161814;--fg:#e6e8e1;--mut:#9aa392;--card:#1e211b;--line:#33382e;--acc:#8fc27f;--code:#262a22;
+  --done:#8fd18a;--done-bg:#1f3320;--todo:#f0bd62;--todo-bg:#3a2e17;--owner:#86bdf0;--owner-bg:#1a2b3b;--wait:#c3b2e6;--wait-bg:#2b2538}}
+:root[data-theme="dark"]{--bg:#161814;--fg:#e6e8e1;--mut:#9aa392;--card:#1e211b;--line:#33382e;--acc:#8fc27f;--code:#262a22;
+  --done:#8fd18a;--done-bg:#1f3320;--todo:#f0bd62;--todo-bg:#3a2e17;--owner:#86bdf0;--owner-bg:#1a2b3b;--wait:#c3b2e6;--wait-bg:#2b2538}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:28px;line-height:1.25;margin:0 0 6px}
+h2{font-size:20px;margin:40px 0 14px;padding-top:12px;border-top:1px solid var(--line)}
+.sub{color:var(--mut);margin:0 0 22px}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.86em;word-break:break-word}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:26px;line-height:1.1}
+.stat span{font-size:13px;color:var(--mut)}
+.stat.done b{color:var(--done)}.stat.todo b{color:var(--todo)}.stat.owner b{color:var(--owner)}.stat.wait b{color:var(--wait)}
+.progress{height:8px;border-radius:99px;background:var(--code);overflow:hidden;display:flex;margin-bottom:22px}
+.progress i{display:block;height:100%}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.filters button{font:inherit;font-size:13px;padding:5px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc);font-weight:600}
+.legend{font-size:13px;color:var(--mut);margin:0 0 6px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.day-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--code)}
+.day-h h3{margin:0;font-size:16px}
+.day-h .when{font-size:13px;color:var(--mut)}
+.day-h .prio{margin-left:auto;font-size:12px;font-weight:600;color:var(--mut)}
+.day-note{padding:10px 16px 0;font-size:13.5px;color:var(--mut);margin:0}
+ul.tasks{list-style:none;margin:0;padding:6px 0}
+ul.tasks li{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:8px 16px;border-top:1px dashed var(--line)}
+ul.tasks li:first-child{border-top:0}
+.st{align-self:start;justify-self:start;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.st.done{color:var(--done);background:var(--done-bg)}
+.st.todo{color:var(--todo);background:var(--todo-bg)}
+.st.owner{color:var(--owner);background:var(--owner-bg)}
+.st.wait{color:var(--wait);background:var(--wait-bg)}
+.who{font-size:12.5px;color:var(--mut)}
+.hidden{display:none}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}ul.tasks li{grid-template-columns:1fr;gap:4px}h1{font-size:23px}.day-h .prio{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kế hoạch SEO tretruc.com.vn</h1>
+  <p class="sub">Cập nhật 19/10/2026 · Theo <code>bao-cao-seo.md</code> (bản 2) và <code>tien-do-seo.md</code> · Nguyên tắc: site đang top nên không đổi title, H1 hay URL của trang top khi Đại ca chưa duyệt.</p>
+
+  <div class="stats" id="stats"></div>
+  <div class="progress" id="progress"></div>
+
+  <p class="legend">Trạng thái:
+    <span class="st done">Đã xong</span>
+    <span class="st todo">Chưa làm</span> (em làm được ngay)
+    <span class="st owner">Cần Đại ca</span> (thao tác hoặc duyệt)
+    <span class="st wait">Chờ dữ liệu</span> (số liệu GSC, giá, ảnh thật)
+  </p>
+  <div class="filters" role="group" aria-label="Lọc theo trạng thái">
+    <button data-f="all" aria-pressed="true">Tất cả</button>
+    <button data-f="done" aria-pressed="false">Đã xong</button>
+    <button data-f="todo" aria-pressed="false">Chưa làm</button>
+    <button data-f="owner" aria-pressed="false">Cần Đại ca</button>
+    <button data-f="wait" aria-pressed="false">Chờ dữ liệu</button>
+  </div>
+
+  <h2>Đã làm (ngày 1–8)</h2>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 1 · Cài công cụ đo</h3><span class="when">trước 26/09/2026</span><span class="prio">P0</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Cài Google Analytics (GA4 <code>G-VMGJXQRQ33</code>) cho mọi trang công khai</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Xác minh Google Search Console</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 2 · Sửa lỗi nền</h3><span class="when">26/09/2026</span><span class="prio">P0</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Title: bỏ tên thương hiệu lặp 2 lần, sửa "Cây TreTầm Vông", bỏ viết hoa toàn bộ</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Meta description ≤ 160 ký tự, cắt ở cuối câu; bài TP.HCM trước bị trống nay đã có</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Schema tác giả bài viết: <code>Person</code> → <code>Organization</code></div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Sửa link hỏng (<code>/hoa-qua/</code>, link sai trong bài tre luồng); link menu/footer <code>cua-hang</code> → <code>cua-hang/</code></div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Thêm trang 404 + 301 cho 5 URL cũ mức tin cậy cao</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Sửa ảnh vỡ, slider tin mới ở trang chủ, giỏ hàng, chỉ mục tìm kiếm tự sinh</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 3 · Lỗi nền nhỏ</h3><span class="when">27/09/2026</span><span class="prio">P0</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Link bọc cả đoạn văn ở trang thi công lợp mái lá guộc: chỉ giữ link ở tên công ty, số điện thoại thành link <code>tel:</code></div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Thay 3 số điện thoại lạ trong 3 bài cũ bằng hotline chính</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 4 · Danh mục sản phẩm rỗng</h3><span class="when">28/09/2026</span><span class="prio">P0</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Gán lại danh mục cho 11 sản phẩm; <code>/thi-cong-tre-truc/</code> và <code>/tre-truc-trang-tri/</code> đã có sản phẩm</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Sửa CMS để lưu bài/sản phẩm cũ không làm hỏng ảnh và nội dung</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 5 · Làm lại CMS</h3><span class="when">30/09/2026</span><span class="prio">Nền tảng</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Nội dung và ảnh lưu trong git; chuyển 120 trang cũ vào <code>data/</code>, giữ nguyên văn title, mô tả, H1, schema</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>CMS có ô Tiêu đề SEO và Mô tả SEO riêng (mục "field meta_description" trong báo cáo)</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Bật giá gốc + nhãn giảm giá trên thẻ sản phẩm (<code>SHOW_SALE_ON_CARDS</code>), đang chờ duyệt</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 6 · Kỹ thuật, schema, ảnh</h3><span class="when">19/10/2026</span><span class="prio">P0 / P4</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>1.183 link "Trang chủ" từ <code>index.html</code> đổi thành <code>/</code> (trước đều qua redirect 307)</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Gỡ link Facebook/masothue bọc cả khối liên hệ ở 5 trang</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Schema công ty (<code>HomeAndConstructionBusiness</code>, khu vực phục vụ, mã số thuế, sameAs); bỏ giá 0 ở 4 sản phẩm "Liên hệ"; schema 3 trang danh mục; ItemList tự sinh</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>Tự điền alt cho 326 ảnh thiếu alt; <code>fetchpriority="high"</code> cho ảnh cover</div></li>
+      <li><span class="st done" data-s="done">Đã xong</span><div>301 cho 3 URL cũ đang 404 (đã kiểm trên live)</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 7 · Thống nhất hotline</h3><span class="when">19/10/2026</span><span class="prio">P0</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Thay 093.123.5757 bằng 087.6915.999 ở 172 chỗ; toàn site còn 1 số điện thoại (commit <code>ad5fd1a</code>, đã deploy)</div></li>
+    </ul>
+  </section>
+
+    <section class="day">
+    <div class="day-h"><h3>Ngày 8 · Đổi năm 2025 → 2026</h3><span class="when">19/10/2026</span><span class="prio">P1</span></div>
+    <ul class="tasks">
+      <li><span class="st done" data-s="done">Đã xong</span><div>Đổi 20 chỗ ở 7 bài: title, H1, tiêu đề mục, alt ảnh, chữ trong bài (gồm trang top báo giá nhà tre và 2 bài có "2025" trong tiêu đề). Giữ nguyên URL, tên ảnh, ngày đăng và năm công trình thật</div></li>
+    </ul>
+  </section>
+
+  <h2>Việc tiếp theo (ngày 9 trở đi)</h2>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 9 · Đo lead</h3><span class="when">làm được ngay</span><span class="prio">P0 · quan trọng nhất</span></div>
+    <p class="day-note">GA4 đã cài nhưng trong mã chưa có event nào, nên chưa biết khách gọi, nhắn Zalo hay gửi form từ trang nào. Số liệu lead chỉ bắt đầu có từ ngày cài.</p>
+    <ul class="tasks">
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>Gắn event <code>click_call</code> (bấm link <code>tel:</code>), <code>click_zalo</code> (nút Zalo), <code>generate_lead</code> (gửi form liên hệ / đặt hàng thành công) <div class="who">Em làm</div></div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Trong GA4 đánh dấu 3 event trên là "key event"; liên kết GA4 với Search Console <div class="who">Đại ca, khoảng 5 phút</div></div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Cloudflare → SSL/TLS → bật <b>Always Use HTTPS</b> (hiện <code>http://tretruc.com.vn/</code> vẫn trả 200) <div class="who">Đại ca, trong dashboard</div></div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 10 · Lấy số liệu Search Console</h3><span class="when">sau ngày 9</span><span class="prio">P0</span></div>
+    <p class="day-note">Các việc đụng tới trang đang top (ngày 11–14, 18–19) chờ bảng này.</p>
+    <ul class="tasks">
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Xuất GSC 16 tháng: bảng Query × Page (click, hiển thị, CTR, vị trí), báo cáo Liên kết, danh sách trang 404 và "Trang có chuyển hướng" → gửi em</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Từ danh sách 404 của GSC: thêm 301 cho URL cũ có trang tương đương (vd <code>/du-an-nha-tre</code>), còn lại để 404 <div class="who">Em làm</div></div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 11 · Cụm "báo giá thi công nhà tre"</h3><span class="when">sau khi có GSC</span><span class="prio">P1</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Trang <code>/tin-tuc/bao-gia-thi-cong-nha-tre-truc/</code> đang dùng chính từ khóa của mình ở H2 làm 3 link sang trang <code>…-chuyen-nghiep/</code>. Xem GSC trang nào mạnh hơn rồi gộp/bỏ link theo báo cáo mục 4.6</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Đổi trang <code>…-chuyen-nghiep/</code> thành "Báo giá thi công nhà tre tại TP.HCM": đổi đồng bộ một lần title, H1, nội dung, anchor trỏ vào <div class="who">Em soạn, Đại ca duyệt</div></div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 12 · Link trỏ vào 6 trang đang top</h3><span class="when">sau ngày 11</span><span class="prio">P1 · đòn bẩy lớn nhất</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Thêm link từ các bài cùng cụm vào 6 trang top theo bảng mục 4.4 (anchor ngắn, đúng nghĩa)</div></li>
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>Trang báo giá ốp trần TP.HCM đang có 0 link ra: thêm link tới trang dịch vụ ốp tre trúc, tre tầm vông, hướng dẫn làm trần</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Sửa anchor sai ngữ cảnh: link vào trang ốp trần dùng chữ "Mua nguyên liệu tre trúc khô…", link vào dự án ốp tre dùng chữ "Địa chỉ mua tre luồng…" (giữ link, chỉ đổi chữ)</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 13 · Liên kết nội bộ ở template</h3><span class="when">sau ngày 12</span><span class="prio">P1</span></div>
+    <p class="day-note">Đổi cùng lúc khoảng 126 trang chi tiết, nên em làm ở bản xem trước cho Đại ca duyệt.</p>
+    <ul class="tasks">
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Khối "Bài viết liên quan" cuối bài theo cụm chủ đề, ưu tiên trang báo giá</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Sidebar "Bài viết mới" đang cố định 5 bài cũ trên ~88 trang → đổi thành "Báo giá nổi bật" + "Bài cùng chủ đề"</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Khối CTA cuối bài theo cụm ("Xem báo giá thi công nhà tre trúc →", "Xem bảng giá nguyên liệu →")</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 14 · Title trùng nhau</h3><span class="when">sau khi có GSC</span><span class="prio">P1</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Tách title các cặp trùng: 2 trang "Cây tre luồng"; 2 trang "mái lá guộc" (nguyên liệu và thi công); dự án và dịch vụ "ốp tre trúc trang trí"</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 15–17 · Trang báo giá có số liệu thật</h3><span class="when">khi có giá + ảnh công trình</span><span class="prio">P2</span></div>
+    <p class="day-note">Mỗi trang theo checklist mục 3: giá theo đơn vị, quy cách, yếu tố làm giá đổi, thời gian, bảo hành, ảnh công trình có địa điểm, case study, CTA.</p>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Bảng giá nguyên liệu tre trúc: viết lại <code>/du-an/bao-gia-nguyen-lieu-tre-truc-trang-tri/</code> (hiện chỉ 61 chữ)</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Nâng cấp pillar "Báo giá thi công nhà tre trúc" và trang báo giá TP.HCM</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Giá tre tầm vông theo quy cách; báo giá ốp trần / ốp tường; bungalow, chòi, mái lá</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Trang <code>/san-pham/bao-gia-cay-truc-da-xu-lu/</code>: bổ sung nội dung (mô tả hiện 25 ký tự)</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 18 · Gộp nội dung trùng</h3><span class="when">sau khi có GSC</span><span class="prio">P3</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>2 bài quy trình mái lá guột giống nhau 100% → giữ 1, 301 bài còn lại</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>3 cặp trùng ≥ 85% (nhà tre, nhà tre mái lá, tầm vông): gộp + 301 hoặc viết lại cho khác intent</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Gộp 2 bài kỹ thuật trồng tầm vông</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 19 · Cụm mành / rèm tre trúc (~40 bài)</h3><span class="when">sau khi có GSC</span><span class="prio">P3</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>12 bài rèm che nắng ngoài trời → 1–2 bài trụ cột; 6 bài giá mành → "Báo giá mành tre trúc TP.HCM"; bài có traffic thì giữ và thêm link về bài trụ cột</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 20–21 · Trang theo khu vực</h3><span class="when">khi có công trình thật theo tỉnh</span><span class="prio">P3</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Đồng Nai, Lâm Đồng (xưởng Phú Lâm, vùng nguyên liệu Đạ Tẻh) → TP.HCM; mỗi trang có công trình, ảnh, phí vận chuyển riêng</div></li>
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>Khánh Hòa: chờ có case study đủ mạnh</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 22 · Schema còn lại</h3><span class="when">làm được dần</span><span class="prio">P4</span></div>
+    <ul class="tasks">
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>5 trang dịch vụ (nhà tre, bungalow, chòi, ốp tre trúc, lợp mái lá): <code>Product</code> → <code>Service</code>, giá theo m² nếu có</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Gửi toạ độ văn phòng, giờ làm việc, link Google Business Profile để bổ sung vào schema công ty</div></li>
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>Dự án: thêm địa điểm công trình (<code>contentLocation</code>)</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngày 23 · Ảnh nặng</h3><span class="when">làm được ngay</span><span class="prio">P4</span></div>
+    <ul class="tasks">
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>76 ảnh &gt; 500 KB (61 file PNG, gồm cả ảnh cover/OG) → chuyển WebP, rộng ≤ 1.600 px</div></li>
+      <li><span class="st todo" data-s="todo">Chưa làm</span><div>Ảnh chia sẻ mạng xã hội (OG) chuẩn 1200×630 cho trang chính</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Ngoài website</h3><span class="when">sau khi on-page ổn</span><span class="prio">P4</span></div>
+    <ul class="tasks">
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Google Business Profile: hồ sơ văn phòng HCM; xưởng Đồng Nai chỉ làm hồ sơ có địa chỉ nếu có nhân viên tiếp khách và biển hiệu, không thì khai báo khu vực phục vụ</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Đăng ảnh công trình đều đặn, xin đánh giá thật từ khách</div></li>
+      <li><span class="st owner" data-s="owner">Cần Đại ca</span><div>Citation cùng tên–địa chỉ–SĐT (087.6915.999): Cốc Cốc Maps, Trang Vàng, Facebook, Zalo OA; link từ đối tác resort/nhà hàng đã thi công</div></li>
+    </ul>
+  </section>
+
+  <section class="day">
+    <div class="day-h"><h3>Hằng tháng</h3><span class="when">sau khi có số liệu</span><span class="prio">Theo dõi</span></div>
+    <ul class="tasks">
+      <li><span class="st wait" data-s="wait">Chờ dữ liệu</span><div>So với số liệu ban đầu: lead (gọi, Zalo, form), click/hiển thị cụm chính, vị trí 6 trang top, trang 404 mới, truy vấn có nhiều URL cùng hiện</div></li>
+    </ul>
+  </section>
+</div>
+<script>
+(function(){
+  var labels={done:"Đã xong",todo:"Chưa làm",owner:"Cần Đại ca",wait:"Chờ dữ liệu"};
+  var colors={done:"var(--done)",todo:"var(--todo)",owner:"var(--owner)",wait:"var(--wait)"};
+  var items=document.querySelectorAll("ul.tasks li");
+  var count={done:0,todo:0,owner:0,wait:0};
+  items.forEach(function(li){var s=li.querySelector(".st").dataset.s;li.dataset.s=s;count[s]++;});
+  var total=items.length,stats=document.getElementById("stats"),bar=document.getElementById("progress");
+  Object.keys(labels).forEach(function(k){
+    stats.insertAdjacentHTML("beforeend",'<div class="stat '+k+'"><b>'+count[k]+'</b><span>'+labels[k]+'</span></div>');
+    var i=document.createElement("i");i.style.width=(count[k]/total*100)+"%";i.style.background=colors[k];i.title=labels[k]+": "+count[k];bar.appendChild(i);
+  });
+  var btns=document.querySelectorAll(".filters button");
+  btns.forEach(function(b){b.addEventListener("click",function(){
+    var f=b.dataset.f;
+    btns.forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+    items.forEach(function(li){li.classList.toggle("hidden",f!=="all"&&li.dataset.s!==f);});
+    document.querySelectorAll("section.day").forEach(function(sec){
+      var vis=sec.querySelectorAll("ul.tasks li:not(.hidden)").length;
+      sec.classList.toggle("hidden",vis===0);
+    });
+  });});
+})();
+</script>
+</body>
+</html>
