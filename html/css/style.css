@@ -1193,6 +1193,14 @@ ul {
 @media (max-width: 767px) {
   /* phones: only the GPU layer sways keep moving; the in-SVG loops (leaf flutter, petal breathe, background sways) stop */
   .ink-art__bamboo .bb-leaves path { animation: none; }
+  /* phones, kept light: no petal-by-petal bloom and no flower sway; the whole bloom cluster just fades in once
+     (after the photo, while the bamboo grows). The bamboo keeps its full sequence and sway. */
+  .ink-art .ink-art__flower :is(.fl-petal, .fl-heart, .fl-leaf, .fl-bud) { opacity: 1; transform: none; transition: none; animation: none; }
+  .ink-art.is-pending:not(.is-in) .ink-art__flower :is(.fl-petal, .fl-heart, .fl-leaf, .fl-bud) { opacity: 1; transform: none; }
+  .ink-art__flower--main, .ink-art__flower--small { animation: none; will-change: auto; }
+  .ink-art__flower { will-change: auto; }
+  .ink-art.is-pending:not(.is-in) .ink-art__flower { opacity: 0; }
+  .ink-art.is-in .ink-art__flower { transition: opacity .9s ease 1.8s; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ink-art__branch, .ink-art__flower--main, .ink-art__flower--small { animation: none; }
