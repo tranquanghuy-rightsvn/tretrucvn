@@ -66,3 +66,4 @@
      - Chữ trong bài: `/du-an/bao-gia-thi-cong-op-tran-tre-truc-tron-goi-tai-tphcm/` ("(2026)"), `/du-an/op-truc/` (H2 + chú thích ảnh), `/du-an/thi-cong-tre-truc/` (chữ link), `/tin-tuc/bao-gia-thi-cong-nha-tre-truc/`
    - KHÔNG đổi: slug/URL (2 bài vẫn có `-2025` trong URL), tên file ảnh, ngày đăng/sửa (để không đảo thứ tự bài ở trang chủ/danh sách), mốc lịch sử "01/07/2025", và "Thi công năm 2025" trong bài smart content nhà tre chòi tre (năm công trình Amiana Cam Ranh thật)
    - Build lại: 11 file khác bản trước (7 trang bài, trang danh sách tin-tuc 3–4, du-an 2, search-index), khác biệt duy nhất là năm
+   - `_redirects`: 301 `/Tin tức/` → `/tin-tuc/` (live đang 404). Viết dạng mã hoá % (`/Tin%20t%E1%BB%A9c/`), kèm bản tách dấu NFD và bản chữ thường; đã thử bằng `wrangler dev` ở máy: cả 6 dạng trả 301 về `/tin-tuc/`

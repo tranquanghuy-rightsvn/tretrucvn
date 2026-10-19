@@ -20,3 +20,12 @@
 /san-pham/cay-tam-vong/ /san-pham/cay-tre-tam-vong-da-qua-xu-ly-so-1/ 301
 /kinh-nghiem/ky-thuat-cham-soc-cay-tre-tam-vong /tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong-tot-nhat/ 301
 /kinh-nghiem/ky-thuat-cham-soc-cay-tre-tam-vong/ /tin-tuc/ky-thuat-trong-va-cham-soc-cay-tam-vong-tot-nhat/ 301
+# 19/10/2026 — URL "/Tin tức/" (có dấu cách, có dấu tiếng Việt) -> /tin-tuc/. Viết dạng mã hoá %
+# vì _redirects tách cột bằng dấu cách. Gồm bản dựng sẵn (NFC, gõ thường) và bản tách dấu (NFD,
+# hay gặp khi gõ/copy trên macOS), cùng bản chữ thường "tin tức".
+/Tin%20t%E1%BB%A9c /tin-tuc/ 301
+/Tin%20t%E1%BB%A9c/ /tin-tuc/ 301
+/Tin%20tu%CC%9B%CC%81c /tin-tuc/ 301
+/Tin%20tu%CC%9B%CC%81c/ /tin-tuc/ 301
+/tin%20t%E1%BB%A9c /tin-tuc/ 301
+/tin%20t%E1%BB%A9c/ /tin-tuc/ 301
