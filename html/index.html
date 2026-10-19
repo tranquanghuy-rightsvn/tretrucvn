@@ -56,24 +56,40 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Tre Việt Building",
-        "url": "https://tretruc.com.vn/",
-        "logo": "https://tretruc.com.vn/images/logo.webp",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "917 Phạm Văn Đồng, Phường Linh Xuân",
-          "addressLocality": "Thành phố Hồ Chí Minh",
-          "addressCountry": "VN"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+84-87-6915-999",
-          "contactType": "customer service",
+        "@type": ["Organization", "HomeAndConstructionBusiness"],
+          "@id": "https://tretruc.com.vn/#org",
+          "name": "Tre Việt Building",
+          "legalName": "Công ty TNHH Tre Việt Building",
+          "taxID": "0317901412",
+          "url": "https://tretruc.com.vn/",
+          "logo": "https://tretruc.com.vn/images/logo.webp",
+          "image": "https://tretruc.com.vn/images/gallery/phong-massage-spa-tre-noi-that.webp",
+          "telephone": "+84876915999",
           "email": "treviet23@gmail.com",
-          "areaServed": "VN",
-          "availableLanguage": "vi"
-        }
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "917 Phạm Văn Đồng, Phường Linh Xuân",
+            "addressLocality": "Thành phố Hồ Chí Minh",
+            "addressCountry": "VN"
+          },
+          "areaServed": [
+            { "@type": "AdministrativeArea", "name": "Thành phố Hồ Chí Minh" },
+            { "@type": "AdministrativeArea", "name": "Lâm Đồng" },
+            { "@type": "AdministrativeArea", "name": "Đồng Nai" },
+            { "@type": "AdministrativeArea", "name": "Khánh Hòa" }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/tretructhienphuc.hcm/",
+            "https://www.masothue.com/0317901412-cong-ty-tnhh-tre-viet-building"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+84-87-6915-999",
+            "contactType": "customer service",
+            "email": "treviet23@gmail.com",
+            "areaServed": "VN",
+            "availableLanguage": "vi"
+          }
       }
     </script>
     <script type="application/ld+json">
@@ -111,7 +127,7 @@
           </button>
 
           <nav class="nav-menu nav-menu--left" aria-label="Menu chính bên trái">
-            <a href="index.html">Trang chủ</a>
+            <a href="./">Trang chủ</a>
             <div class="nav-item has-dropdown">
               <a href="#gioi-thieu" class="nav-dropdown-toggle">
                 Giới thiệu
@@ -207,7 +223,7 @@
 
       <!-- Menu mobile — 1 danh sách gộp, tránh chồng 2 dropdown -->
       <nav class="nav-menu-mobile" id="navMenuMobile" aria-label="Menu mobile">
-        <a href="index.html">Trang chủ</a>
+        <a href="./">Trang chủ</a>
         <div class="mobile-item has-submenu">
           <button
             class="mobile-submenu-toggle"

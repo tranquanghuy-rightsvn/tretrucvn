@@ -388,9 +388,9 @@ def rel(depth):
 
 
 NAV_LEFT_TPL = """          <nav class="nav-menu nav-menu--left" aria-label="Menu chính bên trái">
-            <a href="{r}index.html">Trang chủ</a>
+            <a href="{r}">Trang chủ</a>
             <div class="nav-item has-dropdown">
-              <a href="{r}index.html#gioi-thieu" class="nav-dropdown-toggle">
+              <a href="{r}#gioi-thieu" class="nav-dropdown-toggle">
                 Giới thiệu
                 <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="m6 9 6 6 6-6"></path>
@@ -428,7 +428,7 @@ HEADER_TPL = """    <header class="site-header">
 {nav_left}
         </div>
 
-        <a href="{r}index.html" class="brand" aria-label="Tre Việt Building - Trang chủ">
+        <a href="{r}" class="brand" aria-label="Tre Việt Building - Trang chủ">
           <img src="{r}images/logo.webp" alt="Tre Việt Building">
         </a>
 
@@ -459,7 +459,7 @@ HEADER_TPL = """    <header class="site-header">
       </div>
 
       <nav class="nav-menu-mobile" id="navMenuMobile" aria-label="Menu mobile">
-        <a href="{r}index.html">Trang chủ</a>
+        <a href="{r}">Trang chủ</a>
         <div class="mobile-item has-submenu">
           <button class="mobile-submenu-toggle" type="button" aria-expanded="false">
             Giới thiệu
@@ -530,8 +530,8 @@ FOOTER_TPL = """    <footer class="site-footer">
         <div class="footer-col">
           <h4>Danh mục</h4>
           <ul>
-            <li><a href="{r}index.html#top">Trang chủ</a></li>
-            <li><a href="{r}index.html#gioi-thieu">Giới thiệu</a></li>
+            <li><a href="{r}#top">Trang chủ</a></li>
+            <li><a href="{r}#gioi-thieu">Giới thiệu</a></li>
             <li><a href="{r}cua-hang/">Sản phẩm</a></li>
             <li><a href="{r}du-an/">Dự án</a></li>
             <li><a href="{r}tin-tuc/">Tin tức</a></li>
@@ -752,9 +752,54 @@ def product_grid_card(prod, r, with_categories=False):
 
 # ---------- content transform ----------
 
-def transform_content(content, section, slug):
+IMG_TAG_RE = re.compile(r"<img\b[^>]*>", re.S)
+HEADING_RE = re.compile(r"<h[2-4]\b[^>]*>(.*?)</h[2-4]\s*>", re.S)
+FIGURE_RE = re.compile(r"<figure\b[^>]*>(.*?)</figure\s*>", re.S)
+FIGCAPTION_RE = re.compile(r"<figcaption\b[^>]*>(.*?)</figcaption\s*>", re.S)
+ALT_RE = re.compile(r'\salt\s*=\s*"([^"]*)"', re.S)
+
+
+def plain_text(fragment):
+    return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
+
+
+def fill_missing_alts(content, title):
+    """Ảnh trong nội dung không có alt (hoặc alt rỗng) — 326 ảnh ở ~95 trang, phần lớn bài cũ:
+    alt = chú thích ảnh (figcaption) nếu có, không thì tiêu đề mục (h2–h4) ngay phía trên ảnh,
+    không thì tên bài. Chỉ thêm khi build, dữ liệu gốc giữ nguyên; ảnh đã có alt không đụng tới."""
+    captions = {}
+    for fm in FIGURE_RE.finditer(content):
+        cap = FIGCAPTION_RE.search(fm.group(1))
+        if cap and plain_text(cap.group(1)):
+            captions[fm.start(1)] = (fm.end(1), plain_text(cap.group(1)))
+    # bỏ số thứ tự đầu tiêu đề mục ("1. ", "2.3) ") — alt chỉ cần phần mô tả
+    headings = [(m.start(), re.sub(r"^\d+(\.\d+)*[.)]?\s+", "", plain_text(m.group(1))))
+                for m in HEADING_RE.finditer(content)]
+
+    def alt_for(pos):
+        for start, (end, cap) in captions.items():
+            if start <= pos < end:
+                return cap
+        above = [h for at, h in headings if at < pos and len(h) >= 15]
+        return above[-1] if above else title
+
+    def repl(m):
+        tag = m.group(0)
+        alt = ALT_RE.search(tag)
+        if alt and alt.group(1).strip():
+            return tag
+        text = esc(alt_for(m.start())[:125])
+        if alt:
+            return tag[:alt.start()] + ' alt="%s"' % text + tag[alt.end():]
+        return re.sub(r"^<img\b", '<img alt="%s"' % text, tag)
+
+    return IMG_TAG_RE.sub(repl, content)
+
+
+def transform_content(content, section, slug, title=""):
     # src tương đối images/<section>/<slug>/.. giữ nguyên (đã đúng theo cấu trúc site) — chỉ thêm lazy-load
     content = re.sub(r"<img (?!loading)", '<img loading="lazy" ', content)
+    content = fill_missing_alts(content, title)
     return "\n".join("                " + line if line.strip() else line for line in content.splitlines())
 
 
@@ -819,7 +864,7 @@ def build_detail_page(item, section, tpl, all_items, products):
         .replace("{{PROJECT_INFO}}", project_info_html(item.get("project_info")))
         .replace("{{DATE_PUBLISHED}}", item.get("created_at", ""))
         .replace("{{DATE_MODIFIED}}", item.get("updated_at", item.get("created_at", "")))
-        .replace("{{CONTENT}}", transform_content(item.get("content", ""), section, slug))
+        .replace("{{CONTENT}}", transform_content(item.get("content", ""), section, slug, item["title"]))
         .replace("{{SIDEBAR_POSTS}}", sidebar_post_items(related, "../"))
         .replace("{{SIDEBAR_PRODUCTS}}", sidebar_product_items(featured_products, r))
     )
@@ -1049,7 +1094,7 @@ LISTING_PAGE_TPL = """<!doctype html>
         <div class="page-header-overlay"></div>
         <div class="container">
           <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="{r}index.html">Trang chủ</a>
+            <a href="{r}">Trang chủ</a>
             <span>/</span>
             <span aria-current="page">{label}</span>{breadcrumb_extra}
           </nav>
@@ -1117,6 +1162,15 @@ LISTING_PAGE_TPL = """<!doctype html>
 
 # ---------- sản phẩm (san-pham) ----------
 
+def offers_jsonld(url, price):
+    """Offer trong JSON-LD Product — chỉ khi có giá thật. Giá 0 = "Giá bán: Liên hệ" trên trang;
+    khai báo "price": "0" thì Google có thể hiện sản phẩm là miễn phí / 0 ₫ trên kết quả tìm kiếm."""
+    if not price:
+        return ""
+    return (',"offers":{"@type":"Offer","url":"%s","priceCurrency":"VND","price":"%d",'
+            '"availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition"}' % (url, int(price)))
+
+
 def build_product_detail(prod, all_products):
     slug = prod["slug"]
     category = prod.get("category") or CATEGORY_SLUGS[0]
@@ -1171,8 +1225,8 @@ def build_product_detail(prod, all_products):
         .replace("{{GALLERY_MAIN_SRC}}", cover_src)
         .replace("{{GALLERY_THUMBS}}", thumbs)
         .replace("{{PRICE_DISPLAY}}", price_detail_html(prod))
-        .replace("{{PRICE_JSONLD}}", str(int(price) if price else 0))
-        .replace("{{CONTENT}}", content)
+        .replace("{{OFFERS_JSONLD}}", offers_jsonld(url, price))
+        .replace("{{CONTENT}}", fill_missing_alts(content, prod["title"]))
         .replace("{{RELATED_PRODUCTS}}", prod.get("legacy_related_html") or related_html)
     )
     out = HTML / "san-pham" / slug / "index.html"
@@ -1207,8 +1261,31 @@ def patch_product_grid(path, products, with_categories=False):
     if not n:
         print("WARN: không tìm thấy product-grid trong", path, "- bỏ qua")
         return
+    new_s = patch_item_list_jsonld(new_s, products)
     path.write_text(new_s, encoding="utf-8")
     print("vá product-grid:", path.relative_to(ROOT), "(%d sản phẩm)" % len(products))
+
+
+ITEM_LIST_RE = re.compile(
+    r'(?P<indent>[ \t]*)<script type="application/ld\+json">\s*\{\s*"@context": "https://schema.org",\s*"@type": "ItemList",.*?</script>',
+    re.S,
+)
+
+
+def patch_item_list_jsonld(s, products):
+    """JSON-LD ItemList của trang cửa hàng/danh mục — trước đây viết tay nên lệch với lưới sản
+    phẩm (thiếu sản phẩm mới). Sinh lại cùng thứ tự với lưới; trang không có khối này thì giữ nguyên."""
+    i = "      "
+    items = ",\n".join(
+        '%s    {\n%s      "@type": "ListItem",\n%s      "position": %d,\n%s      "url": "%s/san-pham/%s/"\n%s    }'
+        % (i, i, i, n + 1, i, SITE, p["slug"], i)
+        for n, p in enumerate(products)
+    )
+    block = (
+        '    <script type="application/ld+json">\n%s{\n%s  "@context": "https://schema.org",\n%s  "@type": "ItemList",\n'
+        '%s  "itemListElement": [\n%s\n%s  ]\n%s}\n    </script>' % (i, i, i, i, items, i, i)
+    )
+    return ITEM_LIST_RE.sub(lambda m: block, s, count=1)
 
 
 HOME_NEWS_COUNT = 12

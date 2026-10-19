@@ -39,3 +39,22 @@
    - Đối chiếu trước khi push: trong 129 trang HTML có thay đổi, chỉ 8 trang sản phẩm khác nội dung (6 do sửa danh mục ngày 4, 2 do mục Đại ca đồng ý)
    - CMS: thêm ô Tiêu đề SEO / Mô tả SEO (tuỳ chọn); Smart content sửa được tiêu đề, mô tả, ảnh cover (không sửa nội dung); không còn tab Đơn hàng (đơn vẫn nhận, lưu Sheet, báo Telegram/email)
    - Build tự dọn trang của bài đã xoá qua CMS; CI build lại khi đổi template
+6. **Ngày 6 (19/10/2026)**: Sửa lỗi nền kỹ thuật + schema + ảnh. KHÔNG đổi title, description, H1, URL hay chữ trong bài nào
+   - Link "Trang chủ" (menu, logo, breadcrumb, footer) đổi từ `index.html` sang `/` (vd `../../index.html#gioi-thieu` → `../../#gioi-thieu`). Trên live, `/index.html` bị redirect **307** về `/`, nên trước đây cả 1.183 link nội bộ về trang chủ đều phải đi qua redirect tạm thời
+   - Khối liên hệ trong 5 trang (`/san-pham/cay-tre-luong-xu-ly-chat-luong-so-1/`, `/san-pham/manh-tre-truc-trang-tri/`, `/san-pham/thi-cong-op-tre-truc-trang-tri/`, `/tin-tuc/tat-tan-tat-ve-op-tre-truc-trang-tri-trong-nha/`, `/du-an/gia-cay-tre-tam-vong-da-xu-ly/`): mỗi dòng địa chỉ/nhà máy/website/email đang bọc link Facebook hoặc masothue. Giờ chỉ giữ link ở tên công ty, số điện thoại đổi thành link `tel:` (cùng cách đã làm ngày 3)
+   - Schema trang chủ + `/lien-he/`: `Organization` → `["Organization","HomeAndConstructionBusiness"]`, có `@id` cố định (`https://tretruc.com.vn/#org`), thêm tên pháp lý, mã số thuế, số điện thoại, ảnh, khu vực phục vụ (TP.HCM, Lâm Đồng, Đồng Nai, Khánh Hòa), `sameAs` (Facebook, masothue). Chưa có toạ độ, giờ mở cửa, link Google Business Profile, nên chưa khai báo
+   - Schema bài viết/dự án: `author` và `publisher` trỏ về `@id` của công ty
+   - Schema sản phẩm: 4 sản phẩm "Giá bán: Liên hệ" (cây tre luồng, mái lá guộc, chòi tre, nhà bungalow tre) trước khai báo `"price": "0"`, Google có thể hiện là 0 ₫/miễn phí. Nay bỏ khối `offers` khi chưa có giá
+   - 3 trang danh mục (`/thi-cong-tre-truc/`, `/nguyen-lieu-tre-truc/`, `/tre-truc-trang-tri/`): thêm schema `CollectionPage` + `BreadcrumbList` + `ItemList` (trước chỉ có FAQ)
+   - `ItemList` ở `/cua-hang/` và 3 trang danh mục nay build tự sinh theo đúng lưới sản phẩm (trước viết tay, `/cua-hang/` chỉ có 9/11 sản phẩm)
+   - Alt ảnh: 326 ảnh ở 95 trang thiếu alt. Build tự điền theo thứ tự: chú thích ảnh → tiêu đề mục (h2–h4) ngay trên ảnh → tên bài. Dữ liệu gốc không đổi, ảnh đã có alt giữ nguyên. Còn 1 ảnh: lightbox trang chủ (ảnh rỗng do JS gán, không cần)
+   - Ảnh cover bài/dự án và ảnh chính sản phẩm: thêm `fetchpriority="high"` (ảnh lớn nhất màn hình đầu, giúp LCP)
+   - `_redirects`: thêm 301 cho 3 URL cũ đang 404: `/tin-tuc/1-cay-tre-gia-bao-nhieu-mua-tre-o-dau-uy-tin-chat-luong/` (link hỏng cũ), `/san-pham/cay-tam-vong` và `/kinh-nghiem/ky-thuat-cham-soc-cay-tre-tam-vong` (mức tin cậy trung bình theo báo cáo mục 1.2; đã đọc trang đích)
+   - Đối chiếu trước/sau 163 file HTML có thay đổi: không có khác biệt nào ngoài các mục trên; 329 khối JSON-LD đều hợp lệ
+   - Chưa làm: bật Always Use HTTPS trên Cloudflare (`http://tretruc.com.vn/` vẫn trả 200), thống nhất hotline 093.123.5757, khối "Bài viết liên quan" + link vào 6 trang top (chờ số liệu GSC Query × Page), đổi `Product` → `Service` cho trang dịch vụ
+7. **Ngày 7 (19/10/2026)**: Thống nhất hotline theo trang chủ (Đại ca chốt)
+   - Thay toàn bộ `093.123.5757` → `087.6915.999` và `0931235757` → `0876915999` (cả link `tel:`): 172 chỗ trong 117 file
+     - `data/`: 113 file nội dung bài/dự án/sản phẩm (chủ yếu khối "Thông tin liên hệ" cuối bài) + mô tả của 1 dự án trong `data/du-an.json` (`/du-an/thi-cong-nha-tre/`, mô tả có ghi số điện thoại)
+     - Trang tĩnh: `/chung-toi-la-ai/`, `/nang-luc-san-xuat/` (dòng "liên hệ trực tiếp qua hotline"), `/thanh-toan/` (thông tin chuyển khoản)
+   - Build lại: 117 file HTML khác bản trước, khác biệt duy nhất là số điện thoại (kể cả `search-index.json`)
+   - Toàn site giờ chỉ còn 1 số điện thoại: 0876 915 999 (khớp header, footer, schema, nút gọi nhanh)
