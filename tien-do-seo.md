@@ -67,3 +67,12 @@
    - KHÔNG đổi: slug/URL (2 bài vẫn có `-2025` trong URL), tên file ảnh, ngày đăng/sửa (để không đảo thứ tự bài ở trang chủ/danh sách), mốc lịch sử "01/07/2025", và "Thi công năm 2025" trong bài smart content nhà tre chòi tre (năm công trình Amiana Cam Ranh thật)
    - Build lại: 11 file khác bản trước (7 trang bài, trang danh sách tin-tuc 3–4, du-an 2, search-index), khác biệt duy nhất là năm
    - `_redirects`: 301 `/Tin tức/` → `/tin-tuc/` (live đang 404). Viết dạng mã hoá % (`/Tin%20t%E1%BB%A9c/`), kèm bản tách dấu NFD và bản chữ thường; đã thử bằng `wrangler dev` ở máy: cả 6 dạng trả 301 về `/tin-tuc/`
+9. **Ngày 9 (19/10/2026)**: Link nội bộ từ 5 trang có traffic cao nhất (theo GA4 1 tháng) sang trang kiếm tiền / danh mục. Không đổi title, H1, URL; không đụng trang báo giá đang top (chỉ thêm link TRỎ VÀO)
+   - `/san-pham/cay-tre-luong-xu-ly-chat-luong-so-1/` (85 lượt): bỏ link ở H2 "Địa chỉ mua tre luồng…" đang trỏ nhầm sang dự án ốp tre trang trí; thêm đoạn "Xem thêm" → Nguyên liệu tre trúc, Tre tầm vông đã xử lý, Xử lý tre chống mối mọt
+   - `/tin-tuc/xu-ly-tre-chong-moi-mot/` (77): dòng "Xem thêm: Cây tầm vông tphcmTPHCM" trước không có link → link "Cây tre tầm vông đã xử lý"; thêm đoạn → 7 bước xử lý tre tầm vông, Nguyên liệu tre trúc, Tre luồng đã xử lý, Thi công nhà tre chòi tre trọn gói
+   - `/tin-tuc/cay-le-rung/` (37): "Xem thêm: Cây nứa" trước không có link → có link; thêm đoạn → Nguyên liệu tre trúc, Cây tre lồ ô, Tre mạnh tông, Tre tầm vông đã xử lý
+   - `/san-pham/thi-cong-lop-mai-la-lop-guoc/` (31): thêm đoạn sau phần chi phí → Báo giá nhà tre mái lá (trang top), Mái lá guộc nguyên liệu, Thi công tre trúc
+   - `/san-pham/cay-tre-tam-vong-da-qua-xu-ly-so-1/` (18): thêm "Xem thêm" sau bảng giá → Giá cây tre tầm vông đã xử lý, 7 bước xử lý; cuối bài → Nguyên liệu tre trúc
+   - Số điện thoại cũ còn sót (lần ngày 7 chỉ tìm 093.123.5757): thay 9 chỗ `0909.86.72.89`, `0909.69.72.89`, `087.992.7333` → `087.6915.999` ở 8 trang (tầm vông, chòi tre, nhà tre, bungalow tre, mành tre trúc, cây trúc trang trí, kỹ thuật trồng tầm vông, tre mạnh tông). Đã quét lại mọi kiểu ghi số: toàn site chỉ còn 087.6915.999
+   - Build lại: 12 trang khác bản trước, 0 link hỏng
+   - Đại ca chưa cần gắn event đo lead (hoãn)
