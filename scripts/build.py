@@ -355,7 +355,8 @@ BLOCK_ASSETS = [
     ("tv-process", ["css/process.css"], ["js/blocks.js"]),
     ("tv-models|tv-faq|tv-contact|tv-h2-ico", ["css/blocks.css"], []),
     ("tv-gallery|tv-video|tv-proof", ["css/blocks.css"], ["js/media.js"]),
-    ("tv-harms|tv-callout", ["css/blocks.css"], []),
+    ("tv-harms|tv-callout|tv-reasons|tv-facts|tv-panel|tv-materials|tv-wm", ["css/blocks.css"], []),
+    ("tv-plan", ["css/blocks.css"], ["js/media.js"]),
 ]
 
 

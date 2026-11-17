@@ -596,6 +596,11 @@
         <priority>0.6</priority>
     </url>
     <url>
+        <loc>https://tretruc.com.vn/tin-tuc/quy-trinh-xu-ly-tre-luong/</loc>
+        <lastmod>2026-11-17</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://tretruc.com.vn/tin-tuc/thi-cong-nha-tre-choi-tre-tron-goi/</loc>
         <lastmod>2026-10-04</lastmod>
         <priority>0.6</priority>
@@ -723,6 +728,11 @@
     <url>
         <loc>https://tretruc.com.vn/du-an/1-cay-tre-gia-bao-nhieu-mua-tre-o-dau/</loc>
         <lastmod>2026-05-08</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://tretruc.com.vn/du-an/thi-cong-nha-tre-tam-vong-uon-cong/</loc>
+        <lastmod>2026-11-17</lastmod>
         <priority>0.6</priority>
     </url>
     <url>

@@ -49,13 +49,13 @@
     else if (e.key === 'ArrowLeft') move(-1);
     else if (e.key === 'ArrowRight') move(1);
   }
-  function open(items, i) {
+  function open(items, i, wm) {
     list = items; idx = i;
     box = document.createElement('div');
-    box.className = 'tv-lightbox';
+    box.className = 'tv-lightbox' + (wm ? ' tv-lightbox--wm' : '');
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-modal', 'true');
-    box.innerHTML = '<img alt=""><p class="tv-lightbox-cap"></p>' +
+    box.innerHTML = '<span class="tv-lightbox-frame"><img alt=""></span><p class="tv-lightbox-cap"></p>' +
       '<button type="button" class="tv-lightbox-close" aria-label="Đóng">' + icon('<path d="M18 6 6 18M6 6l12 12"/>') + '</button>' +
       (items.length > 1
         ? '<button type="button" class="tv-lightbox-prev" aria-label="Ảnh trước">' + icon('<path d="m15 18-6-6 6-6"/>') + '</button>' +
@@ -82,21 +82,22 @@
     const btn = box.querySelector('.tv-lightbox-close');
     if (btn) btn.focus();
   }
-  // Nhóm ảnh bấm phóng to: dải ảnh tv-gallery và thẻ công trình tv-proof (chú thích = tên công trình)
-  document.querySelectorAll('.tv-gallery[data-gallery], .tv-proof[data-gallery]').forEach((g) => {
-    const medias = Array.prototype.slice.call(g.querySelectorAll('.tv-gallery-media, .tv-proof-media'));
+  // Nhóm ảnh bấm phóng to: dải ảnh tv-gallery, thẻ công trình tv-proof (chú thích = tên công trình), bản vẽ tv-plan
+  document.querySelectorAll('.tv-gallery[data-gallery], .tv-proof[data-gallery], .tv-plan[data-gallery]').forEach((g) => {
+    const medias = Array.prototype.slice.call(g.querySelectorAll('.tv-gallery-media, .tv-proof-media, .tv-plan-media'));
+    const wm = !!g.closest('.tv-wm'); // bài có gắn logo góc phải lên ảnh: ảnh phóng to cũng có logo
     const items = medias.map((m) => {
       const img = m.querySelector('img');
       const card = m.closest('.tv-proof-card');
-      const cap = card ? card.querySelector('h3') : m.parentNode.querySelector('.tv-gallery-cap');
+      const cap = card ? card.querySelector('h3') : m.parentNode.querySelector('.tv-gallery-cap, .tv-plan-cap');
       return { full: m.getAttribute('data-full') || (img && img.currentSrc) || (img && img.src), alt: img ? img.alt : '', cap: cap ? cap.textContent.trim() : '' };
     });
     medias.forEach((m, i) => {
       m.setAttribute('role', 'button');
       m.setAttribute('tabindex', '0');
       m.setAttribute('aria-label', 'Phóng to ảnh ' + (i + 1));
-      m.addEventListener('click', () => open(items, i));
-      m.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(items, i); } });
+      m.addEventListener('click', () => open(items, i, wm));
+      m.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(items, i, wm); } });
     });
   });
 
