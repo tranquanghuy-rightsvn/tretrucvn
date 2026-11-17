@@ -1398,6 +1398,102 @@ def build_search_index(posts_latest, projects_latest, products):
     print("built html/js/json/search-index.json (%d mục)" % len(items))
 
 
+# ---------- llms.txt (chuẩn llmstxt.org: tóm tắt site cho AI/LLM đọc) ----------
+# Thông tin doanh nghiệp lấy từ trang chủ, /chung-toi-la-ai/, /nang-luc-san-xuat/, /lien-he/ và
+# schema Organization. Đổi thông tin công ty thì sửa ở đây (đồng bộ với các trang trên).
+LLMS_COMPANY = [
+    ("Tên thương hiệu", "Tre Việt Building"),
+    ("Tên pháp nhân", "Công ty TNHH Tre Việt Building"),
+    ("Mã số thuế", "0317901412"),
+    ("Năm thành lập", "2016"),
+    ("Trụ sở chính", "917 Phạm Văn Đồng, Phường Linh Xuân, Thành phố Hồ Chí Minh"),
+    ("Nhà máy sản xuất", "Tổ 6, Ấp Phú Hợp, Xã Phú Lâm, Tỉnh Đồng Nai (HTX tầm vông Tố Lan)"),
+    ("Vùng nguyên liệu", "Hơn 200 ha tre trúc tại Huyện Đạ Tẻh, Tỉnh Lâm Đồng, do công ty chủ động canh tác và thu mua"),
+    ("Quy mô", "Hơn 40 nhân sự, nhà xưởng 1.200 m², hơn 150 dự án đã thực hiện, đội ngũ hơn 15 năm kinh nghiệm thi công tre"),
+    ("Khu vực phục vụ", "Toàn quốc; trọng tâm TP. Hồ Chí Minh, Đồng Nai, Lâm Đồng, Khánh Hòa"),
+    ("Điện thoại / Zalo", "087.6915.999 (+84 876 915 999)"),
+    ("Email", "treviet23@gmail.com"),
+    ("Website", "https://tretruc.com.vn/"),
+    ("Facebook", "https://www.facebook.com/tretructhienphuc.hcm/"),
+]
+LLMS_PAGES = [
+    ("Trang chủ", "", "Giới thiệu tổng quan, sản phẩm nổi bật, dự án và tin tức mới"),
+    ("Chúng tôi là ai", "chung-toi-la-ai/", "Giới thiệu công ty, lĩnh vực kinh doanh, cam kết"),
+    ("Năng lực sản xuất", "nang-luc-san-xuat/", "Nhà xưởng, máy móc, quy trình gia công, vùng nguyên liệu"),
+    ("Liên hệ", "lien-he/", "Địa chỉ trụ sở, nhà máy, điện thoại, email, form yêu cầu tư vấn"),
+    ("Cửa hàng", "cua-hang/", "Toàn bộ sản phẩm và dịch vụ kèm giá tham khảo"),
+    ("Nguyên liệu tre trúc", "nguyen-lieu-tre-truc/", "Tre tầm vông, tre luồng, trúc, mái lá guộc đã xử lý chống mối mọt"),
+    ("Thi công tre trúc", "thi-cong-tre-truc/", "Thiết kế thi công trọn gói nhà tre, bungalow, chòi tre, ốp tre, lợp mái lá"),
+    ("Tre trúc trang trí", "tre-truc-trang-tri/", "Mành tre trúc, ốp tường, ốp trần trang trí"),
+    ("Dự án", "du-an/", "Công trình thực tế và kinh nghiệm thi công"),
+    ("Tin tức", "tin-tuc/", "Kiến thức về các loại tre, xử lý chống mối mọt, kỹ thuật thi công, báo giá"),
+]
+
+
+def build_llms_txt(posts_latest, projects_latest, products):
+    """Sinh html/llms.txt: thông tin công ty + danh sách đầy đủ trang/sản phẩm/dự án/bài viết
+    (tự cập nhật mỗi lần build, kể cả bài đăng qua CMS và Smart content)."""
+    def clean(s, n=200):
+        return truncate(htmllib.unescape(htmllib.unescape(s or "")), n)
+
+    def item(title, url, desc=""):
+        title = re.sub(r"\s*[-–|]\s*Tre Việt Building\s*$", "", cap_first(clean(title, 200)), flags=re.I)
+        desc = cap_first(clean(desc))
+        if desc.lower().rstrip(". ") == title.lower():
+            desc = ""
+        return "- [%s](%s%s)" % (title, SITE, url) + (": " + desc if desc else "")
+
+    L = ["# Tre Việt Building (tretruc.com.vn)", ""]
+    L.append("> Tre Việt Building (Công ty TNHH Tre Việt Building) là đơn vị thiết kế, thi công trọn gói công trình "
+             "tre trúc và cung cấp nguyên liệu tre trúc đã xử lý chống mối mọt tại Việt Nam: nhà tre, chòi tre, "
+             "bungalow, quán cafe, nhà hàng, resort, ốp trần tường tre trúc, lợp mái lá guộc; cung cấp tre tầm vông, "
+             "tre luồng, cây trúc, mành tre trúc. Trụ sở tại TP. Hồ Chí Minh, nhà máy tại Đồng Nai, vùng nguyên liệu "
+             "hơn 200 ha tại Lâm Đồng.")
+    L.append("")
+    L.append("Website viết bằng tiếng Việt. Giá trên website là giá tham khảo, có thể thay đổi theo quy cách, "
+             "số lượng và địa điểm thi công; báo giá chính xác cần liên hệ trực tiếp qua hotline/Zalo 087.6915.999.")
+    L += ["", "## Thông tin doanh nghiệp", ""]
+    L += ["- %s: %s" % (k, v) for k, v in LLMS_COMPANY]
+    L += ["", "## Dịch vụ chính", ""]
+    L += [
+        "- Thiết kế, thi công trọn gói nhà tre, chòi tre, bungalow tre, quán cafe, nhà hàng, homestay, resort bằng tre (kết cấu tre tầm vông, tre luồng, tre uốn cong)",
+        "- Thi công ốp trần, ốp tường, vách ngăn tre trúc trang trí",
+        "- Thi công lợp mái lá guộc (mái lá guột) chống nóng",
+        "- Cung cấp nguyên liệu tre trúc đã xử lý chống mối mọt (ngâm thuốc, luộc boron, hun khói, phơi khô): tre tầm vông, tre luồng, cây trúc, cây le",
+        "- Sản xuất mành tre trúc, nội thất tre (bàn ghế, đèn, tủ) cho nhà hàng, quán cafe, khách sạn",
+    ]
+    L += ["", "## Trang chính", ""]
+    L += [item(n, "/" + u, d) for n, u, d in LLMS_PAGES]
+    for slug, label, _ in CATEGORIES:
+        in_cat = [p for p in products if p.get("category") == slug]
+        if not in_cat:
+            continue
+        L += ["", "## Sản phẩm: %s" % label, ""]
+        for p in in_cat:
+            price = (p.get("price") or 0)
+            note = "Giá tham khảo: %s" % fmt_price(price) if price > 0 else "Giá: liên hệ"
+            desc = cap_first(clean(p.get("description", ""), 160))
+            if desc.lower().rstrip(". ") == clean(p["title"]).lower():
+                desc = ""
+            L.append(item(p["title"], "/san-pham/%s/" % p["slug"], (desc + " " if desc else "") + "(" + note + ")"))
+    smart = [("tin-tuc", p) for p in posts_latest if p.get("smart")] + [("du-an", p) for p in projects_latest if p.get("smart")]
+    if smart:
+        L += ["", "## Bài viết chuyên sâu (ảnh và thông tin thực tế từ xưởng, công trình)", ""]
+        L += [item(p["title"], "/%s/%s/" % (s, p["slug"]), p.get("description", "")) for s, p in smart]
+    L += ["", "## Dự án", ""]
+    L += [item(p["title"], "/du-an/%s/" % p["slug"], p.get("description", "")) for p in projects_latest]
+    L += ["", "## Tin tức và kiến thức", ""]
+    L += [item(p["title"], "/tin-tuc/%s/" % p["slug"], p.get("description", "")) for p in posts_latest]
+    L += ["", "## Optional", ""]
+    L += [
+        "- [Sitemap XML](%s/sitemap.xml): Danh sách đầy đủ URL kèm ngày cập nhật" % SITE,
+        "- [Tìm kiếm](%s/tim-kiem/): Tìm sản phẩm, dự án, bài viết theo từ khóa (tham số ?q=)" % SITE,
+    ]
+    path = HTML / "llms.txt"
+    path.write_text("\n".join(L) + "\n", encoding="utf-8")
+    print("built html/llms.txt (%d sản phẩm, %d dự án, %d bài)" % (len(products), len(projects_latest), len(posts_latest)))
+
+
 def build_cart_data_js(products):
     """Sinh lại js/cart-data.js (catalog cho giỏ hàng) từ toàn bộ sản phẩm (CMS + legacy).
     cart.js đọc window.PRODUCT_CATALOG từ file này — không sửa tay, mất khi build lại."""
@@ -1510,6 +1606,7 @@ def main():
     build_sitemap(posts, projects, products)
     build_cart_data_js(products_latest)
     build_search_index(posts_latest, projects_latest, products)
+    build_llms_txt(posts_latest, projects_latest, sorted(products, key=order_sort_key))
 
     print(
         "Done: %d bai (%d trang) + %d du an (%d trang) + %d san pham | tong %d bai, %d du an, %d san pham | smart content: %d bai, %d du an"
