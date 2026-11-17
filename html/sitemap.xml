@@ -566,11 +566,6 @@
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://tretruc.com.vn/tin-tuc/cay-le-rung/</loc>
-        <lastmod>2025-08-20</lastmod>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://tretruc.com.vn/tin-tuc/bao-quan-manh-tre-trang-tri-sao-cho-dung/</loc>
         <lastmod>2026-03-14</lastmod>
         <priority>0.6</priority>
@@ -593,6 +588,11 @@
     <url>
         <loc>https://tretruc.com.vn/tin-tuc/bao-gia-manh-tre-tai-khu-vuc-tp-hcm/</loc>
         <lastmod>2026-03-14</lastmod>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://tretruc.com.vn/tin-tuc/cay-le-rung/</loc>
+        <lastmod>2025-08-20</lastmod>
         <priority>0.6</priority>
     </url>
     <url>
